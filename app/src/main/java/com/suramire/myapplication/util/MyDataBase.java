@@ -40,6 +40,22 @@ public class MyDataBase extends SQLiteOpenHelper {
         return mydb.query("house", null, "adminid=?", new String[]{adminId+""}, null, null, null);
     }
 
+    public Cursor selectAllRoomGotMoney(int adminId,int ispayed){
+        return mydb.query("rentinfo",null,"ispayed = ? and  roomid in (select _id from room where houseid in (select _id from house where adminid=?))",
+                new String[]{ispayed+"",adminId+""},null,null,null);
+    }
+
+
+
+    /**
+     * 查询某房源下的所有房间
+     * @param houseId
+     * @return
+     */
+    public Cursor selectAllRoom(int houseId){
+        return  mydb.query("room", null, "houseId=?", new String[]{houseId+""}, null, null, null);
+    }
+
     /**
      * 查询某房源下所有已租房间
      * @param houseId

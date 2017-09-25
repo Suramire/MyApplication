@@ -27,6 +27,20 @@
         <activity android:name=".EditRoomActivity"/>
         <activity android:name=".NewRentActivity"/>
         <activity android:name=".GetRentsActivity"/>
+        <activity android:name=".GetServiceActivity"/>
+        <activity android:name=".NewPasswordActivity"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".NotificationActivity"/>
+        <!--<activity android:name=".TestActivity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+
     </application>
 
 </manifest>

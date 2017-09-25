@@ -3,14 +3,20 @@ package com.suramire.myapplication;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.classic.adapter.BaseAdapterHelper;
@@ -33,16 +39,32 @@ public class GetRentsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getrents);
+        //以下代码用于去除actionbar阴影
+        if(Build.VERSION.SDK_INT>=21){
+            getSupportActionBar().setElevation(0);
+        }
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setTitle("收租信息");
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        supportActionBar.setTitle(null);
+        String[] titles = {"收租管理"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
+        supportActionBar.setListNavigationCallbacks(adapter,null);
         ListView listView = (ListView) findViewById(R.id.rents_list);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab2);
-        TabLayout.Tab tab = tabLayout.newTab().setText("未收租");
-        TabLayout.Tab tab1 = tabLayout.newTab().setText("已收租");
-        TextView tv_empty = (TextView) findViewById(R.id.textView23);
+
+        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
+                R.drawable.tab_divider));
+        linearLayout.setDividerPadding(50);
+
+
+        RelativeLayout tv_empty = (RelativeLayout) findViewById(R.id.empty_layout);
         tv_empty.setVisibility(View.VISIBLE);
-        tv_empty.setText("暂无可收租房间");
+//        tv_empty.setText("暂无可收租房间");
         listView.setEmptyView(tv_empty);
-        tabLayout.addTab(tab);
-        tabLayout.addTab(tab1);
         View header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
         final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
 
@@ -101,5 +123,13 @@ public class GetRentsActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() ==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

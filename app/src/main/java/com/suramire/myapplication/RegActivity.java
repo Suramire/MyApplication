@@ -1,6 +1,7 @@
 package com.suramire.myapplication;
 
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -9,7 +10,10 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.suramire.myapplication.model.Admin;
@@ -26,7 +30,7 @@ public class RegActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reg);
         ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-        supportActionBar.setTitle("房东注册");
+        supportActionBar.setTitle("注册");
         final EditText admin_name = (EditText) findViewById(R.id.admin_name);
         final EditText admin_password = (EditText) findViewById(R.id.admin_pasword);
         final EditText admin_password2 = (EditText) findViewById(R.id.admin_password2);
@@ -63,6 +67,31 @@ public class RegActivity extends AppCompatActivity {
                 }
             }
         });
+
+        final RadioButton radioButton = (RadioButton) findViewById(R.id.radioButton);
+        final RadioButton radioButton2 = (RadioButton) findViewById(R.id.radioButton2);
+        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    radioButton.setBackgroundResource(R.drawable.right_selected);
+                }else{
+                    radioButton.setBackgroundResource(R.drawable.right_unselected);
+                }
+            }
+        });
+        radioButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    radioButton2.setBackgroundResource(R.drawable.left_selected);
+                }else{
+                    radioButton2.setBackgroundResource(R.drawable.left_unselected);
+                }
+            }
+        });
+        TextView textView = (TextView) findViewById(R.id.textView29);
+        textView.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
 
     }
 

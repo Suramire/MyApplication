@@ -1,6 +1,5 @@
 package com.suramire.myapplication;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -11,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.suramire.myapplication.util.CustomDialog;
 import com.suramire.myapplication.util.MyDataBase;
 
 /**
@@ -44,9 +45,8 @@ public class LoginActivity extends AppCompatActivity {
                 if("".equals(name)||"".equals(password)){
                     Toast.makeText(LoginActivity.this, "请将登录信息填写完整", Toast.LENGTH_SHORT).show();
                 }else{
-                    final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-                    progressDialog.setMessage("正在登录,请稍候……");
-                    progressDialog.show();
+                    final CustomDialog customDialog = new CustomDialog(LoginActivity.this,R.style.CustomDialog);
+                    customDialog.show();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                     else{
                                         Toast.makeText(LoginActivity.this, "密码错误，请重试", Toast.LENGTH_SHORT).show();
                                     }
-                                    progressDialog.dismiss();
+                                    customDialog.dismiss();
 
 
                                 }
@@ -91,6 +91,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this,RegActivity.class));
+            }
+        });
+
+        TextView view = (TextView) findViewById(R.id.textView26);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, GetServiceActivity.class));
+            }
+        });
+        TextView view1 = (TextView) findViewById(R.id.textView27);
+        view1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, NewPasswordActivity.class));
             }
         });
     }

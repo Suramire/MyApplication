@@ -6,17 +6,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.classic.adapter.BaseAdapterHelper;
@@ -41,41 +45,51 @@ public class ManagementActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
-        final TextView textView = (TextView) findViewById(R.id.text_empty);
+        //以下代码用于去除actionbar阴影
+        if(Build.VERSION.SDK_INT>=21){
+            getSupportActionBar().setElevation(0);
+        }
+        RelativeLayout emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
         final ListView listView = (ListView) findViewById(R.id.list_room);
-        listView.setEmptyView(textView);
+        listView.setEmptyView(emptyView);
         ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setTitle("房源管理");
+        supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        supportActionBar.setTitle(null);
+        String[] titles = {"房源管理"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
+        supportActionBar.setListNavigationCallbacks(adapter,null);
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-        TabLayout layout = (TabLayout) findViewById(R.id.tab_room);
-        final TabLayout.Tab mTab = layout.newTab().setText("已出租");
-        final TabLayout.Tab mTab1 = layout.newTab().setText("未出租");
-        final TabLayout.Tab mTab2 = layout.newTab().setText("即将到期");
+        //为tablayout添加分割线
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_room);
+        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
+                R.drawable.tab_divider));
+        linearLayout.setDividerPadding(40);
         headerView = LayoutInflater.from(this).inflate(R.layout.header_room, null);
         myDataBase = new MyDataBase(ManagementActivity.this,"test.db",null,1);
-        layout.addTab(mTab);
-        layout.addTab(mTab1);
-        layout.addTab(mTab2);
-        layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 listView.setAdapter(null);
-                if(tab == mTab){
-                    textView.setText("暂无出租房源");
+
+                if(tab.getPosition() == 0){
+//                    textView.setText("暂无出租房源");
                     selectRoomLend(listView);
-                    textView.setVisibility(View.VISIBLE);
+//                    textView.setVisibility(View.VISIBLE);
                 }
-                if(tab == mTab1){
+                if(tab.getPosition() == 1){
 
-                    textView.setText("暂无未出租房源");
+//                    textView.setText("暂无未出租房源");
                     selectRoomNotLend(listView);
-                    textView.setVisibility(View.VISIBLE);
+//                    textView.setVisibility(View.VISIBLE);
 
                 }
-                if(tab == mTab2){
+                if(tab.getPosition() == 2){
 
-                    textView.setText("暂无过期房源");
-                    textView.setVisibility(View.VISIBLE);
+//                    textView.setText("暂无过期房源");
+//                    textView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -174,7 +188,8 @@ public class ManagementActivity extends AppCompatActivity {
                         .setOnClickListener(R.id.op_up, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(ManagementActivity.this, "提租", Toast.LENGTH_SHORT).show();
+                                // TODO: 2017/9/21 实现涨租
+                                Toast.makeText(ManagementActivity.this, "待实现", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setOnClickListener(R.id.op_renterinfo, new View.OnClickListener() {
