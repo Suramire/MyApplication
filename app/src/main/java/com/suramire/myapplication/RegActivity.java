@@ -63,7 +63,6 @@ public class RegActivity extends AppCompatActivity {
                         }
                     }
 
-
                 }
             }
         });

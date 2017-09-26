@@ -18,13 +18,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.classic.adapter.BaseAdapterHelper;
-import com.classic.adapter.CommonAdapter;
+import com.suramire.myapplication.adapter.MyBaseAdapter;
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -51,6 +50,13 @@ public class ManagementActivity extends AppCompatActivity {
         }
         RelativeLayout emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
         final ListView listView = (ListView) findViewById(R.id.list_room);
+        Button button = emptyView.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
         listView.setEmptyView(emptyView);
         ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -148,71 +154,13 @@ public class ManagementActivity extends AppCompatActivity {
         }
     }
 
+    public int currentPosition = -1;
+
     private void setupListview(ListView listView, final List<Room> rooms, final String state) {
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(headerView);
         }
-        listView.setAdapter(new CommonAdapter<Room>(ManagementActivity.this, R.layout.item_room,rooms) {
-            @Override
-            public void onUpdate(BaseAdapterHelper helper, Room item, final int position) {
-                helper.setText(R.id.item_roomname, item.getName())
-                        .setText(R.id.item_roomstate, state)
-                        .setText(R.id.item_roomprice, item.getPrice() + "");
-                helper.setOnClickListener(R.id.op_roominfo, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(ManagementActivity.this, EditRoomActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("room", rooms.get(position));
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                    }
-                })
-                        .setOnClickListener(R.id.op_rent, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if(rooms.get(position).getIsLended() ==1){
-                                    Toast.makeText(ManagementActivity.this, "该房间已被租用,请选择其他房间", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Intent intent = new Intent(ManagementActivity.this, NewRentActivity.class);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable("room", rooms.get(position));
-                                    intent.putExtras(bundle);
-                                    startActivity(intent);
-                                }
-
-
-
-                            }
-                        })
-                        .setOnClickListener(R.id.op_up, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // TODO: 2017/9/21 实现涨租
-                                Toast.makeText(ManagementActivity.this, "待实现", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setOnClickListener(R.id.op_renterinfo, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Cursor cursor = myDataBase.selectRenterInfo(rooms.get(position).getId());
-                                if(cursor.getCount()>0){
-                                    if (cursor.moveToLast()){
-                                        String rentername = cursor.getString(cursor.getColumnIndex("rentername"));
-                                        String renterphone = cursor.getString(cursor.getColumnIndex("renterphone"));
-                                        String margin = cursor.getString(cursor.getColumnIndex("margin"));
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(ManagementActivity.this);
-                                        builder.setTitle("租客信息")
-                                                .setMessage("姓名：" + rentername + "\n\n电话：" + renterphone+"\n\n已交押金："+margin);
-                                        builder.show();
-                                        // TODO: 2017/9/21 已出租的房子不能再出租
-                                    }
-                                }
-
-                            }
-                        });
-            }
-        });
+        listView.setAdapter(new MyBaseAdapter(ManagementActivity.this,rooms));
     }
 
     private void selectRoomLend(ListView listView) {
@@ -264,32 +212,36 @@ public class ManagementActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.newhouse:{
-                AlertDialog.Builder builder  = new AlertDialog.Builder(this);
-                final String[] names = {"集中式房源","分散式房源","添加房间"};
-                builder.setItems(names, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        switch (i){
-                            case 0:
-                            case 1:{
-                               startActivity(new Intent(ManagementActivity.this,NewHouseActivity.class));
-                            }break;
-                            case 2:{
-                                startActivity(new Intent(ManagementActivity.this,NewRoomActivity.class));
-                            }break;
-                        }
-
-                    }
-                });
-                builder.setTitle("新增房源");
-
-                builder.setNegativeButton("取消", null
-                );
-                builder.setCancelable(false).show();
+                showDialog();
             }break;
             case android.R.id.home:finish();break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder  = new AlertDialog.Builder(this);
+        final String[] names = {"集中式房源","分散式房源","添加房间"};
+        builder.setItems(names, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i){
+                    case 0:
+                    case 1:{
+                       startActivity(new Intent(ManagementActivity.this,NewHouseActivity.class));
+                    }break;
+                    case 2:{
+                        startActivity(new Intent(ManagementActivity.this,NewRoomActivity.class));
+                    }break;
+                }
+
+            }
+        });
+        builder.setTitle("新增房源");
+
+        builder.setNegativeButton("取消", null
+        );
+        builder.setCancelable(false).show();
     }
 }

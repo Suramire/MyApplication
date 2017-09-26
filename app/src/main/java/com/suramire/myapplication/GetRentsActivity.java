@@ -2,6 +2,7 @@ package com.suramire.myapplication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -62,6 +64,13 @@ public class GetRentsActivity extends AppCompatActivity {
 
 
         RelativeLayout tv_empty = (RelativeLayout) findViewById(R.id.empty_layout);
+        Button button = tv_empty.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
         tv_empty.setVisibility(View.VISIBLE);
 //        tv_empty.setText("暂无可收租房间");
         listView.setEmptyView(tv_empty);
@@ -131,5 +140,30 @@ public class GetRentsActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder  = new AlertDialog.Builder(this);
+        final String[] names = {"集中式房源","分散式房源","添加房间"};
+        builder.setItems(names, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i){
+                    case 0:
+                    case 1:{
+                        startActivity(new Intent(GetRentsActivity.this,NewHouseActivity.class));
+                    }break;
+                    case 2:{
+                        startActivity(new Intent(GetRentsActivity.this,NewRoomActivity.class));
+                    }break;
+                }
+
+            }
+        });
+        builder.setTitle("新增房源");
+
+        builder.setNegativeButton("取消", null
+        );
+        builder.setCancelable(false).show();
     }
 }
