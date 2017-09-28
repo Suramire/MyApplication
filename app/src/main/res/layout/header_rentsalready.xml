@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#F5F5F5"
         android:orientation="horizontal">
 
         <TextView
@@ -15,45 +16,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="房源"
+            android:text="租客姓名"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/item_roomprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="租金"
+            android:text="房间名"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/item_roomstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="租客"
+            android:text="已收租金(元)"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/textView52"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="           " />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="1dp"
-        android:background="#e8e8e8">
 
-    </View>
 </LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<item android:id="@+id/more"-->
+        <!--android:title="null"-->
+        <!--android:icon="@drawable/menu_more"-->
+        <!--app:showAsAction="always"-->
+        <!--/>-->
+
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/menu_history"
+        app:showAsAction="collapseActionView"
+        android:title="收租记录" />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/menu_notification"
+        app:showAsAction="withText"
+        android:title="催租通知"/>
+    <item
+        android:id="@+id/phone"
+        android:icon="@drawable/menu_phone"
+        app:showAsAction="withText"
+        android:title="电话联系" />
+    <item
+        android:id="@+id/print"
+        android:icon="@drawable/menu_print"
+        app:showAsAction="withText"
+        android:title="打印单据" />
+    <item
+        android:id="@+id/reset"
+        android:icon="@drawable/menu_reset"
+        app:showAsAction="withText"
+        android:title="重算费用" />
+
+</menu>

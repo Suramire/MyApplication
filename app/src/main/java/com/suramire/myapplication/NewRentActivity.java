@@ -72,7 +72,10 @@ public class NewRentActivity extends AppCompatActivity {
                     long l = myDataBase.addRentInfo(rentInfo);
                     if(l!=0){
                         int i = myDataBase.updateRoomLend(room.getId());
-                        Toast.makeText(NewRentActivity.this, "出租成功", Toast.LENGTH_SHORT).show();
+                        if (i != 0) {
+                            Toast.makeText(NewRentActivity.this, "出租成功", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     }else{
                         Toast.makeText(NewRentActivity.this, "出租失败", Toast.LENGTH_SHORT).show();
                     }

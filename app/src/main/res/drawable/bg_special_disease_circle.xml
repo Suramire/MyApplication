@@ -4,7 +4,7 @@
     <item>
         <shape android:shape="oval" >
             <corners android:radius="10dp"/>
-            <solid android:color="#FFFFFF" />
+            <solid android:color="#4193f1" />
             <size android:width="170dp" android:height="170dp"/>
         </shape>
     </item>
@@ -14,7 +14,7 @@
             <item android:state_pressed="true">
                 <shape android:shape="oval" >
                     <corners android:radius="10dp"/>
-                    <solid android:color="#836FFF" />
+                    <solid android:color="#58a1fb" />
                     <size android:width="162dp" android:height="162dp"/>
                 </shape>
             </item>
@@ -22,7 +22,7 @@
             <item>
                 <shape android:shape="oval" >
                     <corners android:radius="10dp"/>
-                    <solid android:color="#836FFF" />
+                    <solid android:color="#58a1fb" />
                     <size android:width="162dp" android:height="162dp"/>
                 </shape>
             </item>

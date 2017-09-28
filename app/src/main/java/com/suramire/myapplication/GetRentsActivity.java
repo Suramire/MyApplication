@@ -1,7 +1,5 @@
 package com.suramire.myapplication;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -12,14 +10,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
@@ -36,11 +34,63 @@ import java.util.List;
 public class GetRentsActivity extends AppCompatActivity {
 
     private String roomname;
+    private View header;
+    private TabLayout tabLayout;
+    private ListView listView;
+    private TextView tv_state;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getrents);
+        setupActionBar();
+        header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
+        tv_state = header.findViewById(R.id.item_roomstate);
+        listView = (ListView) findViewById(R.id.rents_list);
+        tabLayout = (TabLayout) findViewById(R.id.tab2);
+//        为tablayout添加分割线
+        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
+                R.drawable.tab_divider));
+        linearLayout.setDividerPadding(40);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                listView.setAdapter(null);
+                int position = tab.getPosition();
+                switch (position){
+                    case 0:
+                        showListNotPayed(listView);
+                        break;
+                    case 1:showListPayed(listView);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        RelativeLayout tv_empty = (RelativeLayout) findViewById(R.id.empty_layout);
+
+        tv_empty.setVisibility(View.VISIBLE);
+//        tv_empty.setText("暂无可收租房间");
+        listView.setEmptyView(tv_empty);
+
+        showListNotPayed(listView);
+    }
+
+    private void setupActionBar() {
         //以下代码用于去除actionbar阴影
         if(Build.VERSION.SDK_INT>=21){
             getSupportActionBar().setElevation(0);
@@ -53,32 +103,98 @@ public class GetRentsActivity extends AppCompatActivity {
         String[] titles = {"收租管理"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
         supportActionBar.setListNavigationCallbacks(adapter,null);
-        ListView listView = (ListView) findViewById(R.id.rents_list);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab2);
+    }
 
-        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
-        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
-                R.drawable.tab_divider));
-        linearLayout.setDividerPadding(50);
-
-
-        RelativeLayout tv_empty = (RelativeLayout) findViewById(R.id.empty_layout);
-        Button button = tv_empty.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog();
-            }
-        });
-        tv_empty.setVisibility(View.VISIBLE);
-//        tv_empty.setText("暂无可收租房间");
-        listView.setEmptyView(tv_empty);
-        View header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
+    private void showListNotPayed(ListView listView) {
+        if(listView.getHeaderViewsCount()==0){
+            listView.addHeaderView(header);
+        }
         final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
 
         //未支付
         Cursor cursor = myDataBase.selectRenterInfoByPayed(0);
+        final List<RentItem> rentItemList = new ArrayList<>();
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String rentername = cursor.getString(cursor.getColumnIndex("rentername"));
+                Float money = cursor.getFloat(cursor.getColumnIndex("money"));
+                int roomid = cursor.getInt(cursor.getColumnIndex("roomid"));
+                int rentInfoId = cursor.getInt(0);
+                String datebegin = cursor.getString(cursor.getColumnIndex("datebegin"));
+                String dateend = cursor.getString(cursor.getColumnIndex("dateend"));
+                Float margin = cursor.getFloat(cursor.getColumnIndex("margin"));
+                Cursor cursor1 = myDataBase.selectRoomByRoomid(roomid);
+                if(cursor1.getCount()>0){
+                    while (cursor1.moveToNext()){
+                        roomname = cursor1.getString(cursor1.getColumnIndex("name"));
+                    }
+                    RentItem rentItem = new RentItem(rentInfoId, rentername, roomname, money + "", margin + "",datebegin,dateend);
+                    rentItemList.add(rentItem);
+                }
+                tv_state.setText("待收租金(元)");
+                if (listView.getHeaderViewsCount() == 0) {
+                    listView.addHeaderView(header);
+                }
+                listView.setAdapter(new CommonAdapter<RentItem>(this, R.layout.item_rents, rentItemList) {
+                    @Override
+                    public void onUpdate(BaseAdapterHelper helper, final RentItem item, final int position) {
+                        helper.setText(R.id.rents_rentername, item.getRenterName())
+                                .setText(R.id.rents_rentroom, item.getRentRoomName())
+                                .setText(R.id.rents_money, item.getMoney());
+                        View.OnClickListener listener = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(GetRentsActivity.this);
+//                                builder.setTitle("提示")
+//                                        .setMessage("应收租"+item.getMoney()+"元");
+//                                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        // TODO: 2017/9/21 执行收租事件
+//                                        int i1 = myDataBase.updateRentInfoPayed(item.getRentInfoId());
+//                                        if(i1!=0){
+//                                            Toast.makeText(GetRentsActivity.this, "收租成功", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }
+//                                });
+//                                builder.setNegativeButton("取消", null);
+//                                builder.show();
+
+                                Intent intent = new Intent(GetRentsActivity.this, RentDetailActivity.class);
+                                intent.putExtra("rentinfo", rentItemList.get(position));
+                                startActivity(intent);
+
+                            }
+                        };
+                        helper.setOnClickListener(R.id.rents_money, listener)
+                                .setOnClickListener(R.id.rents_rentername, listener)
+                                .setOnClickListener(R.id.rents_rentroom, listener);
+                    }
+                });
+            }
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tabLayout.getTabAt(0).select();
+        showListNotPayed(listView);
+
+    }
+
+
+
+    private void showListPayed(ListView listView) {
+        if(listView.getHeaderViewsCount()==0){
+            listView.addHeaderView(header);
+        }
+        final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
+
+        //已支付
+        Cursor cursor = myDataBase.selectRenterInfoByPayed(1);
         List<RentItem> rentItemList = new ArrayList<>();
 
         if (cursor.getCount() > 0) {
@@ -87,14 +203,18 @@ public class GetRentsActivity extends AppCompatActivity {
                 Float money = cursor.getFloat(cursor.getColumnIndex("money"));
                 int roomid = cursor.getInt(cursor.getColumnIndex("roomid"));
                 int rentInfoId = cursor.getInt(0);
+                String datebegin = cursor.getString(cursor.getColumnIndex("datebegin"));
+                String dateend = cursor.getString(cursor.getColumnIndex("dateend"));
+                Float margin = cursor.getFloat(cursor.getColumnIndex("margin"));
                 Cursor cursor1 = myDataBase.selectRoomByRoomid(roomid);
                 if(cursor1.getCount()>0){
                     while (cursor1.moveToNext()){
                         roomname = cursor1.getString(cursor1.getColumnIndex("name"));
                     }
-                    RentItem rentItem = new RentItem(rentInfoId,rentername, roomname, money + "");
+                    RentItem rentItem = new RentItem(rentInfoId, rentername, roomname, money + "", margin + "",datebegin,dateend);
                     rentItemList.add(rentItem);
                 }
+                tv_state.setText("已收租金(元)");
                 if (listView.getHeaderViewsCount() == 0) {
                     listView.addHeaderView(header);
                 }
@@ -107,21 +227,21 @@ public class GetRentsActivity extends AppCompatActivity {
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(GetRentsActivity.this);
-                                builder.setTitle("提示")
-                                        .setMessage("应收租"+item.getMoney()+"元");
-                                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        // TODO: 2017/9/21 执行收租事件
-                                        int i1 = myDataBase.updateRentInfoPayed(item.getRentInfoId());
-                                        if(i1!=0){
-                                            Toast.makeText(GetRentsActivity.this, "收租成功", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                                builder.setNegativeButton("取消", null);
-                                builder.show();
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(GetRentsActivity.this);
+//                                builder.setTitle("提示")
+//                                        .setMessage("应收租"+item.getMoney()+"元");
+//                                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        // TODO: 2017/9/21 执行收租事件
+//                                        int i1 = myDataBase.updateRentInfoPayed(item.getRentInfoId());
+//                                        if(i1!=0){
+//                                            Toast.makeText(GetRentsActivity.this, "收租成功", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }
+//                                });
+//                                builder.setNegativeButton("取消", null);
+//                                builder.show();
                             }
                         };
                         helper.setOnClickListener(R.id.rents_money, listener)
@@ -142,28 +262,5 @@ public class GetRentsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showDialog() {
-        AlertDialog.Builder builder  = new AlertDialog.Builder(this);
-        final String[] names = {"集中式房源","分散式房源","添加房间"};
-        builder.setItems(names, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i){
-                    case 0:
-                    case 1:{
-                        startActivity(new Intent(GetRentsActivity.this,NewHouseActivity.class));
-                    }break;
-                    case 2:{
-                        startActivity(new Intent(GetRentsActivity.this,NewRoomActivity.class));
-                    }break;
-                }
 
-            }
-        });
-        builder.setTitle("新增房源");
-
-        builder.setNegativeButton("取消", null
-        );
-        builder.setCancelable(false).show();
-    }
 }

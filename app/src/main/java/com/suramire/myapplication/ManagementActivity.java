@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -39,18 +40,23 @@ public class ManagementActivity extends AppCompatActivity {
 
     private View headerView;
     private MyDataBase myDataBase;
+    private RelativeLayout emptyView;
+    private ImageView imageView;
+    private TabLayout tabLayout;
+    private ListView listView;
+    private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
-        //以下代码用于去除actionbar阴影
-        if(Build.VERSION.SDK_INT>=21){
-            getSupportActionBar().setElevation(0);
-        }
-        RelativeLayout emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
-        final ListView listView = (ListView) findViewById(R.id.list_room);
-        Button button = emptyView.findViewById(R.id.button);
+
+        setupActionBar();
+
+        emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
+        listView = (ListView) findViewById(R.id.list_room);
+        button = emptyView.findViewById(R.id.button);
+        imageView = emptyView.findViewById(R.id.imageView17);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,20 +64,7 @@ public class ManagementActivity extends AppCompatActivity {
             }
         });
         listView.setEmptyView(emptyView);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        supportActionBar.setTitle(null);
-        String[] titles = {"房源管理"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
-        supportActionBar.setListNavigationCallbacks(adapter,null);
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-        //为tablayout添加分割线
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_room);
-        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
-        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
-                R.drawable.tab_divider));
-        linearLayout.setDividerPadding(40);
+
         headerView = LayoutInflater.from(this).inflate(R.layout.header_room, null);
         myDataBase = new MyDataBase(ManagementActivity.this,"test.db",null,1);
 
@@ -82,20 +75,18 @@ public class ManagementActivity extends AppCompatActivity {
 
                 if(tab.getPosition() == 0){
 //                    textView.setText("暂无出租房源");
-                    selectRoomLend(listView);
-//                    textView.setVisibility(View.VISIBLE);
+                    getRoomLend(listView, button);
                 }
                 if(tab.getPosition() == 1){
 
 //                    textView.setText("暂无未出租房源");
-                    selectRoomNotLend(listView);
-//                    textView.setVisibility(View.VISIBLE);
+                    getRoomNotLend(listView, button);
 
                 }
                 if(tab.getPosition() == 2){
-
 //                    textView.setText("暂无过期房源");
-//                    textView.setVisibility(View.VISIBLE);
+                    imageView.setImageResource(R.drawable.empty_outofdate);
+                    button.setVisibility(View.GONE);
                 }
             }
 
@@ -109,11 +100,58 @@ public class ManagementActivity extends AppCompatActivity {
 
             }
         });
-        selectRoomLend(listView);
+        getRoomLend(listView, button);
 
     }
 
-    private void selectRoomNotLend(ListView listView) {
+    @Override
+    protected void onResume() {
+        getRoomLend(listView,button);
+        tabLayout.getTabAt(0).select();
+        super.onResume();
+
+    }
+
+    private void getRoomNotLend(ListView listView, Button button) {
+        int j = selectRoomNotLend(listView);
+        if (j == 0) {
+            imageView.setImageResource(R.drawable.empty_norent);
+            button.setVisibility(View.GONE);
+        }
+    }
+
+    private void getRoomLend(ListView listView, Button button) {
+        int i = selectRoomLend(listView);
+
+        if (i == 0) {
+            imageView.setImageResource(R.drawable.empty_rent);
+            button.setVisibility(View.GONE);
+        }
+    }
+
+    private void setupActionBar() {
+        //以下代码用于去除actionbar阴影
+        if(Build.VERSION.SDK_INT>=21){
+            getSupportActionBar().setElevation(0);
+        }
+
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        supportActionBar.setTitle(null);
+        String[] titles = {"房源管理"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
+        supportActionBar.setListNavigationCallbacks(adapter,null);
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        //为tablayout添加分割线
+        tabLayout = (TabLayout) findViewById(R.id.tab_room);
+        LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
+        linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
+                R.drawable.tab_divider));
+        linearLayout.setDividerPadding(40);
+    }
+
+    private int selectRoomNotLend(ListView listView) {
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
@@ -148,22 +186,23 @@ public class ManagementActivity extends AppCompatActivity {
 
                     }
                     setupListview(listView, rooms,"未出租");
-
                 }
             }
+            return rooms.size();
+        }else{
+            return -1;
         }
     }
 
-    public int currentPosition = -1;
 
     private void setupListview(ListView listView, final List<Room> rooms, final String state) {
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(headerView);
         }
-        listView.setAdapter(new MyBaseAdapter(ManagementActivity.this,rooms));
+        listView.setAdapter(new MyBaseAdapter(ManagementActivity.this,rooms,state));
     }
 
-    private void selectRoomLend(ListView listView) {
+    private int selectRoomLend(ListView listView) {
         MyDataBase myDataBase = new MyDataBase(ManagementActivity.this,"test.db",null,1);
         SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
         int adminid = sharedPreferences.getInt("adminid", 0);
@@ -199,6 +238,9 @@ public class ManagementActivity extends AppCompatActivity {
 
                 }
             }
+            return rooms.size();
+        }else{
+            return -1;
         }
     }
 
