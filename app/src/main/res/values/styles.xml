@@ -8,13 +8,20 @@
         <item name="colorAccent">#FFF</item>
     </style>
 
+    <style name="AppThemeFullScreen" parent="AppThemeNoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFF</item>
         <item name="colorPrimaryDark">#000</item>
         <item name="colorAccent">#FFF</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="homeAsUpIndicator">@drawable/back</item>
+        <item name="homeAsUpIndicator">@drawable/ic_chevron_left_black_24dp</item>
+        <item name="actionMenuTextColor">#4b9df9</item>
 
 
     </style>

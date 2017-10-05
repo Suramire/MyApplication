@@ -14,11 +14,11 @@
         <activity android:name=".LoginActivity"
             android:theme="@style/AppThemeNoActionBar"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".ManagementActivity" />
         <activity android:name=".NewHouseActivity"/>
@@ -33,16 +33,26 @@
             android:name=".ProfileActivity"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".NotificationActivity"/>
-        <!--<activity android:name=".TestActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
         <activity android:name=".RentHistoryActivity"/>
         <activity android:name=".RentDetailActivity"/>
         <activity android:name=".GetMoneyResultActivity"/>
+        <activity android:name=".HelpActivity"/>
+        <activity android:name=".TestActivity"/>
+        <activity android:name=".FeedbackActivity"/>
+        <activity android:name=".WorkNotification" />
+        <activity android:name=".FEInfoActivity" />
+        <activity android:name=".HardwareActivity" />
+        <activity android:name=".ShopActivity" />
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".MoreActivity" />
+        <activity android:name=".ShopItemDetailActivity" />
+        <activity android:name=".SplashActivity" android:theme="@style/AppThemeFullScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

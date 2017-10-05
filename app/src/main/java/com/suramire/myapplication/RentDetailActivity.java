@@ -27,6 +27,7 @@ import java.util.Date;
 public class RentDetailActivity extends AppCompatActivity {
 
     private SimpleDateFormat simpleDateFormat;
+    private MyDataBase myDataBase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,18 +71,21 @@ public class RentDetailActivity extends AppCompatActivity {
                 builder.setView(view1);
                 builder.setNegativeButton("取消", null);
                 builder.setPositiveButton("确认收租", new DialogInterface.OnClickListener() {
+
+
+
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        final MyDataBase myDataBase = new MyDataBase(RentDetailActivity.this, "test.db", null, 1);
+                        myDataBase = new MyDataBase(RentDetailActivity.this, "test.db", null, 1);
                         int i1 = myDataBase.updateRentInfoPayed(rentinfo.getRentInfoId());
-                                        if(i1!=0){
-                                            finish();
-                                            Intent intent = new Intent(RentDetailActivity.this, GetMoneyResultActivity.class);
-                                            intent.putExtra("money", money+"");
-                                            startActivity(intent);
-                                        }else{
-                                            Toast.makeText(RentDetailActivity.this, "收租失败", Toast.LENGTH_SHORT).show();
-                                        }
+                        if(i1!=0){
+                            finish();
+                            Intent intent = new Intent(RentDetailActivity.this, GetMoneyResultActivity.class);
+                            intent.putExtra("money", money+"");
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(RentDetailActivity.this, "收租失败", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 builder.setCancelable(false).show();
@@ -93,5 +97,11 @@ public class RentDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_rentdetail,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myDataBase.close();
     }
 }

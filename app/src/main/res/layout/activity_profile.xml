@@ -11,15 +11,15 @@
 
         <ImageView
             android:id="@+id/imageView14"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
+            android:layout_width="360dp"
+            android:layout_height="216dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/bg" />
 
         <ImageView
             android:id="@+id/imageView8"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="false"
             android:layout_centerVertical="false"
@@ -87,309 +87,54 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
+                android:id="@+id/button18"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
                 android:layout_marginBottom="1dp"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:background="@drawable/btn_normal" />
 
-                <ImageView
-
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/setting" />
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="常用设置"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="收费周期、到期提醒"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
+                android:id="@+id/button17"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
                 android:layout_marginBottom="1dp"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:background="@drawable/btn_bank" />
 
-                <ImageView
+            <Button
+                android:id="@+id/button16"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_order" />
 
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/card" />
+            <Button
+                android:id="@+id/button15"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_admin" />
 
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="银行卡设置"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="银行T+0秒到账"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/orders" />
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="我的订单"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="商场购买记录"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/admin" />
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="管理员"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="管理员帐号增、删、改"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
                 android:layout_marginBottom="1dp"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:background="@drawable/btn_inviration" />
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/invite" />
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_help" />
 
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="邀请好友"
-                    android:textSize="18sp" />
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="360dp"
+                android:layout_height="49dp"
+                android:background="@drawable/btn_more" />
 
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="好东西要懂得分享"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/help" />
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="使用帮助"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="视频教程哦"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/imageView15"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFF"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/more" />
-
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="更多"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/imageView15"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/forward" />
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

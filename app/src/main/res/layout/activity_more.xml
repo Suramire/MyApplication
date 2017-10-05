@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/imageView36"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/safe" />
+
+    <Button
+        android:id="@+id/imageView35"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/about" />
+
+    <Button
+        android:id="@+id/imageView34"
+        android:layout_width="360dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/logout" />
+
+</LinearLayout>

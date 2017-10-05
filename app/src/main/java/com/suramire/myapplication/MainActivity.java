@@ -9,9 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -27,13 +25,18 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView11);
         ImageView imageView1 = (ImageView) findViewById(R.id.imageView12);
-        ImageView imageView2 = (ImageView) findViewById(R.id.imageView4);
-        ImageView imageView3 = (ImageView) findViewById(R.id.imageView5);
-
+        ImageView rent = (ImageView) findViewById(R.id.img_rent);
+        ImageView management = (ImageView) findViewById(R.id.img_management);
+        ImageView fe = (ImageView) findViewById(R.id.img_58);
+        ImageView hardware = (ImageView) findViewById(R.id.img_hardware);
+        ImageView notification = (ImageView) findViewById(R.id.img_notification);
+        ImageView help = (ImageView) findViewById(R.id.img_help);
+        ImageView shop = (ImageView) findViewById(R.id.img_shop);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                finish();
             }
         });
         imageView1.setOnClickListener(new View.OnClickListener() {
@@ -43,22 +46,46 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        imageView2.setOnClickListener(new View.OnClickListener() {
+        notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "这里响应提醒事件", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,WorkNotification.class));
             }
         });
 
-        imageView3.setOnClickListener(new View.OnClickListener() {
+        help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "这里打开帮助页面", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,HelpActivity.class));
             }
         });
 
-        LinearLayout money = (LinearLayout) findViewById(R.id.f_money);
-        LinearLayout management = (LinearLayout) findViewById(R.id.f_management);
+        fe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,FEInfoActivity.class));
+
+            }
+        });
+        hardware.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,HardwareActivity.class));
+
+            }
+        });
+        shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,ShopActivity.class));
+
+            }
+        });
+
+
+
+
+
 //        LinearLayout work = (LinearLayout) findViewById(R.id.f_work);
 //        LinearLayout help = (LinearLayout) findViewById(R.id.f_help);
         management.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        money.setOnClickListener(new View.OnClickListener() {
+        rent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, GetRentsActivity.class));
@@ -106,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setText("已收租金："+sum1+"元");
         textView1.setText("待收租金："+sum2+"元");
         float percent = sum1 / (sum1 + sum2) * 100;
-        button.setText("租金进度："+Math.round((percent*100)/100)+"%");
+        button.setText("已完成："+Math.round((percent*100)/100)+"%\n查看详情>>");
         // TODO: 2017/9/22 关闭cursor
 
     }

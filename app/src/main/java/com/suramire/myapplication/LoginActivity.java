@@ -21,6 +21,9 @@ import com.suramire.myapplication.util.MyDataBase;
  */
 
 public class LoginActivity extends AppCompatActivity {
+
+    private MyDataBase myDataBase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,57 +35,21 @@ public class LoginActivity extends AppCompatActivity {
         final SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
         String name = sharedPreferences.getString("name", "");
         String password = sharedPreferences.getString("password", "");
+        int autologin = sharedPreferences.getInt("autologin", 0);
         if ("".equals(name) || "".equals(password)) {
         }else{
             text_username.setText(name);
             text_password.setText(password);
+            if(autologin ==1){
+                login(text_password, text_username, sharedPreferences);
+            }
+
+
         }
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String password = text_password.getText().toString().trim();
-                final String name = text_username.getText().toString().trim();
-                if("".equals(name)||"".equals(password)){
-                    Toast.makeText(LoginActivity.this, "请将登录信息填写完整", Toast.LENGTH_SHORT).show();
-                }else{
-                    final CustomDialog customDialog = new CustomDialog(LoginActivity.this,R.style.CustomDialog);
-                    customDialog.show();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            SystemClock.sleep(1000);
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    MyDataBase myDataBase = new MyDataBase(LoginActivity.this,"test.db",null,1);
-                                    Cursor cursor = myDataBase.selectByName(name);
-                                    cursor.moveToFirst();
-                                    if(cursor.getCount()<1){
-                                        Toast.makeText(LoginActivity.this, "该用户不存在", Toast.LENGTH_SHORT).show();
-                                    } else if(password.equals(cursor.getString(2))){
-                                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                                        //登录成功后保存用户名密码
-                                        SharedPreferences.Editor edit = sharedPreferences.edit();
-                                        edit.putString("name", name);
-                                        edit.putString("password", password);
-                                        edit.putInt("adminid", cursor.getInt(0));
-                                        edit.commit();
-                                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                                        finish();
-                                    }
-                                    else{
-                                        Toast.makeText(LoginActivity.this, "密码错误，请重试", Toast.LENGTH_SHORT).show();
-                                    }
-                                    customDialog.dismiss();
-
-
-                                }
-                            });
-                        }
-                    }).start();
-                }
+                login(text_password, text_username, sharedPreferences);
 
 
             }
@@ -108,5 +75,59 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, NewPasswordActivity.class));
             }
         });
+    }
+
+    private void login(EditText text_password, EditText text_username, final SharedPreferences sharedPreferences) {
+        final String password = text_password.getText().toString().trim();
+        final String name = text_username.getText().toString().trim();
+        if("".equals(name)||"".equals(password)){
+            Toast.makeText(LoginActivity.this, "请将登录信息填写完整", Toast.LENGTH_SHORT).show();
+        }else{
+            final CustomDialog customDialog = new CustomDialog(LoginActivity.this, R.style.CustomDialog);
+            customDialog.show();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    SystemClock.sleep(1000);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            myDataBase = new MyDataBase(LoginActivity.this,"test.db",null,1);
+                            Cursor cursor = myDataBase.selectByName(name);
+                            cursor.moveToFirst();
+                            if(cursor.getCount()<1){
+                                Toast.makeText(LoginActivity.this, "该用户不存在", Toast.LENGTH_SHORT).show();
+                            } else if(password.equals(cursor.getString(2))){
+                                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                //登录成功后保存用户名密码
+                                SharedPreferences.Editor edit = sharedPreferences.edit();
+                                edit.putString("name", name);
+                                edit.putString("password", password);
+                                edit.putInt("adminid", cursor.getInt(0));
+                                edit.putInt("autologin",1);
+                                edit.commit();
+                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "密码错误，请重试", Toast.LENGTH_SHORT).show();
+                            }
+                            cursor.close();
+                            customDialog.dismiss();
+
+
+                        }
+                    });
+                }
+            }).start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myDataBase.close();
     }
 }

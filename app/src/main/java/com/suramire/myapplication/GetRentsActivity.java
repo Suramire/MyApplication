@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -103,6 +102,8 @@ public class GetRentsActivity extends AppCompatActivity {
         String[] titles = {"收租管理"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
         supportActionBar.setListNavigationCallbacks(adapter,null);
+        supportActionBar.setElevation(0);
+
     }
 
     private void showListNotPayed(ListView listView) {
@@ -145,23 +146,7 @@ public class GetRentsActivity extends AppCompatActivity {
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-//                                AlertDialog.Builder builder = new AlertDialog.Builder(GetRentsActivity.this);
-//                                builder.setTitle("提示")
-//                                        .setMessage("应收租"+item.getMoney()+"元");
-//                                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        // TODO: 2017/9/21 执行收租事件
-//                                        int i1 = myDataBase.updateRentInfoPayed(item.getRentInfoId());
-//                                        if(i1!=0){
-//                                            Toast.makeText(GetRentsActivity.this, "收租成功", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                                });
-//                                builder.setNegativeButton("取消", null);
-//                                builder.show();
-
-                                Intent intent = new Intent(GetRentsActivity.this, RentDetailActivity.class);
+                          Intent intent = new Intent(GetRentsActivity.this, RentDetailActivity.class);
                                 intent.putExtra("rentinfo", rentItemList.get(position));
                                 startActivity(intent);
 
@@ -227,21 +212,6 @@ public class GetRentsActivity extends AppCompatActivity {
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-//                                AlertDialog.Builder builder = new AlertDialog.Builder(GetRentsActivity.this);
-//                                builder.setTitle("提示")
-//                                        .setMessage("应收租"+item.getMoney()+"元");
-//                                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        // TODO: 2017/9/21 执行收租事件
-//                                        int i1 = myDataBase.updateRentInfoPayed(item.getRentInfoId());
-//                                        if(i1!=0){
-//                                            Toast.makeText(GetRentsActivity.this, "收租成功", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                                });
-//                                builder.setNegativeButton("取消", null);
-//                                builder.show();
                             }
                         };
                         helper.setOnClickListener(R.id.rents_money, listener)

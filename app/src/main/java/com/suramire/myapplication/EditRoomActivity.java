@@ -19,6 +19,9 @@ import com.suramire.myapplication.util.MyDataBase;
  */
 
 public class EditRoomActivity extends AppCompatActivity {
+
+    private MyDataBase myDataBase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class EditRoomActivity extends AppCompatActivity {
                     Toast.makeText(EditRoomActivity.this, "请将房间信息补充完整", Toast.LENGTH_SHORT).show();
                 }else{
                     // TODO: 2017/9/21 回上一级页面时刷新数据
-                    MyDataBase myDataBase = new MyDataBase(EditRoomActivity.this, "test.db", null, 1);
+                    myDataBase = new MyDataBase(EditRoomActivity.this, "test.db", null, 1);
                     room.setName(name);
                     room.setPrice(Float.parseFloat(price));
                     int i = myDataBase.updateRoomInfo(room.getId(), room);
@@ -72,5 +75,11 @@ public class EditRoomActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myDataBase.close();
     }
 }
