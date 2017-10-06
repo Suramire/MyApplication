@@ -80,6 +80,7 @@ public class EditRoomActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        myDataBase.close();
+        if(myDataBase !=null)
+            myDataBase.close();
     }
 }

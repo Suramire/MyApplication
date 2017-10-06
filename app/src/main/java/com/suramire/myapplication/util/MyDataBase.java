@@ -31,6 +31,10 @@ public class MyDataBase extends SQLiteOpenHelper {
         return  mydb.query("admin",null,"name =?",new String[]{name},null,null,null);
     }
 
+    public Cursor selectAdminById(int adminid){
+        return mydb.query("admin", null,"_id = ?",new String[]{adminid+""},null,null,null);
+    }
+
     /**
      * 查询登录用户所拥有的房源
      * @param adminId
@@ -109,6 +113,7 @@ public class MyDataBase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("name", admin.getName());
         values.put("password", admin.getPassword());
+        values.put("nickname", admin.getNickname());
         return mydb.insert("admin", null, values);
     }
 
@@ -161,7 +166,7 @@ public class MyDataBase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table if not exists admin(_id integer primary key autoincrement," +
-                "name varchar,password varchar)");
+                "name varchar,password varchar,nickname varchar)");
         db.execSQL("create table if not exists house(_id integer primary key autoincrement," +
                 "address varchar,area varchar,name varchar,floor integer,adminid integer)");
         db.execSQL("create table if not exists room(_id integer primary key autoincrement," +

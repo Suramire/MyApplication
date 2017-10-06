@@ -1,326 +1,398 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <View android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e8e8e8"
+        />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="1dp">
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="姓名*"
-            android:textColor="#f60"
-            android:textSize="14sp" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/rent_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="10"
-            android:hint="如，张三"
-            android:inputType="textPersonName"
-            android:textAlignment="viewEnd"
-            android:textColor="#999999"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="1dp"
-            android:background="#ededed" />
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名*"
+                    android:textColor="#f60"
+                    android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:text="身份证识别"
-            android:textAlignment="viewEnd"
-            android:textColor="#64b0ff"
-            android:textSize="16sp" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/rent_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="如，张三"
+                    android:inputType="textPersonName"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ededed" />
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="电话*"
-            android:textColor="#f60" />
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:text="身份证识别"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#64b0ff"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/rent_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="有电话，方便缴租"
-            android:inputType="phone"
-            android:textAlignment="viewEnd"
-            android:textColor="#999999"
-            android:textSize="16sp" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="电话*"
+                    android:textColor="#f60" />
 
-        <TextView
-            android:id="@+id/textView46"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="性别" />
+                <EditText
+                    android:id="@+id/rent_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="有电话，方便缴租"
+                    android:inputType="phone"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="2dp"
-            android:text="男"
-            android:textAlignment="viewEnd"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-        <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:paddingBottom="2dp"
-            app:srcCompat="@drawable/forward" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="性别" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="2dp"
+                    android:text="男"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="租金*"
-            android:textColor="#f60" />
+                <ImageView
+                    android:id="@+id/imageView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:paddingBottom="2dp"
+                    app:srcCompat="@drawable/forward" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/rent_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="0"
-            android:inputType="number"
-            android:textAlignment="viewEnd"
-            android:textColor="#f60"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-        <View
-            android:id="@+id/view4"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="1dp"
-            android:background="#ededed" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="每月租金*"
+                    android:textColor="#f60" />
 
-        <TextView
-            android:id="@+id/textView43"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="元/月"
-            android:textAlignment="center"
-            android:textColor="#999999"
-            android:textSize="16sp" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/rent_money_permonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#f60"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ededed" />
 
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="押金" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="元/月"
+                    android:textAlignment="center"
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/rent_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="0"
-            android:inputType="number"
-            android:text="0"
-            android:textAlignment="viewEnd"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-        <View
-            android:id="@+id/view5"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="1dp"
-            android:background="#ededed" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总租金*"
+                    android:textColor="#f60" />
 
-        <TextView
-            android:id="@+id/textView44"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="元"
-            android:textAlignment="textStart"
-            android:textColor="#999999"
-            android:textSize="16sp" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/rent_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#f60"
+                    android:textSize="16sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ededed" />
 
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="起租日期" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="元"
+                    android:textAlignment="center"
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/rent_begin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="请输入起租时间"
-            android:inputType="textPersonName"
-            android:textAlignment="viewEnd"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="押金" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:background="#FFF"
-        android:orientation="horizontal"
-        android:padding="14dp">
+                <EditText
+                    android:id="@+id/rent_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:text="0"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="结束日期" />
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ededed" />
 
-        <EditText
-            android:id="@+id/rent_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="请输入结束时间"
-            android:inputType="textPersonName"
-            android:textAlignment="viewEnd"
-            android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="元"
+                    android:textAlignment="center"
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="起租日期" />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="半年" />
+                <EditText
+                    android:id="@+id/rent_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="请输入起租时间"
+                    android:inputType="textPersonName"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="一年" />
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="两年" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="#FFF"
+                android:orientation="horizontal"
+                android:padding="14dp">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="其他" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="结束日期" />
 
-    <TextView
-        android:id="@+id/textView45"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="可以让租客帮您填写合同的哦，点击查看"
-        android:textColor="#999999" />
+                <EditText
+                    android:id="@+id/rent_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="请输入结束时间"
+                    android:inputType="textPersonName"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F5F5F9"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:text="半年" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:text="一年" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:text="两年" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FFF"
+                    android:text="其他" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="可以让租客帮您填写合同的哦，点击查看"
+                android:textColor="#999999" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <Button
@@ -336,4 +408,6 @@
             android:textColor="#FFF" />
     </RelativeLayout>
 
-</LinearLayout>
+
+
+</RelativeLayout>

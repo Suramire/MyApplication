@@ -6,12 +6,14 @@ package com.suramire.myapplication.model;
 
 public class Admin {
     int id;
-    String name;
-    String password;
+    String name;//用户名(手机号)
+    String password;//密码
+    String nickname;//昵称
 
-    public Admin(String name, String password) {
+    public Admin(String name, String password,String nickname) {
         this.name = name;
         this.password = password;
+        this.nickname = nickname;
     }
 
     public int getId() {
@@ -38,5 +40,11 @@ public class Admin {
         this.password = password;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }

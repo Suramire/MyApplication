@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -34,11 +36,12 @@ public class NewRentActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newrent);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
         final Calendar calendar = Calendar.getInstance();
         Bundle extras = getIntent().getExtras();
         final Room room = (Room) extras.getSerializable("room");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(room.getName());
+        actionBar.setDisplayHomeAsUpEnabled(true);
         calendar.setTime(new Date());
         year_begin = calendar.get(Calendar.YEAR);
         month_begin = calendar.get(Calendar.MONTH);
@@ -46,40 +49,50 @@ public class NewRentActivity extends AppCompatActivity {
         final EditText rent_name = (EditText) findViewById(R.id.rent_name);
         final EditText rent_phone = (EditText) findViewById(R.id.rent_phone);
         final EditText rent_money = (EditText) findViewById(R.id.rent_money);
+        final EditText rent_money_permonth = (EditText) findViewById(R.id.rent_money_permonth);
         final EditText rent_margin = (EditText) findViewById(R.id.rent_margin);
         Button button = (Button) findViewById(R.id.btn_rent);
         final EditText rent_begin = (EditText) findViewById(R.id.rent_begin);
         final EditText rent_end = (EditText) findViewById(R.id.rent_end);
         rent_begin.setText(year_begin+"年"+(month_begin+1)+"月"+day_begin+"日");
         rent_end.setText(year_begin+"年"+(month_begin+1)+"月"+day_begin+"日");
+        rent_money_permonth.setText(room.getPrice()+"");
         time_begin = calendar.getTimeInMillis();
         time_end = calendar.getTimeInMillis();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(time_end<=time_begin){
-                    Toast.makeText(NewRentActivity.this, "出租时长不能小于1天", Toast.LENGTH_SHORT).show();
-                }else{
-                    String name = rent_name.getText().toString().trim();
-                    String phone = rent_phone.getText().toString().trim();
-                    Float money = Float.valueOf(rent_money.getText().toString().trim());
-                    Float margin = Float.valueOf(rent_margin.getText().toString().trim());
-                    long day = Math.abs((time_end - time_begin) / 1000 / 60 / 60 / 24);
-                    Date date_begin = new Date(time_begin);
-                    Date date_end = new Date(time_end);
-                    RentInfo rentInfo = new RentInfo(name, phone, room.getId(), money, margin, date_begin.toString(), date_end.toString());
-                    MyDataBase myDataBase = new MyDataBase(NewRentActivity.this, "test.db", null, 1);
-                    long l = myDataBase.addRentInfo(rentInfo);
-                    if(l!=0){
-                        int i = myDataBase.updateRoomLend(room.getId());
-                        if (i != 0) {
-                            Toast.makeText(NewRentActivity.this, "出租成功", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }else{
-                        Toast.makeText(NewRentActivity.this, "出租失败", Toast.LENGTH_SHORT).show();
-                    }
+            if(time_end<=time_begin){
+                Toast.makeText(NewRentActivity.this, "出租时长不能小于1天", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String name = rent_name.getText().toString().trim();
+            String phone = rent_phone.getText().toString().trim();
+            Float money = Float.valueOf(rent_money.getText().toString().trim());
+            Log.d("NewRentActivity", name);
+            Log.d("NewRentActivity", phone);
+            Log.d("NewRentActivity", "money:" + money);
+            Float margin = Float.valueOf(rent_margin.getText().toString().trim());
+            long day = Math.abs((time_end - time_begin) / 1000 / 60 / 60 / 24);
+            Date date_begin = new Date(time_begin);
+            Date date_end = new Date(time_end);
+            if(TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || money==0){
+                Toast.makeText(NewRentActivity.this, "请将租客信息补充完整", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            RentInfo rentInfo = new RentInfo(name, phone, room.getId(), money, margin, date_begin.toString(), date_end.toString());
+            MyDataBase myDataBase = new MyDataBase(NewRentActivity.this, "test.db", null, 1);
+            long l = myDataBase.addRentInfo(rentInfo);
+            if(l!=0){
+                int i = myDataBase.updateRoomLend(room.getId());
+                if (i != 0) {
+                    Toast.makeText(NewRentActivity.this, "出租成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+            }else{
+                Toast.makeText(NewRentActivity.this, "出租失败", Toast.LENGTH_SHORT).show();
+            }
+
             }
         });
 

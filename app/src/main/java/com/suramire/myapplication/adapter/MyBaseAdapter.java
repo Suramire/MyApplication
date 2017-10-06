@@ -62,16 +62,24 @@ public class MyBaseAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.item_room, viewGroup, false);
             viewHolder = new ViewHolder();
             viewHolder.layout_item = view.findViewById(R.id.layout_item);
-            viewHolder.item_roomname =(TextView) view.findViewById(R.id.item_roomname);
-            viewHolder.item_roomstate =(TextView) view.findViewById(R.id.item_roomstate);
-            viewHolder.item_roomprice =(TextView) view.findViewById(R.id.item_roomprice);
-            viewHolder.imageView_check =(ImageView) view.findViewById(R.id.imageView18);
-            viewHolder.layout_hide = (LinearLayout)view.findViewById(R.id.layout_hide);
-            viewHolder.layout_hide2 = (LinearLayout)view.findViewById(R.id.layout_hide2);
+            viewHolder.item_roomname = view.findViewById(R.id.item_roomname);
+            viewHolder.item_roomstate = view.findViewById(R.id.item_roomstate);
+            viewHolder.item_roomprice = view.findViewById(R.id.item_roomprice);
+            viewHolder.imageView_check = view.findViewById(R.id.imageView18);
+            viewHolder.layout_hide = view.findViewById(R.id.layout_hide);
+            viewHolder.layout_hide2 = view.findViewById(R.id.layout_hide2);
             viewHolder.op_renterinfo = view.findViewById(R.id.op_renthistory);
             viewHolder.op_rent = view.findViewById(R.id.op_rent);
             viewHolder.op_roominfo = view.findViewById(R.id.op_roominfo);
-            viewHolder.op_up = view.findViewById(R.id.op_up);
+            viewHolder.op_money_back = view.findViewById(R.id.op_money_back);
+            viewHolder.op_cancel = view.findViewById(R.id.op_cancel);
+            viewHolder.op_rise = view.findViewById(R.id.op_rise);
+            viewHolder.op_roominfo2 = view.findViewById(R.id.op_roominfo2);
+            viewHolder.op_renthistory2 = view.findViewById(R.id.op_renthistory2);
+            viewHolder.op_agreement = view.findViewById(R.id.op_agreement);
+            viewHolder.op_renter = view.findViewById(R.id.op_renter);
+            viewHolder.op_phone = view.findViewById(R.id.op_phone);
+            viewHolder.op_more = view.findViewById(R.id.op_more);
             view.setTag(viewHolder);
         }
         if(view !=null){
@@ -151,7 +159,7 @@ public class MyBaseAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-            viewHolder.op_up.setOnClickListener(new View.OnClickListener() {
+            viewHolder.op_money_back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -199,6 +207,8 @@ public class MyBaseAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
+
+
         }
 
 
@@ -210,8 +220,8 @@ public class MyBaseAdapter extends BaseAdapter {
 
     class ViewHolder{
         TextView item_roomname,item_roomprice,item_roomstate;
-
         ImageView imageView_check;
-        LinearLayout layout_item,layout_hide,layout_hide2,op_roominfo,op_rent,op_up,op_renterinfo;
+        LinearLayout layout_item,layout_hide,layout_hide2,op_roominfo,op_rent, op_money_back,op_renterinfo,
+                op_cancel,op_rise,op_roominfo2,op_renthistory2,op_agreement,op_renter,op_phone,op_more;
     }
 }

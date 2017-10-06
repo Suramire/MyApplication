@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +33,7 @@ public class RegActivity extends AppCompatActivity {
         final EditText admin_name = (EditText) findViewById(R.id.admin_name);
         final EditText admin_password = (EditText) findViewById(R.id.admin_pasword);
         final EditText admin_password2 = (EditText) findViewById(R.id.admin_password2);
+        final EditText admin_nickname = (EditText) findViewById(R.id.admin_nickname);
 
         Button reg = (Button) findViewById(R.id.btn_reg);
         reg.setOnClickListener(new View.OnClickListener() {
@@ -42,15 +42,14 @@ public class RegActivity extends AppCompatActivity {
                 String name = admin_name.getText().toString().trim();
                 String password = admin_password.getText().toString().trim();
                 String password2 = admin_password2.getText().toString().trim();
-                if(name.length()==0||password.length()==0 ||password2.length()==0){
+                String nickname = admin_nickname.getText().toString().trim();
+                if(name.length()==0||password.length()==0 ||password2.length()==0 || nickname.length()==0){
                     Toast.makeText(RegActivity.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
                 }else if(!password.equals(password2)){
                     Toast.makeText(RegActivity.this, "两次输入的密码不一致", Toast.LENGTH_SHORT).show();
-                }else if(TextUtils.isEmpty(name)){
-                    Toast.makeText(RegActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    Admin admin = new Admin(name, password);
+                    Admin admin = new Admin(name, password,nickname);
                     MyDataBase myDataBase = new MyDataBase(RegActivity.this,"test.db",null,1);
                     Cursor cursor = myDataBase.selectByName(name);
                     if(cursor.getCount()>0){
