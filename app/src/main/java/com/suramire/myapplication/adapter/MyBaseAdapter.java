@@ -24,6 +24,7 @@ import java.util.List;
 
 /**
  * Created by Suramire on 2017/9/25.
+ * 实现点击item展开其菜单
  */
 
 public class MyBaseAdapter extends BaseAdapter {
@@ -187,14 +188,14 @@ public class MyBaseAdapter extends BaseAdapter {
             viewHolder.op_renterinfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                MyDataBase myDataBase = new MyDataBase(context,"test.db",null,1);
-//                Cursor cursor = myDataBase.selectRenterInfo(data.get(i).getId());
+//                MyDataBase myDataBase = new MyDataBase(mContext,"test.db",null,1);
+//                Cursor cursor = myDataBase.selectRenterInfo(mData.get(i).getId());
 //                if(cursor.getCount()>0){
 //                    if (cursor.moveToLast()){
 //                        String rentername = cursor.getString(cursor.getColumnIndex("rentername"));
 //                        String renterphone = cursor.getString(cursor.getColumnIndex("renterphone"));
 //                        String margin = cursor.getString(cursor.getColumnIndex("margin"));
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 //                        builder.setTitle("租客信息")
 //                                .setMessage("姓名：" + rentername + "\n\n电话：" + renterphone+"\n\n已交押金："+margin);
 //                        builder.show();

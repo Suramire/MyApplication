@@ -43,6 +43,12 @@ public class GetRentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getrents);
         setupActionBar();
+        findViewById(R.id.button20).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GetRentsActivity.this, AmmeterActivity.class));
+            }
+        });
         header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
         tv_state = header.findViewById(R.id.item_roomstate);
         listView = (ListView) findViewById(R.id.rents_list);
@@ -61,9 +67,9 @@ public class GetRentsActivity extends AppCompatActivity {
                 int position = tab.getPosition();
                 switch (position){
                     case 0:
-                        showListNotPayed(listView);
+                        showListNotPayed();
                         break;
-                    case 1:showListPayed(listView);
+                    case 1:showListPayed();
                         break;
                 }
             }
@@ -86,7 +92,7 @@ public class GetRentsActivity extends AppCompatActivity {
 //        tv_empty.setText("暂无可收租房间");
         listView.setEmptyView(tv_empty);
 
-        showListNotPayed(listView);
+        showListNotPayed();
     }
 
     private void setupActionBar() {
@@ -106,7 +112,7 @@ public class GetRentsActivity extends AppCompatActivity {
 
     }
 
-    private void showListNotPayed(ListView listView) {
+    private void showListNotPayed() {
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(header);
         }
@@ -166,13 +172,13 @@ public class GetRentsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         tabLayout.getTabAt(0).select();
-        showListNotPayed(listView);
+        showListNotPayed();
 
     }
 
 
 
-    private void showListPayed(ListView listView) {
+    private void showListPayed() {
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(header);
         }

@@ -22,7 +22,7 @@ public class FEInfoActivity extends AppCompatActivity {
         supportActionBar.setTitle("58品牌馆");
         supportActionBar.setDisplayHomeAsUpEnabled(true);
         ImageView imageView = (ImageView) findViewById(R.id.imageView31);
-        Picasso.with(this).load(R.drawable.fe_info).into(imageView);
+        Picasso.with(this).load(R.drawable.fe_info).placeholder(R.drawable.loading).into(imageView);
     }
 
     @Override

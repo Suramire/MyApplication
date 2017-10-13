@@ -40,7 +40,6 @@ public class ManagementActivity extends AppCompatActivity {
 
     private View headerView;
     private MyDataBase myDataBase;
-    private RelativeLayout emptyView;
     private ImageView imageView;
     private TabLayout tabLayout;
     private ListView listView;
@@ -53,7 +52,7 @@ public class ManagementActivity extends AppCompatActivity {
 
         setupActionBar();
 
-        emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
+        RelativeLayout emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
         listView = (ListView) findViewById(R.id.list_room);
         button = emptyView.findViewById(R.id.button);
         imageView = emptyView.findViewById(R.id.imageView17);
@@ -107,7 +106,10 @@ public class ManagementActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         getRoomLend(listView,button);
-        tabLayout.getTabAt(0).select();
+        TabLayout.Tab tab = tabLayout.getTabAt(0);
+        if(tab!=null){
+            tab.select();
+        }
         super.onResume();
 
     }
@@ -131,11 +133,12 @@ public class ManagementActivity extends AppCompatActivity {
 
     private void setupActionBar() {
         //以下代码用于去除actionbar阴影
-        if(Build.VERSION.SDK_INT>=21){
-            getSupportActionBar().setElevation(0);
-        }
 
         ActionBar supportActionBar = getSupportActionBar();
+        if(Build.VERSION.SDK_INT>=21){
+            supportActionBar.setElevation(0);
+        }
+
         supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         supportActionBar.setTitle(null);
         String[] titles = {"房源管理"};

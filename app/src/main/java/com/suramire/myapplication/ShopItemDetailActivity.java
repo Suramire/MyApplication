@@ -25,7 +25,7 @@ public class ShopItemDetailActivity extends AppCompatActivity {
         actionBar.setTitle("商品详情");
         actionBar.setDisplayHomeAsUpEnabled(true);
         ImageView imageView = (ImageView) findViewById(R.id.imageView15);
-        Picasso.with(this).load(R.drawable.printer).into(imageView);
+        Picasso.with(this).load(R.drawable.printer).placeholder(R.drawable.loading).into(imageView);
         Button button = (Button) findViewById(R.id.button19);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

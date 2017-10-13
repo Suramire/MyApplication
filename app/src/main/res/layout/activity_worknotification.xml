@@ -40,7 +40,8 @@
     <ListView
         android:id="@+id/work_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp" />
 
     <RelativeLayout
         android:id="@+id/empty_layout"

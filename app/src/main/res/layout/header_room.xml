@@ -18,7 +18,7 @@
             android:text="房源"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/item_roomprice"
@@ -28,24 +28,24 @@
             android:text="租金"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/item_roomstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:text="租客"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/textView52"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="           " />
+            android:layout_weight="0.8"
+            android:text="           "/>
 
     </LinearLayout>
 

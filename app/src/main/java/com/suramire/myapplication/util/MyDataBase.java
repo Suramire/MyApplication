@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.suramire.myapplication.model.Admin;
+import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.model.House;
+import com.suramire.myapplication.model.Notification;
 import com.suramire.myapplication.model.RentInfo;
 import com.suramire.myapplication.model.Room;
 
@@ -50,14 +52,19 @@ public class MyDataBase extends SQLiteOpenHelper {
     }
 
 
+    public Cursor selectAmmeter(int roomId){
+        return mydb.query("ammeter", null, "roomid=?", new String[]{roomId + ""}, null, null, null);
+    }
+
+
 
     /**
-     * 查询某房源下的所有房间
-     * @param houseId
+     * 查询当前登录的房东的所有房间
+     * @param adminId
      * @return
      */
-    public Cursor selectAllRoom(int houseId){
-        return  mydb.query("room", null, "houseId=?", new String[]{houseId+""}, null, null, null);
+    public Cursor selectAllRoom(int adminId){
+        return  mydb.query("room", null, "houseid = (select _id from house where adminid=?) ", new String[]{adminId+""}, null, null, null);
     }
 
     /**
@@ -108,6 +115,10 @@ public class MyDataBase extends SQLiteOpenHelper {
         return mydb.update("rentinfo", values, "_id = ?", new String[]{rentinfoId + ""});
     }
 
+    public int updateAmmeter(Ammeter ammeter){
+        ContentValues values = new ContentValues();
+        return mydb.update("ammeter",values,"_id=?",new String[]{ammeter.getId()+""});
+    }
 
     public long addAdmin(Admin admin) {
         ContentValues values = new ContentValues();
@@ -149,6 +160,27 @@ public class MyDataBase extends SQLiteOpenHelper {
         return mydb.insert("rentinfo",null,values);
     }
 
+    public long addAmmeter(Ammeter ammeter){
+        ContentValues values = new ContentValues();
+        values.put("roomid", ammeter.getRoomid());
+        values.put("count", ammeter.getCount());
+        return mydb.insert("ammeter",null,values);
+    }
+
+
+
+    public long addNotification(Notification notification){
+        ContentValues values = new ContentValues();
+        values.put("ncontent", notification.getContent());
+        values.put("ndate", notification.getDate());
+        values.put("adminid", notification.getAdminid());
+        return mydb.insert("notification",null,values);
+    }
+
+    public Cursor selectNotification(int adminid){
+        return mydb.query("notification", null, "adminid=?", new String[]{adminid+""}, null, null, null);
+    }
+
 
     public int delete(String where,String[] strings){
        return  mydb.delete("admin",where,strings);
@@ -174,6 +206,10 @@ public class MyDataBase extends SQLiteOpenHelper {
         db.execSQL("create table if not exists rentinfo(_id integer primary key autoincrement," +
                 "roomid integer,rentername varchar,renterphone varchar,money integer,margin integer,datebegin date,dateend date" +
                 ",ispayed integer)");
+        db.execSQL("create table if not exists notification(_id integer primary key autoincrement," +
+                "ncontent varchar,adminid integer,ndate date)");
+        db.execSQL("create table if not exists ammeter(_id integer primary key autoincrement," +
+                "roomid integer,lastcount integer,count integer,time date,lasttime date)");
     }
 
     @Override

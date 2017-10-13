@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="key_height">40dp</dimen>
+    <dimen name="key_height_double">80dp</dimen>
+</resources>
