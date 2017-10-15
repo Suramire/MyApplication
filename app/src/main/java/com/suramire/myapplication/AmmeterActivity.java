@@ -82,6 +82,7 @@ public class AmmeterActivity extends AppCompatActivity {
                         mAdapter.notifyDataSetChanged();
                     }
                 });
+                mAdapter.setSelectedItem(-1);//默认不选中任何项
             }
 
         }

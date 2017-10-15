@@ -16,6 +16,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert</item>
         <item name="colorPrimary">#FFF</item>
         <item name="colorPrimaryDark">#000</item>
         <item name="colorAccent">#FFF</item>
@@ -25,7 +26,7 @@
 
 
     </style>
-
+    <style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert"/>
     <style name="AppThemeWhiteActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFFFFF</item>

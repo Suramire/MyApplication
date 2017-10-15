@@ -1,7 +1,7 @@
 package com.suramire.myapplication;
 
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -282,11 +282,10 @@ public class ManagementActivity extends AppCompatActivity {
                 }
 
             }
-        });
-        builder.setTitle("新增房源");
-
-        builder.setNegativeButton("取消", null
-        );
-        builder.setCancelable(false).show();
+        })
+                .setTitle("新增房源")
+                .setNegativeButton("取消", null)
+                .setCancelable(false)
+                .show();
     }
 }

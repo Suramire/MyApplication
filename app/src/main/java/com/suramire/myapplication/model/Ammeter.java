@@ -8,13 +8,6 @@ public class Ammeter {
     int id;
     int mRoomid;
 
-    public String getRoomName() {
-        return mRoomName;
-    }
-
-    public void setRoomName(String roomName) {
-        mRoomName = roomName;
-    }
 
     String mRoomName;//房间名
     int mLastcount;//上次读数
@@ -73,6 +66,14 @@ public class Ammeter {
 
     public void setLastTime(String lastTime) {
         this.mLastTime = lastTime;
+    }
+
+    public String getRoomName() {
+        return mRoomName;
+    }
+
+    public void setRoomName(String roomName) {
+        mRoomName = roomName;
     }
 
 

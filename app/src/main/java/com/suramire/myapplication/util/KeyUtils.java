@@ -2,6 +2,7 @@ package com.suramire.myapplication.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.Camera;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
@@ -16,6 +17,12 @@ import com.suramire.myapplication.R;
  */
 
 public class KeyUtils implements  OnKeyboardActionListener{
+
+    public static boolean isLightUp = false;
+    private Camera m_Camera;
+    private Camera.Parameters mParameters;
+
+    //region Listener
     @Override
     public void onPress(int i) {
 
@@ -52,6 +59,27 @@ public class KeyUtils implements  OnKeyboardActionListener{
                 }
                 mOnTextChangeListener.onTextCompleted(mEditText);
             }break;
+            case 100:{
+                if(isLightUp){
+                    try{
+                        mParameters = m_Camera.getParameters();
+                        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                        m_Camera.setParameters(mParameters);
+                        m_Camera.release();
+                        isLightUp =false;
+                    } catch(Exception ex){}
+
+                }else{
+                    try{
+                        m_Camera = Camera.open();
+                        mParameters = m_Camera.getParameters();
+                        mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                        m_Camera.setParameters(mParameters);
+                        isLightUp =true;
+                    } catch(Exception ex){}
+
+                }
+            }break;
             case 101:{
 //                mOnTextChangeListener.onPreviousLine();
             }break;
@@ -86,6 +114,7 @@ public class KeyUtils implements  OnKeyboardActionListener{
     public void swipeUp() {
 
     }
+    //endregion
 
     public interface onTextChangeListener{
         void onTextCompleted(EditText editText);

@@ -37,6 +37,7 @@ public class MyBaseAdapter2 extends BaseAdapter {
     public void setData(List<Ammeter> data) {
         for(Ammeter ammeter:data){
             Ammeter ammeter1 = new Ammeter(ammeter.getId(),ammeter.getRoomid(),ammeter.getCount());
+            ammeter1.setRoomName(ammeter.getRoomName());
             mData.add(ammeter1);
         }
     }
@@ -74,7 +75,7 @@ public class MyBaseAdapter2 extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         if(view == null){
-            view = LayoutInflater.from(mContext).inflate(R.layout.item_list5, viewGroup, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.item_ammeter, viewGroup, false);
             viewHolder = new ViewHolder();
             viewHolder.mImageView = view.findViewById(R.id.imageView2);
             viewHolder.mTextView = view.findViewById(R.id.textView2);
@@ -127,7 +128,7 @@ public class MyBaseAdapter2 extends BaseAdapter {
 //                }
             });
 
-            viewHolder.mLinearLayout.setBackgroundColor(Color.YELLOW);
+            viewHolder.mLinearLayout.setBackgroundResource(R.drawable.bg_selected);
 
         }else{
             viewHolder.mTextView.setVisibility(View.VISIBLE);
