@@ -50,6 +50,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewNotificationActivity" />
+        <activity android:name=".SendMessageActivity"/>
+        <activity android:name=".RecordsActivity"/>
 
     </application>
 

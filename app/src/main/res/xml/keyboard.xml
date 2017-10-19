@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-          android:keyWidth="25%p"
+          android:keyWidth="20%p"
           android:keyHeight="@dimen/key_height"
             android:verticalGap="1dp"
           android:horizontalGap="1dp"
@@ -11,9 +11,7 @@
         <Key android:codes="1" android:keyLabel="1" />
         <Key android:codes="2" android:keyLabel="2" />
         <Key android:codes="3" android:keyLabel="3" />
-        <!--<Key android:codes="101"  android:keyHeight="@dimen/key_height_double"-->
-             <!--android:keyLabel="上一间" android:keyEdgeFlags="right"-->
-             <!--android:isRepeatable="true"/>-->
+        <Key android:codes="101" android:keyLabel="上一间" android:keyHeight="@dimen/key_height_double" />
 
     </Row>
 
@@ -31,10 +29,8 @@
         <Key android:codes="7" android:keyLabel="7" />
         <Key android:codes="8" android:keyLabel="8" />
         <Key android:codes="9" android:keyLabel="9" />
-        <!--<Key android:codes="103"  android:keyHeight="@dimen/key_height_double"-->
-             <!--android:keyLabel="下一间" android:keyEdgeFlags="right"-->
-             <!--android:isRepeatable="true"/>-->
 
+        <Key android:codes="103" android:keyLabel="下一间" android:keyHeight="@dimen/key_height_double" />
     </Row>
 
     <Row>

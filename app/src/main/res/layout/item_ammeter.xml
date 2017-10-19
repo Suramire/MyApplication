@@ -43,6 +43,7 @@
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
+        android:maxLength="9"
         android:text="Name"
         android:textColor="#6BB1EE"
         android:visibility="gone"/>

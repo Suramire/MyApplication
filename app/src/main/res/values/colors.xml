@@ -6,4 +6,5 @@
     <color name="themeBlue">#FF4b9df9</color>
     <color name="black">#000000</color>
     <color name="keyboardBackground">#5A5C5F</color>
+    <color name="bottomgray">#7A818A</color>
 </resources>

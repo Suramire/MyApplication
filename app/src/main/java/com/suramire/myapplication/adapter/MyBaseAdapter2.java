@@ -19,6 +19,8 @@ import com.suramire.myapplication.util.KeyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.suramire.myapplication.R.id.editText;
+
 /**
  * Created by Suramire on 2017/9/25.
  * 实现选中点击的item
@@ -29,6 +31,7 @@ public class MyBaseAdapter2 extends BaseAdapter {
 
     Context mContext;
     private int mSelectedItem;
+    List<Integer> tempCounts = new ArrayList<>();//存放上一次读数
 
     public List<Ammeter> getData() {
         return mData;
@@ -36,9 +39,10 @@ public class MyBaseAdapter2 extends BaseAdapter {
 
     public void setData(List<Ammeter> data) {
         for(Ammeter ammeter:data){
-            Ammeter ammeter1 = new Ammeter(ammeter.getId(),ammeter.getRoomid(),ammeter.getCount());
+            Ammeter ammeter1 = new Ammeter(ammeter.getId(),ammeter.getRoomid(),ammeter.getCount(),ammeter.getLastcount());
             ammeter1.setRoomName(ammeter.getRoomName());
             mData.add(ammeter1);
+            tempCounts.add(ammeter.getCount());
         }
     }
 
@@ -82,55 +86,55 @@ public class MyBaseAdapter2 extends BaseAdapter {
             viewHolder.mTextViewRoomId = view.findViewById(R.id.textView19);
             viewHolder.mTextView2 = view.findViewById(R.id.textView12);
             viewHolder.mLinearLayout = view.findViewById(R.id.ll_item5);
-            viewHolder.mEditText = view.findViewById(R.id.editText);
+            viewHolder.mEditText = view.findViewById(editText);
             view.setTag(viewHolder);
         }
         if(view !=null){
             viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.mTextViewRoomId.setText(mData.get(i).getRoomName());
-        viewHolder.mTextView2.setText("0");
         viewHolder.mTextView.setText(mData.get(i).getCount()+"");
         viewHolder.mEditText.setText(mData.get(i).getCount()+"");
+        Log.d("MyBaseAdapter2", "mData.get(i).getLastcount():" + mData.get(i).getLastcount());
+        viewHolder.mTextView2.setText(mData.get(i).getLastcount()+"");
 
         if(mSelectedItem == i){
-            Log.d("MyBaseAdapter2", mData.get(i).getCount() + "is selected");
             viewHolder.mTextView.setVisibility(View.GONE);
             viewHolder.mEditText.setVisibility(View.VISIBLE);
-
             mKeyUtils = KeyUtils.getInstance(mContext, viewHolder.mEditText);
             mKeyUtils.setOnTextCompleteListener(new KeyUtils.onTextChangeListener() {
                 @Override
-                public void onTextCompleted(EditText editText) {
-                    String text = editText.getText().toString();
-                    Log.d("MyBaseAdapter2", text + "is selected 3");
-                    if("".equals(text)){
-                        text = "0";
-                    }
-                    viewHolder.mEditText.setText(text);
-                    mData.get(i).setCount(Integer.parseInt(text));
+                public void onTextCompleted(String newString,String lastString) {
+
+                    mData.get(mSelectedItem).setLastcount(tempCounts.get(i));
+
+                    viewHolder.mEditText.setText(newString);
+                    mData.get(mSelectedItem).setCount(Integer.parseInt(newString));
+
                 }
 
-//                @Override
-//                public void onNextLine() {
-//                    if(mSelectedItem<mData.size()-1){
-//                        setSelectedItem(mSelectedItem+1);
-//                        notifyDataSetChanged();
-//                    }
-//                }
-//
-//                @Override
-//                public void onPreviousLine() {
-//                    if(mSelectedItem>0){
-//                        setSelectedItem(mSelectedItem-1);
-//                        notifyDataSetChanged();
-//                    }
-//                }
+
+                @Override
+                public void onNextLine() {
+                    if(mSelectedItem<mData.size()-1){
+                        setSelectedItem(mSelectedItem+1);
+                        notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onPreviousLine() {
+                    if(mSelectedItem>0){
+                        setSelectedItem(mSelectedItem-1);
+                        notifyDataSetChanged();
+                    }
+                }
             });
 
             viewHolder.mLinearLayout.setBackgroundResource(R.drawable.bg_selected);
 
         }else{
+
             viewHolder.mTextView.setVisibility(View.VISIBLE);
             viewHolder.mEditText.setVisibility(View.GONE);
             viewHolder.mLinearLayout.setBackgroundColor(Color.TRANSPARENT);
@@ -144,5 +148,6 @@ public class MyBaseAdapter2 extends BaseAdapter {
         ImageView mImageView;
         EditText mEditText;
         LinearLayout mLinearLayout;
+
     }
 }

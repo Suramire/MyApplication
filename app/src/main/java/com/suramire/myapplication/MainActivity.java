@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -84,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
 //        LinearLayout work = (LinearLayout) findViewById(R.id.f_work);
 //        LinearLayout help = (LinearLayout) findViewById(R.id.f_help);
         management.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, GetRentsActivity.class));
             }
         });
+        updateInfo();
+        // TODO: 2017/9/22 关闭cursor
+
+    }
+
+    /**
+     * 更新首页数据
+     */
+    private void updateInfo() {
         float sum1 = 0;
         float sum2 = 0;
         SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
@@ -134,7 +140,11 @@ public class MainActivity extends AppCompatActivity {
         textView1.setText("待收租金："+sum2+"元");
         float percent = sum1 / (sum1 + sum2) * 100;
         button.setText("已完成："+Math.round((percent*100)/100)+"%\n查看详情>>");
-        // TODO: 2017/9/22 关闭cursor
+    }
 
+    @Override
+    protected void onResume() {
+        updateInfo();
+        super.onResume();
     }
 }

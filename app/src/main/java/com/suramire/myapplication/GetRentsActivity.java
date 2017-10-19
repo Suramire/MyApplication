@@ -43,10 +43,22 @@ public class GetRentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getrents);
         setupActionBar();
-        findViewById(R.id.button20).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ll_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GetRentsActivity.this,SendMessageActivity.class));
+            }
+        });
+        findViewById(R.id.ll_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(GetRentsActivity.this, AmmeterActivity.class));
+            }
+        });
+        findViewById(R.id.ll_4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GetRentsActivity.this, RecordsActivity.class));
             }
         });
         header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
@@ -113,6 +125,7 @@ public class GetRentsActivity extends AppCompatActivity {
     }
 
     private void showListNotPayed() {
+        listView.setAdapter(null);
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(header);
         }
@@ -179,6 +192,7 @@ public class GetRentsActivity extends AppCompatActivity {
 
 
     private void showListPayed() {
+        listView.setAdapter(null);
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(header);
         }

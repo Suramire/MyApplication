@@ -117,6 +117,8 @@ public class MyDataBase extends SQLiteOpenHelper {
 
     public int updateAmmeter(Ammeter ammeter){
         ContentValues values = new ContentValues();
+        values.put("count", ammeter.getCount());
+        values.put("lastcount",ammeter.getLastcount());
         return mydb.update("ammeter",values,"_id=?",new String[]{ammeter.getId()+""});
     }
 

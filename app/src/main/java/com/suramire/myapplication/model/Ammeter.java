@@ -22,6 +22,14 @@ public class Ammeter {
 //        mTime = time;
     }
 
+    public Ammeter(int id, int roomid, int count,int lastcount) {
+        this.id = id;
+        this.mRoomid = roomid;
+        this.mCount = count;
+        this.mLastcount = lastcount;
+//        mTime = time;
+    }
+
     public Ammeter(int roomid, int count) {
         this.mRoomid = roomid;
         this.mCount = count;

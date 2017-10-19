@@ -45,19 +45,24 @@ public class KeyUtils implements  OnKeyboardActionListener{
             case 6:
             case 7:
             case 8:
-            case 9:{mEditText.append(i+"");
-                mOnTextChangeListener.onTextCompleted(mEditText);
+            case 9:{
+                String lastString = mEditText.getText().toString().trim();
+                mEditText.append(i+"");
+                String newString = mEditText.getText().toString().trim();
+                mOnTextChangeListener.onTextCompleted(newString,lastString);
             }break;
             case 11:
             case -12:{hide();}break;
             case 12:{
+                String lastString = mEditText.getText().toString().trim();
                 if(mEditText.length()>0) {
                     mEditText.setText(mEditText.getText().subSequence(0, mEditText.length() - 1));
                 }
                 else{
                     mEditText.setText("0");
                 }
-                mOnTextChangeListener.onTextCompleted(mEditText);
+                String newString = mEditText.getText().toString().trim();
+                mOnTextChangeListener.onTextCompleted(newString,lastString);
             }break;
             case 100:{
                 if(isLightUp){
@@ -81,10 +86,10 @@ public class KeyUtils implements  OnKeyboardActionListener{
                 }
             }break;
             case 101:{
-//                mOnTextChangeListener.onPreviousLine();
+                mOnTextChangeListener.onPreviousLine();
             }break;
             case 103:{
-//                mOnTextChangeListener.onNextLine();
+                mOnTextChangeListener.onNextLine();
             }break;
 
         }
@@ -117,9 +122,9 @@ public class KeyUtils implements  OnKeyboardActionListener{
     //endregion
 
     public interface onTextChangeListener{
-        void onTextCompleted(EditText editText);
-//        void onNextLine();
-//        void onPreviousLine();
+        void onTextCompleted(String newString,String lastString);
+        void onNextLine();
+        void onPreviousLine();
     }
 
     private Context mContext;
