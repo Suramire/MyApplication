@@ -1,10 +1,14 @@
 package com.suramire.myapplication.model;
 
+import android.support.annotation.NonNull;
+
+import java.io.Serializable;
+
 /**
  * Created by Suramire on 2017/10/12.
  */
 
-public class Ammeter {
+public class Ammeter implements Serializable,Comparable<Ammeter> {
     int id;
     int mRoomid;
 
@@ -13,7 +17,16 @@ public class Ammeter {
     int mLastcount;//上次读数
     int mCount;//本次读数
     String mLastTime;//上次读取时间
-//    String mTime;//本次读取时间
+    int mSort;//排序序号
+
+    public int getSort() {
+        return mSort;
+    }
+
+    public void setSort(int sort) {
+        mSort = sort;
+    }
+    //    String mTime;//本次读取时间
 
     public Ammeter(int id, int roomid, int count) {
         this.id = id;
@@ -22,11 +35,12 @@ public class Ammeter {
 //        mTime = time;
     }
 
-    public Ammeter(int id, int roomid, int count,int lastcount) {
+    public Ammeter(int id, int roomid, int count,int lastcount,int sort) {
         this.id = id;
         this.mRoomid = roomid;
         this.mCount = count;
         this.mLastcount = lastcount;
+        this.mSort = sort;
 //        mTime = time;
     }
 
@@ -84,5 +98,8 @@ public class Ammeter {
         mRoomName = roomName;
     }
 
-
+    @Override
+    public int compareTo(@NonNull Ammeter o) {
+        return o.getSort() - getSort() ;
+    }
 }

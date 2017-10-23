@@ -1,6 +1,8 @@
 package com.suramire.myapplication.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.suramire.myapplication.R;
+import com.suramire.myapplication.SortRoomActivity;
 import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.util.KeyUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,10 +43,11 @@ public class MyBaseAdapter2 extends BaseAdapter {
 
     public void setData(List<Ammeter> data) {
         for(Ammeter ammeter:data){
-            Ammeter ammeter1 = new Ammeter(ammeter.getId(),ammeter.getRoomid(),ammeter.getCount(),ammeter.getLastcount());
+            Ammeter ammeter1 = new Ammeter(ammeter.getId(),ammeter.getRoomid(),ammeter.getCount(),ammeter.getLastcount(),ammeter.getSort());
             ammeter1.setRoomName(ammeter.getRoomName());
             mData.add(ammeter1);
             tempCounts.add(ammeter.getCount());
+            Log.d("MyBaseAdapter2", "ammeter.getSort():" + ammeter.getSort());
         }
     }
 
@@ -95,7 +100,6 @@ public class MyBaseAdapter2 extends BaseAdapter {
         viewHolder.mTextViewRoomId.setText(mData.get(i).getRoomName());
         viewHolder.mTextView.setText(mData.get(i).getCount()+"");
         viewHolder.mEditText.setText(mData.get(i).getCount()+"");
-        Log.d("MyBaseAdapter2", "mData.get(i).getLastcount():" + mData.get(i).getLastcount());
         viewHolder.mTextView2.setText(mData.get(i).getLastcount()+"");
 
         if(mSelectedItem == i){
@@ -105,12 +109,9 @@ public class MyBaseAdapter2 extends BaseAdapter {
             mKeyUtils.setOnTextCompleteListener(new KeyUtils.onTextChangeListener() {
                 @Override
                 public void onTextCompleted(String newString,String lastString) {
-
                     mData.get(mSelectedItem).setLastcount(tempCounts.get(i));
-
                     viewHolder.mEditText.setText(newString);
                     mData.get(mSelectedItem).setCount(Integer.parseInt(newString));
-
                 }
 
 
@@ -128,6 +129,14 @@ public class MyBaseAdapter2 extends BaseAdapter {
                         setSelectedItem(mSelectedItem-1);
                         notifyDataSetChanged();
                     }
+                }
+
+                @Override
+                public void onStartSort() {
+                    Intent intent = new Intent((Activity) mContext, SortRoomActivity.class);
+                    //传输将要排序的房间信息
+                    intent.putExtra("rooms", (Serializable) getData());
+                    mContext.startActivity(intent);
                 }
             });
 

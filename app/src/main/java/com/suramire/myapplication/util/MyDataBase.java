@@ -53,7 +53,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
 
     public Cursor selectAmmeter(int roomId){
-        return mydb.query("ammeter", null, "roomid=?", new String[]{roomId + ""}, null, null, null);
+        return mydb.query("ammeter", null, "roomid=?", new String[]{roomId + ""}, null, null, "sort desc");
     }
 
 
@@ -119,6 +119,7 @@ public class MyDataBase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("count", ammeter.getCount());
         values.put("lastcount",ammeter.getLastcount());
+        values.put("sort",ammeter.getSort());
         return mydb.update("ammeter",values,"_id=?",new String[]{ammeter.getId()+""});
     }
 
@@ -211,7 +212,7 @@ public class MyDataBase extends SQLiteOpenHelper {
         db.execSQL("create table if not exists notification(_id integer primary key autoincrement," +
                 "ncontent varchar,adminid integer,ndate date)");
         db.execSQL("create table if not exists ammeter(_id integer primary key autoincrement," +
-                "roomid integer,lastcount integer,count integer,time date,lasttime date)");
+                "roomid integer,lastcount integer,count integer,time date,lasttime date,sort integer)");
     }
 
     @Override

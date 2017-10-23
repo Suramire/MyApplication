@@ -1,12 +1,12 @@
 package com.suramire.myapplication;
 
-import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,6 +20,7 @@ import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.util.MyDataBase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,6 +34,8 @@ public class AmmeterActivity extends AppCompatActivity {
     private List<String> mRoomNameList;
     private boolean[] mChecks;
     private boolean isSaved;
+    private List<Ammeter> mTemp;
+    private ListView mListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class AmmeterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ammeter);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        ListView listView = (ListView) findViewById(R.id.list_ammeter);
+        mListView = (ListView) findViewById(R.id.list_ammeter);
         findViewById(R.id.button21).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +96,13 @@ public class AmmeterActivity extends AppCompatActivity {
                         dialog.show();
             }
         });
-//        先获取所有房间信息
+        getData(mListView);
+
+
+    }
+
+    private void getData(ListView listView) {
+        //        先获取所有房间信息
         MyDataBase myDataBase = new MyDataBase(AmmeterActivity.this, "test.db", null, 1);
         final SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
         int adminid = sharedPreferences.getInt("adminid", 0);
@@ -118,7 +127,9 @@ public class AmmeterActivity extends AppCompatActivity {
                     while (cursor1.moveToNext()){
                         Ammeter ammeter = new Ammeter(cursor1.getInt(cursor1.getColumnIndex("_id")),cursor1.getInt(cursor1.getColumnIndex("roomid")),cursor1.getInt(cursor1.getColumnIndex("count")));
                         ammeter.setRoomName(roomName);
+                        Log.d("ss", cursor1.getInt(cursor1.getColumnIndex("sort"))+"");
                         ammeter.setLastcount(cursor1.getInt(cursor1.getColumnIndex("lastcount")));
+                        ammeter.setSort(cursor1.getInt(cursor1.getColumnIndex("sort")));
                         mAmmeterList.add(ammeter);
                     }
                 }else{
@@ -131,7 +142,9 @@ public class AmmeterActivity extends AppCompatActivity {
                 cursor1.close();
             }
 
+
             if(mAmmeterList.size()!=0){
+                Collections.sort(mAmmeterList);
                 mAdapter = new MyBaseAdapter2(AmmeterActivity.this, mAmmeterList);
                 listView.setAdapter(mAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -142,6 +155,7 @@ public class AmmeterActivity extends AppCompatActivity {
                     }
                 });
                 mAdapter.setSelectedItem(-1);//默认不选中任何项
+                mAdapter.notifyDataSetChanged();
 
             }
 
@@ -151,8 +165,8 @@ public class AmmeterActivity extends AppCompatActivity {
         for (int i = 0; i < mChecks.length; i++) {
             mChecks[i] = false;
         }
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() ==android.R.id.home){
@@ -183,6 +197,12 @@ public class AmmeterActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData(mListView);
     }
 
     /**

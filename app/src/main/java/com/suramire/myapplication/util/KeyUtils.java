@@ -55,7 +55,7 @@ public class KeyUtils implements  OnKeyboardActionListener{
             case -12:{hide();}break;
             case 12:{
                 String lastString = mEditText.getText().toString().trim();
-                if(mEditText.length()>0) {
+                if(mEditText.length()>1) {
                     mEditText.setText(mEditText.getText().subSequence(0, mEditText.length() - 1));
                 }
                 else{
@@ -87,6 +87,9 @@ public class KeyUtils implements  OnKeyboardActionListener{
             }break;
             case 101:{
                 mOnTextChangeListener.onPreviousLine();
+            }break;
+            case 102:{
+                mOnTextChangeListener.onStartSort();
             }break;
             case 103:{
                 mOnTextChangeListener.onNextLine();
@@ -125,6 +128,7 @@ public class KeyUtils implements  OnKeyboardActionListener{
         void onTextCompleted(String newString,String lastString);
         void onNextLine();
         void onPreviousLine();
+        void onStartSort();
     }
 
     private Context mContext;
