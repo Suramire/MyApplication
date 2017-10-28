@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -41,11 +40,9 @@ public class SortRoomActivity extends AppCompatActivity {
         mListViewAdd = (ListView) findViewById(R.id.list_add);
         mListViewRemove = (ListView) findViewById(R.id.list_remove);
         final List<Ammeter> rooms = (List<Ammeter>) getIntent().getSerializableExtra("rooms");
-        Log.d("SortRoomActivity", "rooms.size():" + rooms.size());
 
         mTempList = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
-            Log.d("SortRoomActivity", "rooms.get(i).getSort():" + rooms.get(i).getRoomName());
             if(rooms.get(i).getSort()!=0){
                 //若之前已排序直接显示在排序后的列表
                 mTempList.add(rooms.get(i));

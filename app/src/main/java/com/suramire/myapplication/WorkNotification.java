@@ -2,7 +2,6 @@ package com.suramire.myapplication;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +22,7 @@ import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
 import com.suramire.myapplication.model.Notification;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,8 +106,7 @@ public class WorkNotification extends AppCompatActivity {
 
     private void getData() {
         try {
-            SharedPreferences account = getSharedPreferences("account", MODE_PRIVATE);
-            int adminid = account.getInt("adminid", 0);
+            int adminid = (int) SPUtils.get("adminid", 0);
             MyDataBase myDataBase = new MyDataBase(WorkNotification.this,"test.db",null,1);
             Cursor cursor = myDataBase.selectNotification(adminid);
             List<Notification> notificationList = new ArrayList<>();

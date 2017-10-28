@@ -22,6 +22,7 @@ import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
 import com.suramire.myapplication.model.RentItem;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class GetRentsActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ListView listView;
     private TextView tv_state;
+    private int mAdminid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,6 +123,7 @@ public class GetRentsActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
         supportActionBar.setListNavigationCallbacks(adapter,null);
         supportActionBar.setElevation(0);
+        mAdminid = (int) SPUtils.get("adminid", 0);
 
     }
 
@@ -132,7 +135,7 @@ public class GetRentsActivity extends AppCompatActivity {
         final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
 
         //未支付
-        Cursor cursor = myDataBase.selectRenterInfoByPayed(0);
+        Cursor cursor = myDataBase.selectAllRoomGotMoney(mAdminid,0);
         final List<RentItem> rentItemList = new ArrayList<>();
 
         if (cursor.getCount() > 0) {
@@ -199,7 +202,7 @@ public class GetRentsActivity extends AppCompatActivity {
         final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
 
         //已支付
-        Cursor cursor = myDataBase.selectRenterInfoByPayed(1);
+        Cursor cursor = myDataBase.selectAllRoomGotMoney(mAdminid,1);
         List<RentItem> rentItemList = new ArrayList<>();
 
         if (cursor.getCount() > 0) {

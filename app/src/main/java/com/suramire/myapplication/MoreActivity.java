@@ -1,13 +1,14 @@
 package com.suramire.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.suramire.myapplication.util.SPUtils;
 
 /**
  * Created by Suramire on 2017/10/4.
@@ -38,10 +39,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imageView34:{
-                 SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
-                SharedPreferences.Editor edit = sharedPreferences.edit();
-                edit.putInt("autologin",0);
-                edit.commit();
+                SPUtils.put("autologin",0);
                 Intent intent = new Intent(MoreActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

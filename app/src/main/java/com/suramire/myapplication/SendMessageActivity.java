@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 /**
  * Created by Suramire on 2017/10/18.
@@ -32,9 +31,8 @@ public class SendMessageActivity extends AppCompatActivity {
         findViewById(R.id.textView48).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SendMessageActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 View inflate = getLayoutInflater().inflate(R.layout.popup_sendmessage, null);
-                PopupWindow popupWindow = new PopupWindow(inflate, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                final PopupWindow popupWindow = new PopupWindow(inflate, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                 popupWindow.setTouchable(true);
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
@@ -46,6 +44,7 @@ public class SendMessageActivity extends AppCompatActivity {
                     public void onDismiss() {
                         // popupWindow隐藏时恢复屏幕正常透明度
                         setBackgroundAlpha(1.0f);
+//                        popupWindow.dismiss();
                     }
                 });
             }

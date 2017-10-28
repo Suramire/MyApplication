@@ -1,7 +1,6 @@
 package com.suramire.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 /**
  * Created by Suramire on 2017/9/24.
@@ -42,8 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         TextView profile_nickname = (TextView) findViewById(R.id.profile_nickname);
-        SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
-        int adminid = sharedPreferences.getInt("adminid", 0);
+        int adminid = (int) SPUtils.get("adminid", 0);
         MyDataBase myDataBase = new MyDataBase(ProfileActivity.this,"test.db",null,1);
         Cursor cursor = myDataBase.selectAdminById(adminid);
         if(cursor.getCount()>0){

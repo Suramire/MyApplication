@@ -1,10 +1,8 @@
 package com.suramire.myapplication;
 
 
-import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,6 +26,7 @@ import android.widget.RelativeLayout;
 import com.suramire.myapplication.adapter.MyBaseAdapter;
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,8 +157,7 @@ public class ManagementActivity extends AppCompatActivity {
     private int selectRoomNotLend(ListView listView) {
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
-        int adminid = sharedPreferences.getInt("adminid", 0);
+        int adminid = (int) SPUtils.get("adminid", 0);
         Cursor cursorHouse = myDataBase.selectAllHouseByAdminId(adminid);//先查询房东所有的房源
         //再根据房源找出房间
         List<Integer> houseIds = new ArrayList<>();
@@ -207,8 +206,7 @@ public class ManagementActivity extends AppCompatActivity {
 
     private int selectRoomLend(ListView listView) {
         MyDataBase myDataBase = new MyDataBase(ManagementActivity.this,"test.db",null,1);
-        SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
-        int adminid = sharedPreferences.getInt("adminid", 0);
+        int adminid = (int) SPUtils.get("adminid", 0);
         Cursor cursorHouse = myDataBase.selectAllHouseByAdminId(adminid);//先查询房东所有的房源
         //再根据房源找出房间
         List<Integer> houseIds = new ArrayList<>();

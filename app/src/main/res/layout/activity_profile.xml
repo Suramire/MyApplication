@@ -11,10 +11,10 @@
 
         <ImageView
             android:id="@+id/imageView14"
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="216dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/bg" />
+            app:srcCompat="@drawable/bg"/>
 
         <ImageView
             android:id="@+id/imageView8"
@@ -104,52 +104,52 @@
             <!---->
             <Button
                 android:id="@+id/button18"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="1dp"
 
-                android:background="@drawable/btn_normal" />
+                android:background="@drawable/btn_normal"/>
 
             <Button
                 android:id="@+id/button17"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="1dp"
-                android:background="@drawable/btn_bank" />
+                android:background="@drawable/btn_bank"/>
 
             <Button
                 android:id="@+id/button16"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/btn_order" />
+                android:background="@drawable/btn_order"/>
 
             <Button
                 android:id="@+id/button15"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/btn_admin" />
+                android:background="@drawable/btn_admin"/>
 
             <Button
                 android:id="@+id/button14"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="1dp"
-                android:background="@drawable/btn_inviration" />
+                android:background="@drawable/btn_inviration"/>
 
             <Button
                 android:id="@+id/button11"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/btn_help" />
+                android:background="@drawable/btn_help"/>
 
             <Button
                 android:id="@+id/button10"
-                android:layout_width="360dp"
+                android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:background="@drawable/btn_more" />
+                android:background="@drawable/btn_more"/>
 
         </LinearLayout>
     </ScrollView>

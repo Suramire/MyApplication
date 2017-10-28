@@ -12,11 +12,20 @@ public class Ammeter implements Serializable,Comparable<Ammeter> {
     int id;
     int mRoomid;
 
-
     String mRoomName;//房间名
     int mLastcount;//上次读数
     int mCount;//本次读数
     String mLastTime;//上次读取时间
+    String mTime;
+
+    public String getTime() {
+        return mTime;
+    }
+
+    public void setTime(String time) {
+        this.mTime = time;
+    }
+
     int mSort;//排序序号
 
     public int getSort() {
@@ -32,7 +41,7 @@ public class Ammeter implements Serializable,Comparable<Ammeter> {
         this.id = id;
         this.mRoomid = roomid;
         this.mCount = count;
-//        mTime = time;
+//        mTime = mTime;
     }
 
     public Ammeter(int id, int roomid, int count,int lastcount,int sort) {
@@ -41,13 +50,13 @@ public class Ammeter implements Serializable,Comparable<Ammeter> {
         this.mCount = count;
         this.mLastcount = lastcount;
         this.mSort = sort;
-//        mTime = time;
+//        mTime = mTime;
     }
 
     public Ammeter(int roomid, int count) {
         this.mRoomid = roomid;
         this.mCount = count;
-//        this.mTime = time;
+//        this.mTime = mTime;
     }
 
     public int getId() {

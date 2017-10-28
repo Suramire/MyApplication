@@ -1,7 +1,6 @@
 package com.suramire.myapplication;
 
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import com.suramire.myapplication.adapter.MyBaseAdapter2;
 import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +34,6 @@ public class AmmeterActivity extends AppCompatActivity {
     private List<String> mRoomNameList;
     private boolean[] mChecks;
     private boolean isSaved;
-    private List<Ammeter> mTemp;
     private ListView mListView;
 
     @Override
@@ -50,7 +49,11 @@ public class AmmeterActivity extends AppCompatActivity {
                 MyDataBase myDataBase = new MyDataBase(AmmeterActivity.this,"test.db",null,1);
                 if(!isTheSame()){
                     for (int i = 0; i < mAdapter.getData().size(); i++) {
-                        myDataBase.updateAmmeter(mAdapter.getData().get(i));
+                        //保存本次读表记录
+                        Ammeter ammeter = mAdapter.getData().get(i);
+                        myDataBase.updateAmmeter(ammeter);
+                        // TODO: 2017/10/28 生成历史读表记录
+                        myDataBase.addAmHistory(ammeter);
                         Log.d("AmmeterActivity", "mAdapter.getData().get(i).getLastcount():" + mAdapter.getData().get(i).getLastcount());
                     }
                 }
@@ -104,8 +107,7 @@ public class AmmeterActivity extends AppCompatActivity {
     private void getData(ListView listView) {
         //        先获取所有房间信息
         MyDataBase myDataBase = new MyDataBase(AmmeterActivity.this, "test.db", null, 1);
-        final SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
-        int adminid = sharedPreferences.getInt("adminid", 0);
+        int adminid = (int) SPUtils.get("adminid", 0);
         Cursor cursor = myDataBase.selectAllRoom(adminid);
         List<Integer> roomIdList = new ArrayList<>();
         mRoomNameList = new ArrayList<>();
@@ -161,7 +163,7 @@ public class AmmeterActivity extends AppCompatActivity {
 
         }
 
-        mChecks = new boolean[mAmmeterList.size()];
+        mChecks = new boolean[100];
         for (int i = 0; i < mChecks.length; i++) {
             mChecks[i] = false;
         }
@@ -209,9 +211,11 @@ public class AmmeterActivity extends AppCompatActivity {
      * 判断两个list是否相等（当前读数）
      */
     private boolean isTheSame() {
-        for (int i = 0; i < mAmmeterList.size(); i++) {
-            if(mAmmeterList.get(i).getCount() != mAdapter.getData().get(i).getCount()){
-                return false;
+        if(mAmmeterList!=null){
+            for (int i = 0; i < mAmmeterList.size(); i++) {
+                if(mAmmeterList.get(i).getCount() != mAdapter.getData().get(i).getCount()){
+                    return false;
+                }
             }
         }
         return true;

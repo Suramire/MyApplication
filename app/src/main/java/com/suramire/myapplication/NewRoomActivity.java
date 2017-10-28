@@ -1,6 +1,5 @@
 package com.suramire.myapplication;
 
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +40,7 @@ public class NewRoomActivity extends AppCompatActivity {
         final EditText room_price = (EditText) findViewById(R.id.room_price);
         Button button = (Button) findViewById(R.id.btn_newroom);
         final MyDataBase myDataBase = new MyDataBase(NewRoomActivity.this, "test.db", null, 1);
-        SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
-        int adminid = sharedPreferences.getInt("adminid", 0);
+        int adminid = (int) SPUtils.get("adminid", 0);
         Cursor cursor = myDataBase.selectAllHouseByAdminId(adminid);
         int count = cursor.getCount();
         if(count <1){

@@ -1,6 +1,5 @@
 package com.suramire.myapplication;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import com.suramire.myapplication.model.House;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 /**
  * Created by Suramire on 2017/9/19.
@@ -45,8 +45,7 @@ public class NewHouseActivity extends AppCompatActivity {
                     Toast.makeText(NewHouseActivity.this, "清将房源信息填写完整", Toast.LENGTH_SHORT).show();
                 }else{
                     MyDataBase myDataBase = new MyDataBase(NewHouseActivity.this,"test.db",null,1);
-                    SharedPreferences sharedPreferences = getSharedPreferences("account",MODE_PRIVATE);
-                    int adminid = sharedPreferences.getInt("adminid", 0);
+                    int adminid = (int) SPUtils.get("adminid", 0);
                     House house = new House(address,area,name,Integer.parseInt(floor),adminid);
                     long l = myDataBase.addHouse(house);
                     if(l>0){

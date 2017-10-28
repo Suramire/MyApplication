@@ -1,7 +1,6 @@
 package com.suramire.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -109,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateInfo() {
         float sum1 = 0;
         float sum2 = 0;
-        SharedPreferences sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
-        int adminid = sharedPreferences.getInt("adminid", 0);
+        int adminid = (int) SPUtils.get("adminid", 0);
         //先获取当前房东所拥有的房间
         MyDataBase myDataBase = new MyDataBase(MainActivity.this, "test.db", null, 1);
         Cursor cursor = myDataBase.selectAllRoomGotMoney(adminid,1);

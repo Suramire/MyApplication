@@ -1,7 +1,6 @@
 package com.suramire.myapplication;
 
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.suramire.myapplication.model.Notification;
 import com.suramire.myapplication.util.MyDataBase;
+import com.suramire.myapplication.util.SPUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -89,8 +89,7 @@ public class NewNotificationActivity extends AppCompatActivity {
                     return;
                 }
                 MyDataBase myDataBase = new MyDataBase(NewNotificationActivity.this,"test.db",null,1);
-                SharedPreferences account = getSharedPreferences("account", MODE_PRIVATE);
-                int adminid = account.getInt("adminid", 0);
+                int adminid = (int) SPUtils.get("adminid", 0);
                 String date = notification_date.getText().toString().trim();
                 long l = myDataBase.addNotification(new Notification(content, date, adminid));
                 if (l != 0) {
