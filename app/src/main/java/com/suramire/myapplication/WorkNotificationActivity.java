@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +18,7 @@ import android.widget.Toast;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Notification;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
@@ -31,7 +30,7 @@ import java.util.List;
  * Created by Suramire on 2017/10/3.
  */
 
-public class WorkNotification extends AppCompatActivity {
+public class WorkNotificationActivity extends BaseActivity {
     private TabLayout tabLayout;
     private RelativeLayout emptyView;
     private ListView listView;
@@ -41,11 +40,8 @@ public class WorkNotification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worknotification);
         setupTablayout();
-
-        setupActionBar();
-
+        setTitle("工作提醒");
         initView();
-
         getData();
     }
 
@@ -56,18 +52,12 @@ public class WorkNotification extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WorkNotification.this,NewNotificationActivity.class));
+                startActivity(new Intent(WorkNotificationActivity.this,NewNotificationActivity.class));
             }
         });
         listView.setEmptyView(emptyView);
     }
 
-    private void setupActionBar() {
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setTitle("工作提醒");
-        supportActionBar.setElevation(0);
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-    }
 
     private void setupTablayout() {
         tabLayout = (TabLayout) findViewById(R.id.tab2);
@@ -107,7 +97,7 @@ public class WorkNotification extends AppCompatActivity {
     private void getData() {
         try {
             int adminid = (int) SPUtils.get("adminid", 0);
-            MyDataBase myDataBase = new MyDataBase(WorkNotification.this,"test.db",null,1);
+            MyDataBase myDataBase = new MyDataBase(WorkNotificationActivity.this,"test.db",null,1);
             Cursor cursor = myDataBase.selectNotification(adminid);
             List<Notification> notificationList = new ArrayList<>();
             if (cursor.getCount()>0){
@@ -126,7 +116,7 @@ public class WorkNotification extends AppCompatActivity {
                     helper.setOnClickListener(R.id.notification_item, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(WorkNotification.this, "备注详情显示待实现", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(WorkNotificationActivity.this, "备注详情显示待实现", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -154,7 +144,7 @@ public class WorkNotification extends AppCompatActivity {
                 finish();
                 break;
             case R.id.action_new:
-                startActivity(new Intent(WorkNotification.this,NewNotificationActivity.class));
+                startActivity(new Intent(WorkNotificationActivity.this,NewNotificationActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

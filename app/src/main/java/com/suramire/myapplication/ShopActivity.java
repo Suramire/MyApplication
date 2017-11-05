@@ -3,15 +3,16 @@ package com.suramire.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.squareup.picasso.Picasso;
+import com.suramire.myapplication.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
  * Created by Suramire on 2017/10/4.
  */
 
-public class ShopActivity extends AppCompatActivity {
+public class ShopActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,20 +39,19 @@ public class ShopActivity extends AppCompatActivity {
         listView.setAdapter(new CommonAdapter<Integer>(this,R.layout.item_shop,images) {
             @Override
             public void onUpdate(BaseAdapterHelper helper, Integer item, int position) {
-                helper.setImageResource(R.id.shop_item, item)
-                        .setOnClickListener(R.id.shop_item, new View.OnClickListener() {
+                Picasso.with(ShopActivity.this)
+                        .load(item)
+                        .into((ImageView) helper.getView(R.id.shop_item));
+                helper.setOnClickListener(R.id.shop_item, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 startActivity(new Intent(ShopActivity.this,ShopItemDetailActivity.class));
-
                             }
                         });
             }
         });
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("商城");
+        setTitle("商城");
 
     }
 

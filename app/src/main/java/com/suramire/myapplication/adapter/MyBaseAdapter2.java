@@ -7,19 +7,18 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.suramire.myapplication.AmmeterChangeActivity;
 import com.suramire.myapplication.AmmeterHistoryActivity;
 import com.suramire.myapplication.R;
 import com.suramire.myapplication.SortRoomActivity;
@@ -30,11 +29,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.suramire.myapplication.R.id.editText;
-
 /**
  * Created by Suramire on 2017/9/25.
- * 实现选中点击的item
+ * 实现选中点击的item修改
  */
 
 public class MyBaseAdapter2 extends BaseAdapter {
@@ -51,10 +48,11 @@ public class MyBaseAdapter2 extends BaseAdapter {
     public void setData(List<Ammeter> data) {
         for(Ammeter ammeter:data){
             Ammeter ammeter1 = new Ammeter(ammeter.getId(),ammeter.getRoomid(),ammeter.getCount(),ammeter.getLastcount(),ammeter.getSort());
+            ammeter1.setTime(ammeter.getTime());
             ammeter1.setRoomName(ammeter.getRoomName());
+            ammeter1.setLastTime(ammeter.getLastTime());
             mData.add(ammeter1);
             tempCounts.add(ammeter.getCount());
-            Log.d("MyBaseAdapter2", "ammeter.getSort():" + ammeter.getSort());
         }
     }
 
@@ -84,7 +82,6 @@ public class MyBaseAdapter2 extends BaseAdapter {
 
     public void setSelectedItem(int selectedItem) {
         mSelectedItem = selectedItem;
-//        KeyUtils.getInstance(mContext,mCurrentEditText);
     }
 
 
@@ -98,7 +95,11 @@ public class MyBaseAdapter2 extends BaseAdapter {
             viewHolder.mTextViewRoomId = view.findViewById(R.id.textView19);
             viewHolder.mTextView2 = view.findViewById(R.id.textView12);
             viewHolder.mLinearLayout = view.findViewById(R.id.ll_item5);
-            viewHolder.mEditText = view.findViewById(editText);
+            viewHolder.mEditText = view.findViewById(R.id.editText);
+            viewHolder.mLinearLayoutHide = view.findViewById(R.id.ll_hide);
+            viewHolder.mLinearLayoutShow = view.findViewById(R.id.ll_show);
+            viewHolder.mTextView20 = view.findViewById(R.id.textView20);
+            viewHolder.mTextView30 = view.findViewById(R.id.textview30);
             view.setTag(viewHolder);
         }
         if(view !=null){
@@ -108,6 +109,9 @@ public class MyBaseAdapter2 extends BaseAdapter {
         viewHolder.mTextView.setText(mData.get(i).getCount()+"");
         viewHolder.mEditText.setText(mData.get(i).getCount()+"");
         viewHolder.mTextView2.setText(mData.get(i).getLastcount()+"");
+        viewHolder.mTextView20.setText(mData.get(i).getLastTime());
+        viewHolder.mTextView30.setText(mData.get(i).getTime());
+
         //每间房 读表额外操作
         viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,14 +152,19 @@ public class MyBaseAdapter2 extends BaseAdapter {
                 inflate.findViewById(R.id.button28).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent = new Intent(mContext, AmmeterChangeActivity.class);
+                        intent.putExtra("roomid", getData().get(i).getRoomid());
+                        intent.putExtra("ammeterid", getData().get(i).getId());
+                        mContext.startActivity(intent);
                         popupWindow.dismiss();
                     }
                 });
             }
         });
         if(mSelectedItem == i){
-            viewHolder.mTextView.setVisibility(View.GONE);
-            viewHolder.mEditText.setVisibility(View.VISIBLE);
+            viewHolder.mLinearLayoutShow.setVisibility(View.GONE);
+            viewHolder.mLinearLayoutHide.setVisibility(View.VISIBLE);
+            viewHolder.mTextView20.setVisibility(View.VISIBLE);
             mKeyUtils = KeyUtils.getInstance(mContext, viewHolder.mEditText);
             mKeyUtils.setOnTextCompleteListener(new KeyUtils.onTextChangeListener() {
                 @Override
@@ -192,9 +201,9 @@ public class MyBaseAdapter2 extends BaseAdapter {
             viewHolder.mLinearLayout.setBackgroundResource(R.drawable.bg_selected);
 
         }else{
-
-            viewHolder.mTextView.setVisibility(View.VISIBLE);
-            viewHolder.mEditText.setVisibility(View.GONE);
+            viewHolder.mLinearLayoutShow.setVisibility(View.VISIBLE);
+            viewHolder.mLinearLayoutHide.setVisibility(View.GONE);
+            viewHolder.mTextView20.setVisibility(View.GONE);
             viewHolder.mLinearLayout.setBackgroundColor(Color.TRANSPARENT);
         }
 
@@ -202,10 +211,10 @@ public class MyBaseAdapter2 extends BaseAdapter {
     }
 
     class ViewHolder{
-        TextView mTextView,mTextViewRoomId,mTextView2;
+        TextView mTextView,mTextViewRoomId,mTextView2,mTextView20,mTextView30;
         ImageView mImageView;
-        EditText mEditText;
-        LinearLayout mLinearLayout;
+        TextView mEditText;
+        LinearLayout mLinearLayout,mLinearLayoutHide,mLinearLayoutShow;
 
     }
 

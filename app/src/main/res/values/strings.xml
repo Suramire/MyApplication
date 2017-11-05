@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="ps">PS:注册账号在好好租房东版系列软件上通用：\n1)好好租房东版APP(苹果核安卓)\n2)好好租房东版Web平台(fd.hhz360.com)</string>
+    <string name="login_phone">手机号码</string>
+    <string name="logon_password">密码</string>
+    <string name="login_login">登 录</string>
+    <string name="login_reg">注册用户</string>
+    <string name="login_forget">忘记密码？</string>
+    <string name="login_server">联系客服</string>
+    <string name="bottom4">到账记录</string>
+    <string name="print">打印</string>
+    <string name="sendmessage">催租</string>
+    <string name="ammeter">抄表</string>
+    <string name="notgetmoney">未收租</string>
+    <string name="getmoney">已收租</string>
 </resources>

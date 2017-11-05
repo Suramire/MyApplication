@@ -2,15 +2,13 @@ package com.suramire.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.House;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
@@ -19,15 +17,13 @@ import com.suramire.myapplication.util.SPUtils;
  * Created by Suramire on 2017/9/19.
  */
 
-public class NewHouseActivity extends AppCompatActivity {
+public class NewHouseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newhouse);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setTitle("新增房源");
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("新增房源");
         final EditText house_address = (EditText) findViewById(R.id.house_address);
         final EditText house_area = (EditText) findViewById(R.id.house_area);
         final EditText house_name = (EditText) findViewById(R.id.house_name);
@@ -59,12 +55,6 @@ public class NewHouseActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }
 

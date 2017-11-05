@@ -8,7 +8,7 @@ import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.suramire.myapplication.R;
 
@@ -134,7 +134,7 @@ public class KeyUtils implements  OnKeyboardActionListener{
     private Context mContext;
     private KeyboardView mKeyboardView;
     private Keyboard mKeyboard;
-    private EditText mEditText;
+    private TextView mEditText;
     private static KeyUtils mKeyUtils;
     private onTextChangeListener mOnTextChangeListener;
 
@@ -144,7 +144,7 @@ public class KeyUtils implements  OnKeyboardActionListener{
 
 
 
-    public static KeyUtils getInstance(Context context,EditText editText){
+    public static KeyUtils getInstance(Context context,TextView editText){
 //        if(mKeyUtils ==null){
 //            mKeyUtils = new KeyUtils(context,editText);
 //        }
@@ -154,7 +154,7 @@ public class KeyUtils implements  OnKeyboardActionListener{
         return mKeyUtils;
     }
 
-    private KeyUtils(Context context,EditText editText) {
+    private KeyUtils(Context context,TextView editText) {
         mContext = context;
         mEditText = editText;
         mKeyboard = new Keyboard(mContext, R.xml.keyboard);
@@ -164,7 +164,6 @@ public class KeyUtils implements  OnKeyboardActionListener{
         mKeyboardView.setOnKeyboardActionListener(this);
 
     }
-
 
 
 

@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.SPUtils;
 
 import java.util.Calendar;
@@ -20,7 +20,7 @@ import static com.suramire.myapplication.util.Common.SPLASHDELAY;
  * Created by Suramire on 2017/10/5.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

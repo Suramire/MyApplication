@@ -4,17 +4,14 @@ import android.database.Cursor;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Admin;
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -22,21 +19,18 @@ import com.suramire.myapplication.util.MyDataBase;
  * Created by Suramire on 2017/9/19.
  */
 
-public class RegActivity extends AppCompatActivity {
+public class RegActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-        supportActionBar.setTitle("注册");
+        setTitle("注册");
         final EditText admin_name = (EditText) findViewById(R.id.admin_name);
         final EditText admin_password = (EditText) findViewById(R.id.admin_pasword);
         final EditText admin_password2 = (EditText) findViewById(R.id.admin_password2);
         final EditText admin_nickname = (EditText) findViewById(R.id.admin_nickname);
 
-        Button reg = (Button) findViewById(R.id.btn_reg);
-        reg.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_reg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = admin_name.getText().toString().trim();
@@ -88,16 +82,8 @@ public class RegActivity extends AppCompatActivity {
                 }
             }
         });
-        TextView textView = (TextView) findViewById(R.id.textView29);
-        textView.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

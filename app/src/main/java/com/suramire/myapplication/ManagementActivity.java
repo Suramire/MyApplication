@@ -11,7 +11,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +23,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.suramire.myapplication.adapter.MyBaseAdapter;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
@@ -35,7 +35,7 @@ import java.util.List;
  * Created by Suramire on 2017/9/19.
  */
 
-public class ManagementActivity extends AppCompatActivity {
+public class ManagementActivity extends BaseActivity {
 
 
     private View headerView;
@@ -49,9 +49,15 @@ public class ManagementActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
-
         setupActionBar();
 
+        initView();
+
+        getRoomLend(listView, button);
+
+    }
+
+    private void initView() {
         RelativeLayout emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
         listView = (ListView) findViewById(R.id.list_room);
         button = emptyView.findViewById(R.id.button);
@@ -99,12 +105,11 @@ public class ManagementActivity extends AppCompatActivity {
 
             }
         });
-        getRoomLend(listView, button);
-
     }
 
     @Override
     protected void onResume() {
+        //刷新数据
         getRoomLend(listView,button);
         TabLayout.Tab tab = tabLayout.getTabAt(0);
         if(tab!=null){
@@ -187,6 +192,7 @@ public class ManagementActivity extends AppCompatActivity {
                         rooms.add(room);
 
                     }
+                    cursor.close();
                     setupListview(listView, rooms,"未出租");
                 }
             }
@@ -235,6 +241,7 @@ public class ManagementActivity extends AppCompatActivity {
                         room.setPrice(price);
                         rooms.add(room);
                     }
+                    cursor.close();
                     setupListview(listView, rooms,"已出租");
 
                 }

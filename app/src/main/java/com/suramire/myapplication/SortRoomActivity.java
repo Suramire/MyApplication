@@ -2,15 +2,13 @@ package com.suramire.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -22,7 +20,7 @@ import java.util.List;
  * Created by Suramire on 2017/10/23.
  */
 
-public class SortRoomActivity extends AppCompatActivity {
+public class SortRoomActivity extends BaseActivity {
 
     private ListView mListViewAdd;
     private CommonAdapter<Ammeter> mAdapterAdd;
@@ -34,9 +32,7 @@ public class SortRoomActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sortroom);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("房源排序");
+        setTitle("房源排序");
         mListViewAdd = (ListView) findViewById(R.id.list_add);
         mListViewRemove = (ListView) findViewById(R.id.list_remove);
         final List<Ammeter> rooms = (List<Ammeter>) getIntent().getSerializableExtra("rooms");
@@ -50,10 +46,6 @@ public class SortRoomActivity extends AppCompatActivity {
                 i--;
             }
         }
-
-
-
-
 
         mAdapterAdd = new CommonAdapter<Ammeter>(SortRoomActivity.this, R.layout.item_sort_add, rooms) {
 
@@ -131,11 +123,5 @@ public class SortRoomActivity extends AppCompatActivity {
         });
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

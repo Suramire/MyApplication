@@ -8,8 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.RentItem;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
@@ -31,7 +32,7 @@ import java.util.List;
  * Created by Suramire on 2017/9/21.
  */
 
-public class GetRentsActivity extends AppCompatActivity {
+public class GetRentsActivity extends BaseActivity implements View.OnClickListener {
 
     private String roomname;
     private View header;
@@ -39,30 +40,29 @@ public class GetRentsActivity extends AppCompatActivity {
     private ListView listView;
     private TextView tv_state;
     private int mAdminid;
+    private MyDataBase mMyDataBase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getrents);
+        mMyDataBase = new MyDataBase(GetRentsActivity.this,"test.db",null,1);
         setupActionBar();
-        findViewById(R.id.ll_2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(GetRentsActivity.this,SendMessageActivity.class));
-            }
-        });
-        findViewById(R.id.ll_1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(GetRentsActivity.this, AmmeterActivity.class));
-            }
-        });
-        findViewById(R.id.ll_4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(GetRentsActivity.this, RecordsActivity.class));
-            }
-        });
+
+        findViewById(R.id.ll_2).setOnClickListener(this);
+        findViewById(R.id.ll_1).setOnClickListener(this);
+        findViewById(R.id.ll_4).setOnClickListener(this);
+        findViewById(R.id.imageView44).setOnClickListener(this);
+        findViewById(R.id.btn_1).setOnClickListener(this);
+        findViewById(R.id.imageView45).setOnClickListener(this);
+        findViewById(R.id.button25).setOnClickListener(this);
+        findViewById(R.id.imageView46).setOnClickListener(this);
+        findViewById(R.id.button24).setOnClickListener(this);
+        findViewById(R.id.imageView47).setOnClickListener(this);
+        findViewById(R.id.button23).setOnClickListener(this);
+
+
+
         header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
         tv_state = header.findViewById(R.id.item_roomstate);
         listView = (ListView) findViewById(R.id.rents_list);
@@ -110,19 +110,27 @@ public class GetRentsActivity extends AppCompatActivity {
     }
 
     private void setupActionBar() {
-        //以下代码用于去除actionbar阴影
-        if(Build.VERSION.SDK_INT>=21){
-            getSupportActionBar().setElevation(0);
-        }
+        setTitle("");
         ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setTitle("收租信息");
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        if(Build.VERSION.SDK_INT>=21){
+            supportActionBar.setElevation(0);
+        }
+        //获取当前用户所有的房源信息
+        int adminid = (int) SPUtils.get("adminid", 0);
+        Cursor cursor = mMyDataBase.selectAllHouseByAdminId(adminid);
+        int count = cursor.getCount();
+        List<String> list = new ArrayList<>();
+        if(count >0){
+            while (cursor.moveToNext()){
+                list.add(cursor.getString(cursor.getColumnIndex("name")));
+            }
+            cursor.close();
+        }
         supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         supportActionBar.setTitle(null);
-        String[] titles = {"收租管理"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,titles);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,list);
         supportActionBar.setListNavigationCallbacks(adapter,null);
-        supportActionBar.setElevation(0);
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
         mAdminid = (int) SPUtils.get("adminid", 0);
 
     }
@@ -248,12 +256,41 @@ public class GetRentsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mMyDataBase == null) {
+            mMyDataBase.close();
         }
-        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0,10,0,"收租攻略")
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_1:
+            case R.id.imageView44:
+            case R.id.ll_1:{
+                startActivity(new Intent(GetRentsActivity.this, AmmeterActivity.class));
+            }break;
+            case R.id.button25:
+            case R.id.imageView45:
+            case R.id.ll_2:{
+                startActivity(new Intent(GetRentsActivity.this,SendMessageActivity.class));
+            }break;
+//            case R.id.ll_3:{
+//
+//            }break;
+            case R.id.button23:
+            case R.id.imageView47:
+            case R.id.ll_4:{
+                startActivity(new Intent(GetRentsActivity.this, RecordsActivity.class));
+            }break;
+        }
+    }
 }

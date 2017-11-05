@@ -17,41 +17,90 @@
         android:text="TextView"
         android:textColor="#000"/>
 
-    <TextView
-        android:id="@+id/textView12"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textColor="#000"/>
+        android:orientation="vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textColor="#000"/>
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
 
-    <EditText
-        android:id="@+id/editText"
+            android:text="TextView"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textColor="#000"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="TextView"
+            android:textColor="#000"/>
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_hide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="textPersonName"
-        android:maxLength="9"
-        android:text="Name"
-        android:textColor="#6BB1EE"
-        android:visibility="gone"/>
+        android:background="#FFF"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:inputType="textPersonName"
+            android:maxLength="9"
+            android:maxLines="2"
+            android:text="Name"
+            android:textColor="#6BB1EE"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/textview30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_gravity="center"
         android:visibility="visible"
         app:srcCompat="@drawable/more2"/>
 

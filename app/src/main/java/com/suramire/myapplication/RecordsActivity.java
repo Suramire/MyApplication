@@ -2,13 +2,14 @@ package com.suramire.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import com.suramire.myapplication.base.BaseActivity;
 
 /**
  * Created by Suramire on 2017/10/19.
  */
 
-public class RecordsActivity extends AppCompatActivity {
+public class RecordsActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

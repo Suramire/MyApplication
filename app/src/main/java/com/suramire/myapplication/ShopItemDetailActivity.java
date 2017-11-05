@@ -2,28 +2,24 @@ package com.suramire.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.suramire.myapplication.base.BaseActivity;
 
 /**
  * Created by Suramire on 2017/10/4.
  */
 
-public class ShopItemDetailActivity extends AppCompatActivity {
+public class ShopItemDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("商品详情");
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("商品详情");
         ImageView imageView = (ImageView) findViewById(R.id.imageView15);
         Picasso.with(this).load(R.drawable.printer).placeholder(R.drawable.loading).into(imageView);
         Button button = (Button) findViewById(R.id.button19);
@@ -35,11 +31,5 @@ public class ShopItemDetailActivity extends AppCompatActivity {
         });
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

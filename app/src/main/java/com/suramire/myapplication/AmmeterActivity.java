@@ -2,19 +2,21 @@ package com.suramire.myapplication;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.suramire.myapplication.adapter.MyBaseAdapter2;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
@@ -27,7 +29,7 @@ import java.util.List;
  * Created by Suramire on 2017/10/12.
  */
 
-public class AmmeterActivity extends AppCompatActivity {
+public class AmmeterActivity extends BaseActivity {
 
     private List<Ammeter> mAmmeterList;
     private MyBaseAdapter2 mAdapter;
@@ -35,29 +37,32 @@ public class AmmeterActivity extends AppCompatActivity {
     private boolean[] mChecks;
     private boolean isSaved;
     private ListView mListView;
+    private MyDataBase mMyDataBase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ammeter);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        mMyDataBase = new MyDataBase(AmmeterActivity.this,"test.db",null,1);
+        setupActionBar();
         mListView = (ListView) findViewById(R.id.list_ammeter);
         findViewById(R.id.button21).setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
-                MyDataBase myDataBase = new MyDataBase(AmmeterActivity.this,"test.db",null,1);
+
                 if(!isTheSame()){
                     for (int i = 0; i < mAdapter.getData().size(); i++) {
                         //保存本次读表记录
                         Ammeter ammeter = mAdapter.getData().get(i);
-                        myDataBase.updateAmmeter(ammeter);
-                        // TODO: 2017/10/28 生成历史读表记录
-                        myDataBase.addAmHistory(ammeter);
-                        Log.d("AmmeterActivity", "mAdapter.getData().get(i).getLastcount():" + mAdapter.getData().get(i).getLastcount());
+
+                        mMyDataBase.updateAmmeter(ammeter);
+                        //生成历史读表记录
+                        mMyDataBase.addAmHistory(ammeter);
                     }
                 }
-                myDataBase.close();
+
                 isSaved = true;
                 AlertDialog.Builder builder = new AlertDialog.Builder(AmmeterActivity.this);
                 builder.setTitle("保存提示")
@@ -104,11 +109,35 @@ public class AmmeterActivity extends AppCompatActivity {
 
     }
 
+    private void setupActionBar() {
+        setTitle("");
+        ActionBar supportActionBar = getSupportActionBar();
+        if(Build.VERSION.SDK_INT>=21){
+            supportActionBar.setElevation(0);
+        }
+        //获取当前用户所有的房源信息
+        int adminid = (int) SPUtils.get("adminid", 0);
+        Cursor cursor = mMyDataBase.selectAllHouseByAdminId(adminid);
+        int count = cursor.getCount();
+        List<String> list = new ArrayList<>();
+        if(count >0){
+            while (cursor.moveToNext()){
+                list.add(cursor.getString(cursor.getColumnIndex("name")));
+            }
+            cursor.close();
+        }
+        supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        supportActionBar.setTitle(null);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,list);
+        supportActionBar.setListNavigationCallbacks(adapter,null);
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
     private void getData(ListView listView) {
         //        先获取所有房间信息
-        MyDataBase myDataBase = new MyDataBase(AmmeterActivity.this, "test.db", null, 1);
+
         int adminid = (int) SPUtils.get("adminid", 0);
-        Cursor cursor = myDataBase.selectAllRoom(adminid);
+        Cursor cursor = mMyDataBase.selectAllRoom(adminid);
         List<Integer> roomIdList = new ArrayList<>();
         mRoomNameList = new ArrayList<>();
         if (cursor.getCount() != 0) {
@@ -123,20 +152,27 @@ public class AmmeterActivity extends AppCompatActivity {
             for (int i = 0; i < roomIdList.size(); i++) {
                 Integer roomId = roomIdList.get(i);
                 String roomName = mRoomNameList.get(i);
-                Cursor cursor1 = myDataBase.selectAmmeter(roomId);
+                Cursor cursor1 = mMyDataBase.selectAmmeter(roomId);
                 if(cursor1.getCount()!=0){
                     //该房间存在读表
                     while (cursor1.moveToNext()){
+                        //默认带id roomid 当前读数
                         Ammeter ammeter = new Ammeter(cursor1.getInt(cursor1.getColumnIndex("_id")),cursor1.getInt(cursor1.getColumnIndex("roomid")),cursor1.getInt(cursor1.getColumnIndex("count")));
+                        //设置房间名
                         ammeter.setRoomName(roomName);
-                        Log.d("ss", cursor1.getInt(cursor1.getColumnIndex("sort"))+"");
+                        //设置上次读数
                         ammeter.setLastcount(cursor1.getInt(cursor1.getColumnIndex("lastcount")));
+                        //上次读数
+                        ammeter.setLastTime(cursor1.getString(cursor1.getColumnIndex("lasttime")));
+                        //设置排序权重
                         ammeter.setSort(cursor1.getInt(cursor1.getColumnIndex("sort")));
+                        //当前读数对应的日期
+                        ammeter.setTime(cursor1.getString(cursor1.getColumnIndex("time")));
                         mAmmeterList.add(ammeter);
                     }
                 }else{
                     //该房间不存在读表 新建读表
-                    int id = (int) myDataBase.addAmmeter(new Ammeter(roomId, 0));
+                    int id = (int) mMyDataBase.addAmmeter(new Ammeter(roomId, 0));
                     Ammeter ammeter = new Ammeter(id,roomId,0);
                     ammeter.setRoomName(roomName);
                     mAmmeterList.add(ammeter);
@@ -164,9 +200,12 @@ public class AmmeterActivity extends AppCompatActivity {
         }
 
         mChecks = new boolean[100];
-        for (int i = 0; i < mChecks.length; i++) {
-            mChecks[i] = false;
-        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_ammeter,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -178,12 +217,7 @@ public class AmmeterActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AmmeterActivity.this);
                 builder.setTitle("抄表提示")
                         .setMessage("您已经抄表，是否不保存？")
-                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
+                        .setPositiveButton("取消", null)
                         .setNegativeButton("不保存", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -219,5 +253,13 @@ public class AmmeterActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mMyDataBase == null) {
+            mMyDataBase.close();
+        }
     }
 }

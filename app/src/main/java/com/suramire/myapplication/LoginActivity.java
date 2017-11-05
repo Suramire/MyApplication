@@ -6,12 +6,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
 
@@ -19,12 +19,15 @@ import com.suramire.myapplication.util.SPUtils;
  * Created by Suramire on 2017/9/19.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private MyDataBase myDataBase;
     private ProgressDialog mProgressDialog;
     private EditText mText_username;
     private EditText mText_password;
+
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
             mText_password.setText((String) SPUtils.get("password", ""));
             login();
         }
-
-
 
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                             } else if (password.equals(cursor.getString(2))) {
                                 Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                                 //登录成功后保存用户名密码
-                                cursor.close();
-                                if (myDataBase != null)
-                                    myDataBase.close();
                                 SPUtils.put("name", name);
                                 SPUtils.put("password", password);
                                 SPUtils.put("adminid", cursor.getInt(0));
                                 SPUtils.put("autologin", 1);
+                                cursor.close();
+                                if (myDataBase != null)
+                                    myDataBase.close();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             } else {

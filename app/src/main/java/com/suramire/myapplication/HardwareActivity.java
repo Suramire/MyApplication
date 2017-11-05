@@ -4,11 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.suramire.myapplication.base.BaseActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -19,7 +18,7 @@ import java.util.List;
  * Created by Suramire on 2017/10/4.
  */
 
-public class HardwareActivity extends AppCompatActivity {
+public class HardwareActivity extends BaseActivity {
     private ActionBar actionBar;
 
     @Override
@@ -27,9 +26,7 @@ public class HardwareActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hardware);
         setupBanner();
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("智能硬件");
+        setTitle("智能硬件");
     }
 
     private void setupBanner() {
@@ -41,13 +38,7 @@ public class HardwareActivity extends AppCompatActivity {
         banner.setImageLoader(new GlideImageLoader()).setImages(images).start();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     class GlideImageLoader extends ImageLoader {
         @Override

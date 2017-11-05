@@ -27,14 +27,14 @@
             android:id="@+id/item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未收租"/>
+            android:text="@string/notgetmoney"/>
 
 
         <android.support.design.widget.TabItem
             android:id="@+id/item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已收租"/>
+            android:text="@string/getmoney"/>
 
     </android.support.design.widget.TabLayout>
 
@@ -91,11 +91,11 @@
                 app:srcCompat="@drawable/bottom_1"/>
 
             <Button
+                android:id="@+id/btn_1"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_weight="1"
+                android:layout_height="25dp"
                 android:background="@null"
-                android:text="抄表"
+                android:text="@string/ammeter"
                 android:textColor="#FFF"/>
         </LinearLayout>
 
@@ -118,7 +118,7 @@
                 android:layout_height="24dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:text="催租"
+                android:text="@string/sendmessage"
                 android:textColor="#FFF"/>
         </LinearLayout>
 
@@ -140,7 +140,7 @@
                 android:layout_height="24dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:text="打印"
+                android:text="@string/print"
                 android:textColor="#FFF"/>
         </LinearLayout>
 
@@ -163,7 +163,7 @@
                 android:layout_height="24dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:text="到账记录"
+                android:text="@string/bottom4"
                 android:textColor="#FFF"/>
         </LinearLayout>
 

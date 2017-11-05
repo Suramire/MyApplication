@@ -3,101 +3,33 @@ package com.suramire.myapplication;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageView11);
-        ImageView imageView1 = (ImageView) findViewById(R.id.imageView12);
-        ImageView rent = (ImageView) findViewById(R.id.img_rent);
-        ImageView management = (ImageView) findViewById(R.id.img_management);
-        ImageView fe = (ImageView) findViewById(R.id.img_58);
-        ImageView hardware = (ImageView) findViewById(R.id.img_hardware);
-        ImageView notification = (ImageView) findViewById(R.id.img_notification);
-        ImageView help = (ImageView) findViewById(R.id.img_help);
-        ImageView shop = (ImageView) findViewById(R.id.img_shop);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
-                finish();
-            }
-        });
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,NotificationActivity.class));
-            }
-        });
+        findViewById(R.id.imageView11).setOnClickListener(this);
+        findViewById(R.id.imageView12).setOnClickListener(this);
+        findViewById(R.id.img_rent).setOnClickListener(this);
+        findViewById(R.id.img_management).setOnClickListener(this);
+        findViewById(R.id.img_58).setOnClickListener(this);
+        findViewById(R.id.img_hardware).setOnClickListener(this);
+        findViewById(R.id.img_notification).setOnClickListener(this);
+        findViewById(R.id.img_help).setOnClickListener(this);
+        findViewById(R.id.img_shop).setOnClickListener(this);
 
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,WorkNotification.class));
-            }
-        });
-
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,HelpActivity.class));
-            }
-        });
-
-        fe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,FEInfoActivity.class));
-
-            }
-        });
-        hardware.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,HardwareActivity.class));
-
-            }
-        });
-        shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,ShopActivity.class));
-
-            }
-        });
-
-
-
-//        LinearLayout work = (LinearLayout) findViewById(R.id.f_work);
-//        LinearLayout help = (LinearLayout) findViewById(R.id.f_help);
-        management.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ManagementActivity.class));
-            }
-        });
-
-        rent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, GetRentsActivity.class));
-            }
-        });
         updateInfo();
         // TODO: 2017/9/22 关闭cursor
 
@@ -131,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
             cursor1.close();
 
         }
+        if(myDataBase!=null){
+            myDataBase.close();
+        }
 
         TextView textView = (TextView) findViewById(R.id.textView24);
         TextView textView1 = (TextView) findViewById(R.id.textView25);
@@ -143,7 +78,41 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        updateInfo();
         super.onResume();
+        updateInfo();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.imageView11:
+                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                finish();
+                break;
+            case R.id.imageView12:
+                startActivity(new Intent(MainActivity.this,NotificationActivity.class));
+                break;
+            case R.id.img_notification:
+                startActivity(new Intent(MainActivity.this,WorkNotificationActivity.class));
+                break;
+            case R.id.img_help:
+                startActivity(new Intent(MainActivity.this,HelpActivity.class));
+                break;
+            case R.id.img_58:
+                startActivity(new Intent(MainActivity.this,FEInfoActivity.class));
+                break;
+            case R.id.img_hardware:
+                startActivity(new Intent(MainActivity.this,HardwareActivity.class));
+                break;
+            case R.id.img_shop:
+                startActivity(new Intent(MainActivity.this,ShopActivity.class));
+                break;
+            case R.id.img_management:
+                startActivity(new Intent(MainActivity.this, ManagementActivity.class));
+                break;
+            case R.id.img_rent:
+                startActivity(new Intent(MainActivity.this, GetRentsActivity.class));
+                break;
+        }
     }
 }

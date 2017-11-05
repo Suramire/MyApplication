@@ -3,25 +3,22 @@ package com.suramire.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.SPUtils;
 
 /**
  * Created by Suramire on 2017/10/4.
  */
 
-public class MoreActivity extends AppCompatActivity implements View.OnClickListener {
+public class MoreActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("更多");
+        setTitle("更多");
 
         findViewById(R.id.imageView34).setOnClickListener(this);
     }

@@ -2,15 +2,13 @@ package com.suramire.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -18,7 +16,7 @@ import com.suramire.myapplication.util.MyDataBase;
  * Created by Suramire on 2017/9/21.
  */
 
-public class EditRoomActivity extends AppCompatActivity {
+public class EditRoomActivity extends BaseActivity {
 
     private MyDataBase myDataBase;
 
@@ -26,9 +24,7 @@ public class EditRoomActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editroom);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("房间信息");
+        setTitle("房间信息");
 
         //接收数据
         Bundle extras = getIntent().getExtras();
@@ -69,13 +65,7 @@ public class EditRoomActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     @Override
     protected void onDestroy() {

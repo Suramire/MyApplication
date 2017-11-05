@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.suramire.myapplication.model.Admin;
 import com.suramire.myapplication.model.Ammeter;
@@ -24,13 +25,15 @@ import java.util.Date;
 public class MyDataBase extends SQLiteOpenHelper {
     SQLiteDatabase mydb;
     Context context;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public MyDataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.context = context;
         mydb = getWritableDatabase();
     }
+
+
     public Cursor selectByName(String name){
         return  mydb.query("admin",null,"name =?",new String[]{name},null,null,null);
     }
@@ -216,9 +219,13 @@ public class MyDataBase extends SQLiteOpenHelper {
      * @return
      */
     public int updateAmmeter(Ammeter ammeter){
+        Log.d("MyDataBase gettime", ammeter.getTime());
         ContentValues values = new ContentValues();
         values.put("count", ammeter.getCount());
+        String format = simpleDateFormat.format(new Date());
+        values.put("time",format);
         values.put("lastcount",ammeter.getLastcount());
+        values.put("lasttime",ammeter.getTime());
         values.put("sort",ammeter.getSort());
         return mydb.update("ammeter",values,"_id=?",new String[]{ammeter.getId()+""});
     }

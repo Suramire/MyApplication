@@ -1,33 +1,31 @@
 package com.suramire.myapplication;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat.LayoutParams;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
+
+import com.suramire.myapplication.base.BaseActivity;
 
 /**
  * Created by Suramire on 2017/10/18.
  */
 
-public class SendMessageActivity extends AppCompatActivity {
-    private Context mContext;
+public class SendMessageActivity extends BaseActivity {
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sentmessage);
         mContext = this;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("催租");
+        setTitle("催租");
         findViewById(R.id.textView48).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,11 +56,5 @@ public class SendMessageActivity extends AppCompatActivity {
         ((Activity) mContext).getWindow().setAttributes(lp);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

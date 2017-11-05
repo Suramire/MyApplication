@@ -35,7 +35,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".FeedbackActivity"/>
-        <activity android:name=".WorkNotification" />
+        <activity android:name=".WorkNotificationActivity" />
         <activity android:name=".FEInfoActivity"  android:process=":picture"/>
         <activity android:name=".HardwareActivity" />
         <activity android:name=".ShopActivity" />
@@ -55,7 +55,7 @@
         <activity android:name=".RecordsActivity"/>
         <activity android:name=".SortRoomActivity"/>
         <activity android:name=".AmmeterHistoryActivity"/>
-
+        <activity android:name=".AmmeterChangeActivity"/>
     </application>
 
 </manifest>

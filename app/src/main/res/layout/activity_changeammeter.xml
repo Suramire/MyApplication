@@ -20,6 +20,7 @@
             android:text="旧表刻度"/>
 
         <EditText
+            android:id="@+id/old_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,6 +47,7 @@
             android:text="抄表时间"/>
 
         <EditText
+            android:id="@+id/old_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -72,6 +74,7 @@
             android:text="新表刻度"/>
 
         <EditText
+            android:id="@+id/new_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -99,6 +102,7 @@
             android:text="抄表时间"/>
 
         <EditText
+            android:id="@+id/new_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -109,4 +113,31 @@
             android:textAlignment="textEnd"/>
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#FFF"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:background="@drawable/btn_ok2"
+                android:text="保存"
+                android:textColor="#FFF" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

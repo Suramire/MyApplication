@@ -3,17 +3,15 @@ package com.suramire.myapplication;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.RentInfo;
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
@@ -25,7 +23,7 @@ import java.util.Date;
  * Created by Suramire on 2017/9/21.
  */
 
-public class NewRentActivity extends AppCompatActivity {
+public class NewRentActivity extends BaseActivity {
     int year_begin,year_end;
     int month_begin,month_end;
     int day_begin,day_end;
@@ -39,9 +37,7 @@ public class NewRentActivity extends AppCompatActivity {
         final Calendar calendar = Calendar.getInstance();
         Bundle extras = getIntent().getExtras();
         final Room room = (Room) extras.getSerializable("room");
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(room.getName());
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle(room.getName());
         calendar.setTime(new Date());
         year_begin = calendar.get(Calendar.YEAR);
         month_begin = calendar.get(Calendar.MONTH);
@@ -142,11 +138,5 @@ public class NewRentActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

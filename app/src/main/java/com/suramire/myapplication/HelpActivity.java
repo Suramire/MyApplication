@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -15,6 +12,7 @@ import android.widget.SearchView;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.suramire.myapplication.base.BaseActivity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -24,15 +22,12 @@ import java.util.List;
  * Created by Suramire on 2017/10/1.
  */
 
-public class HelpActivity extends AppCompatActivity {
+public class HelpActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setTitle("帮助中心");
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-        supportActionBar.setElevation(0);
+        setTitle("帮助中心");
         final View header = LayoutInflater.from(this).inflate(R.layout.header_help, null);
         final View footer = LayoutInflater.from(this).inflate(R.layout.footer_help, null);
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
@@ -72,12 +67,6 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
 }

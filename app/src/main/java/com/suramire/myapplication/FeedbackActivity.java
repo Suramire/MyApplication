@@ -2,19 +2,19 @@ package com.suramire.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
+
 /**
  * Created by Suramire on 2017/10/1.
  */
 
-public class FeedbackActivity extends AppCompatActivity {
+public class FeedbackActivity extends BaseActivity {
 
     private EditText editText;
 
@@ -23,9 +23,7 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         editText = (EditText) findViewById(R.id.editText15);
-        ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setTitle("帮助中心");
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("帮助中心");
 
     }
 

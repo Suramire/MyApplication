@@ -3,13 +3,13 @@ package com.suramire.myapplication;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Ammeter;
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by Suramire on 2017/10/28.
  */
 
-public class AmmeterHistoryActivity extends AppCompatActivity {
+public class AmmeterHistoryActivity extends BaseActivity {
 
     private ListView mListView;
 
@@ -28,6 +28,7 @@ public class AmmeterHistoryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actiity_ammeterhistory);
+        setTitle("历史读表记录");
         int roomid = getIntent().getIntExtra("roomid", 0);
         final MyDataBase myDataBase = new MyDataBase(AmmeterHistoryActivity.this, "test.db", null, 1);
         mListView = (ListView) findViewById(R.id.list_amhistory);
@@ -63,4 +64,5 @@ public class AmmeterHistoryActivity extends AppCompatActivity {
         }
 
     }
+
 }

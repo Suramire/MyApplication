@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.RentItem;
 import com.suramire.myapplication.util.MyDataBase;
 
@@ -24,7 +25,7 @@ import java.util.Date;
  * Created by Suramire on 2017/9/28.
  */
 
-public class RentDetailActivity extends AppCompatActivity {
+public class RentDetailActivity extends BaseActivity {
 
     private SimpleDateFormat simpleDateFormat;
     private MyDataBase myDataBase;
@@ -41,6 +42,10 @@ public class RentDetailActivity extends AppCompatActivity {
         final float total = Float.parseFloat(margin) + Float.parseFloat(money);
         String date_begin = rentinfo.getDate_begin();
         String date_end = rentinfo.getDate_end();
+        String rentRoomName = rentinfo.getRentRoomName();
+        String renterName = rentinfo.getRenterName();
+        ActionBar supportActionBar = getSupportActionBar();
+        setTitle(rentRoomName+"("+renterName+")");
 
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format_begin = simpleDateFormat.format(new Date(date_begin));

@@ -3,10 +3,7 @@ package com.suramire.myapplication;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Notification;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
@@ -26,7 +24,7 @@ import java.util.Date;
  * Created by Suramire on 2017/10/7.
  */
 
-public class NewNotificationActivity extends AppCompatActivity {
+public class NewNotificationActivity extends BaseActivity {
 
     private long time_begin;
     private long time_end;
@@ -109,18 +107,9 @@ public class NewNotificationActivity extends AppCompatActivity {
     }
 
     private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("新增备忘");
-        }
+         setTitle("新增备忘");
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() ==android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }
