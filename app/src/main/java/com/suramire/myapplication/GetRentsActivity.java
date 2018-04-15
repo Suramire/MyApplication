@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,9 +29,6 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/9/21.
- */
 
 public class GetRentsActivity extends BaseActivity implements View.OnClickListener {
 
@@ -41,6 +39,7 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
     private TextView tv_state;
     private int mAdminid;
     private MyDataBase mMyDataBase;
+    private View mLinearLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +59,8 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.button24).setOnClickListener(this);
         findViewById(R.id.imageView47).setOnClickListener(this);
         findViewById(R.id.button23).setOnClickListener(this);
-
+        findViewById(R.id.imageView54).setOnClickListener(this);
+        mLinearLayout = (LinearLayout)findViewById(R.id.linearLayout);
 
 
         header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
@@ -276,20 +276,26 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_1:
             case R.id.imageView44:
             case R.id.ll_1:{
-                startActivity(new Intent(GetRentsActivity.this, AmmeterActivity.class));
+                startActivity(AmmeterActivity.class);
             }break;
             case R.id.button25:
             case R.id.imageView45:
             case R.id.ll_2:{
-                startActivity(new Intent(GetRentsActivity.this,SendMessageActivity.class));
+                startActivity(SendMessageActivity.class);
             }break;
-//            case R.id.ll_3:{
-//
-//            }break;
             case R.id.button23:
             case R.id.imageView47:
             case R.id.ll_4:{
-                startActivity(new Intent(GetRentsActivity.this, RecordsActivity.class));
+                startActivity(RecordsActivity.class);
+            }break;
+            case R.id.imageView54:{
+                if(mLinearLayout.getVisibility()==View.GONE){
+                    mLinearLayout.setVisibility(View.VISIBLE);
+                    mLinearLayout.setAnimation(AnimationUtils.makeInAnimation(mContext, false));
+                }else{
+                    mLinearLayout.setVisibility(View.GONE);
+                    mLinearLayout.setAnimation(AnimationUtils.makeOutAnimation(mContext, true));
+                }
             }break;
         }
     }

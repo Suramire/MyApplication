@@ -11,9 +11,6 @@ import com.suramire.myapplication.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/9/23.
- */
 
 public class GetServiceActivity extends BaseActivity {
     @Override

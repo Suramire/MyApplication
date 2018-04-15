@@ -20,9 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Suramire on 2017/10/7.
- */
 
 public class NewNotificationActivity extends BaseActivity {
 
@@ -78,10 +75,10 @@ public class NewNotificationActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 String content = notification_content.getText().toString().trim();
-                if(TextUtils.isEmpty(content)){
-                    Toast.makeText(NewNotificationActivity.this, "请填写备忘内容", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if(TextUtils.isEmpty(content)){
+//                    Toast.makeText(NewNotificationActivity.this, "请填写备忘内容", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if(time_end<time_begin){
                     Toast.makeText(NewNotificationActivity.this, "提醒时间不能早于今天", Toast.LENGTH_SHORT).show();
                     return;

@@ -1,8 +1,5 @@
 package com.suramire.myapplication.model;
 
-/**
- * Created by Suramire on 2017/9/19.
- */
 
 public class Admin {
     int id;

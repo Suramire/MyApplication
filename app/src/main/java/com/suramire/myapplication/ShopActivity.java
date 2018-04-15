@@ -1,6 +1,5 @@
 package com.suramire.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
@@ -17,9 +16,6 @@ import com.suramire.myapplication.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/10/4.
- */
 
 public class ShopActivity extends BaseActivity {
     @Override
@@ -45,7 +41,7 @@ public class ShopActivity extends BaseActivity {
                 helper.setOnClickListener(R.id.shop_item, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                startActivity(new Intent(ShopActivity.this,ShopItemDetailActivity.class));
+                                startActivity(ShopItemDetailActivity.class);
                             }
                         });
             }
@@ -67,7 +63,7 @@ public class ShopActivity extends BaseActivity {
             finish();
         }
         if (item.getItemId() == R.id.menu_order) {
-            startActivity(new Intent(ShopActivity.this,OrderActivity.class));
+            startActivity(OrderActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
         android:background="#F5F5F5"
         android:orientation="horizontal">
@@ -15,31 +15,34 @@
             android:id="@+id/item_roomname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="租客姓名"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="16sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/item_roomprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="房间名"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="16sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/item_roomstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="待收租金(元)"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="16sp" />
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

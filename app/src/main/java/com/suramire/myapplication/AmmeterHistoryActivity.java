@@ -16,9 +16,6 @@ import com.suramire.myapplication.util.MyDataBase;
 import java.util.ArrayList;
 
 
-/**
- * Created by Suramire on 2017/10/28.
- */
 
 public class AmmeterHistoryActivity extends BaseActivity {
 

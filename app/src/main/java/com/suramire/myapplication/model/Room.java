@@ -2,9 +2,6 @@ package com.suramire.myapplication.model;
 
 import java.io.Serializable;
 
-/**
- * Created by Suramire on 2017/9/20.
- */
 
 public class Room implements Serializable {
     int id;

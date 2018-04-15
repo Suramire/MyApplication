@@ -4,9 +4,6 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-/**
- * Created by Suramire on 2017/10/12.
- */
 
 public class Ammeter implements Serializable,Comparable<Ammeter> {
     int id;

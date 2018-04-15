@@ -5,9 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/10/4.
- */
 
 public class OrderActivity extends BaseActivity {
     @Override

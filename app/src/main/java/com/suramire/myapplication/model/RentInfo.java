@@ -1,8 +1,5 @@
 package com.suramire.myapplication.model;
 
-/**
- * Created by Suramire on 2017/9/21.
- */
 
 public class RentInfo {
     int id;

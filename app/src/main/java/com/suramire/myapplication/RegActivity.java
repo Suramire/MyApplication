@@ -15,9 +15,6 @@ import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Admin;
 import com.suramire.myapplication.util.MyDataBase;
 
-/**
- * Created by Suramire on 2017/9/19.
- */
 
 public class RegActivity extends BaseActivity {
     @Override

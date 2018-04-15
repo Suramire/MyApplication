@@ -2,9 +2,6 @@ package com.suramire.myapplication.model;
 
 import java.io.Serializable;
 
-/**
- * Created by Suramire on 2017/9/21.
- */
 
 public class RentItem  implements Serializable{
     int rentInfoId;

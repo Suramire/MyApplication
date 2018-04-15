@@ -1,7 +1,6 @@
 package com.suramire.myapplication;
 
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,13 +25,8 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/10/3.
- */
 
 public class WorkNotificationActivity extends BaseActivity {
-    private TabLayout tabLayout;
-    private RelativeLayout emptyView;
     private ListView listView;
 
     @Override
@@ -47,12 +41,12 @@ public class WorkNotificationActivity extends BaseActivity {
 
     private void initView() {
         listView = (ListView) findViewById(R.id.work_list);
-        emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
+        RelativeLayout emptyView = (RelativeLayout) findViewById(R.id.empty_layout);
         Button button = emptyView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WorkNotificationActivity.this,NewNotificationActivity.class));
+                startActivity(NewNotificationActivity.class);
             }
         });
         listView.setEmptyView(emptyView);
@@ -60,7 +54,7 @@ public class WorkNotificationActivity extends BaseActivity {
 
 
     private void setupTablayout() {
-        tabLayout = (TabLayout) findViewById(R.id.tab2);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab2);
 //        为tablayout添加分割线
         LinearLayout linearLayout = (LinearLayout) tabLayout.getChildAt(0);
         linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
@@ -144,7 +138,7 @@ public class WorkNotificationActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.action_new:
-                startActivity(new Intent(WorkNotificationActivity.this,NewNotificationActivity.class));
+                startActivity(NewNotificationActivity.class);
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -5,9 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/9/23.
- */
 
 public class NewPasswordActivity extends BaseActivity {
     @Override

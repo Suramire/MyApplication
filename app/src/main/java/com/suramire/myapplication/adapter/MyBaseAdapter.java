@@ -168,7 +168,6 @@ public class MyBaseAdapter extends BaseAdapter {
                     builder.setNegativeButton("撤销退租", null);
                     builder.setPositiveButton("取消", null);
                     builder.setCancelable(false).show();
-                    // TODO: 2017/9/28 自定义对话框
                 }
             });
             viewHolder.op_rent.setOnClickListener(new View.OnClickListener() {

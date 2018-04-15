@@ -19,7 +19,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.suramire.myapplication.AmmeterChangeActivity;
+import com.suramire.myapplication.AmmeterChangeActivity2;
 import com.suramire.myapplication.AmmeterHistoryActivity;
+import com.suramire.myapplication.AmmeterHistoryActivity2;
 import com.suramire.myapplication.R;
 import com.suramire.myapplication.SortRoomActivity;
 import com.suramire.myapplication.model.Ammeter;
@@ -40,6 +42,7 @@ public class MyBaseAdapter2 extends BaseAdapter {
     Context mContext;
     private int mSelectedItem;
     List<Integer> tempCounts = new ArrayList<>();//存放上一次读数
+    int flag ;//区分电表与水表标志位
 
     public List<Ammeter> getData() {
         return mData;
@@ -60,9 +63,10 @@ public class MyBaseAdapter2 extends BaseAdapter {
     private ViewHolder viewHolder;
     private KeyUtils mKeyUtils;
 
-    public MyBaseAdapter2(Context context,final List<Ammeter> data) {
+    public MyBaseAdapter2(Context context,final List<Ammeter> data,int flag) {
         this.mContext = context;
         setData(data);
+        this.flag = flag;
     }
 
     @Override
@@ -109,8 +113,19 @@ public class MyBaseAdapter2 extends BaseAdapter {
         viewHolder.mTextView.setText(mData.get(i).getCount()+"");
         viewHolder.mEditText.setText(mData.get(i).getCount()+"");
         viewHolder.mTextView2.setText(mData.get(i).getLastcount()+"");
-        viewHolder.mTextView20.setText(mData.get(i).getLastTime());
-        viewHolder.mTextView30.setText(mData.get(i).getTime());
+        if(mData.get(i).getLastTime()==null){
+            viewHolder.mTextView20.setText("-");
+        }else{
+            viewHolder.mTextView20.setText(mData.get(i).getLastTime());
+        }
+
+
+        if(mData.get(i).getTime()==null){
+            viewHolder.mTextView30.setText("-");
+        }else{
+            viewHolder.mTextView30.setText(mData.get(i).getTime());
+        }
+
 
         //每间房 读表额外操作
         viewHolder.mImageView.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +157,12 @@ public class MyBaseAdapter2 extends BaseAdapter {
                 inflate.findViewById(R.id.button26).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext, AmmeterHistoryActivity.class);
+                        Intent intent;
+                        if(flag==0){
+                            intent = new Intent(mContext, AmmeterHistoryActivity.class);
+                        }else{
+                            intent = new Intent(mContext, AmmeterHistoryActivity2.class);
+                        }
                         intent.putExtra("roomid", getData().get(i).getRoomid());
                         mContext.startActivity(intent);
                         popupWindow.dismiss();
@@ -152,7 +172,12 @@ public class MyBaseAdapter2 extends BaseAdapter {
                 inflate.findViewById(R.id.button28).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext, AmmeterChangeActivity.class);
+                        Intent intent;
+                        if(flag==0){
+                            intent = new Intent(mContext, AmmeterChangeActivity.class);
+                        }else{
+                            intent = new Intent(mContext, AmmeterChangeActivity2.class);
+                        }
                         intent.putExtra("roomid", getData().get(i).getRoomid());
                         intent.putExtra("ammeterid", getData().get(i).getId());
                         mContext.startActivity(intent);
@@ -199,7 +224,7 @@ public class MyBaseAdapter2 extends BaseAdapter {
                 }
             });
             viewHolder.mLinearLayout.setBackgroundResource(R.drawable.bg_selected);
-
+            notifyDataSetChanged();
         }else{
             viewHolder.mLinearLayoutShow.setVisibility(View.VISIBLE);
             viewHolder.mLinearLayoutHide.setVisibility(View.GONE);

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.suramire.myapplication.model.Admin;
 import com.suramire.myapplication.model.Ammeter;
@@ -18,14 +17,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Suramire on 2017/5/2.
  * 实现对数据库的相关操作
  */
 
 public class MyDataBase extends SQLiteOpenHelper {
-    SQLiteDatabase mydb;
-    Context context;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SQLiteDatabase mydb;
+    private Context context;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public MyDataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -63,8 +61,14 @@ public class MyDataBase extends SQLiteOpenHelper {
 //        电读数表
         db.execSQL("create table if not exists ammeter(_id integer primary key autoincrement," +
                 "roomid integer,lastcount integer,count integer,time date,lasttime date,sort integer)");
-//        历史读数表
+//        水表读数
+        db.execSQL("create table if not exists ammeter2(_id integer primary key autoincrement," +
+                "roomid integer,lastcount integer,count integer,time date,lasttime date,sort integer)");
+//        电表历史读数表
         db.execSQL("create table if not exists ammeterhistory(_id integer primary key autoincrement," +
+                "roomid integer,count integer,time date)");
+//        水表历史读数表
+        db.execSQL("create table if not exists ammeterhistory2(_id integer primary key autoincrement," +
                 "roomid integer,count integer,time date)");
     }
 
@@ -103,6 +107,15 @@ public class MyDataBase extends SQLiteOpenHelper {
      */
     public Cursor selectAmmeter(int roomId){
         return mydb.query("ammeter", null, "roomid=?", new String[]{roomId + ""}, null, null, "sort desc");
+    }
+
+    /**
+     * 查询某房间的水表读数
+     * @param roomId
+     * @return
+     */
+    public Cursor selectAmmeter2(int roomId){
+        return mydb.query("ammeter2", null, "roomid=?", new String[]{roomId + ""}, null, null, "sort desc");
     }
 
 
@@ -165,13 +178,23 @@ public class MyDataBase extends SQLiteOpenHelper {
 
 
     /**
-     * 查询某房间的所有历史读数
+     * 查询某房间的所有电表历史读数
      * @param roomId
      * @return
      */
     public Cursor selectAmHistory(int roomId){
         return mydb.query("ammeterhistory", null, "roomid= ?", new String[]{roomId + ""},null,null,null);
     }
+
+    /**
+     * 查询某房间的所有水表历史读数
+     * @param roomId
+     * @return
+     */
+    public Cursor selectAmHistory2(int roomId){
+        return mydb.query("ammeterhistory2", null, "roomid= ?", new String[]{roomId + ""},null,null,null);
+    }
+
 
 
     /**
@@ -214,12 +237,11 @@ public class MyDataBase extends SQLiteOpenHelper {
 
 
     /**
-     * 更新读表
+     * 更新电表读数
      * @param ammeter
      * @return
      */
     public int updateAmmeter(Ammeter ammeter){
-        Log.d("MyDataBase gettime", ammeter.getTime());
         ContentValues values = new ContentValues();
         values.put("count", ammeter.getCount());
         String format = simpleDateFormat.format(new Date());
@@ -228,6 +250,22 @@ public class MyDataBase extends SQLiteOpenHelper {
         values.put("lasttime",ammeter.getTime());
         values.put("sort",ammeter.getSort());
         return mydb.update("ammeter",values,"_id=?",new String[]{ammeter.getId()+""});
+    }
+
+    /**
+     * 更新水表读数
+     * @param ammeter
+     * @return
+     */
+    public int updateAmmeter2(Ammeter ammeter){
+        ContentValues values = new ContentValues();
+        values.put("count", ammeter.getCount());
+        String format = simpleDateFormat.format(new Date());
+        values.put("time",format);
+        values.put("lastcount",ammeter.getLastcount());
+        values.put("lasttime",ammeter.getTime());
+        values.put("sort",ammeter.getSort());
+        return mydb.update("ammeter2",values,"_id=?",new String[]{ammeter.getId()+""});
     }
 
 
@@ -296,7 +334,7 @@ public class MyDataBase extends SQLiteOpenHelper {
 
 
     /**
-     * 未新房间添加读表
+     * 为新房间添加电表
      * @param ammeter
      * @return
      */
@@ -308,7 +346,19 @@ public class MyDataBase extends SQLiteOpenHelper {
     }
 
     /**
-     * 添加一条历史读表记录
+     * 为新房间添加水表
+     * @param ammeter
+     * @return
+     */
+    public long addAmmeter2(Ammeter ammeter){
+        ContentValues values = new ContentValues();
+        values.put("roomid", ammeter.getRoomid());
+        values.put("count", ammeter.getCount());
+        return mydb.insert("ammeter2",null,values);
+    }
+
+    /**
+     * 添加一条历史电表记录
      * @param ammeter
      * @return
      */
@@ -319,6 +369,20 @@ public class MyDataBase extends SQLiteOpenHelper {
         String format = simpleDateFormat.format(new Date());
         values.put("time",format);
         return mydb.insert("ammeterhistory",null,values);
+    }
+
+    /**
+     * 添加一条历史水表记录
+     * @param ammeter
+     * @return
+     */
+    public long addAmHistory2(Ammeter ammeter){
+        ContentValues values = new ContentValues();
+        values.put("roomid", ammeter.getRoomid());
+        values.put("count", ammeter.getCount());
+        String format = simpleDateFormat.format(new Date());
+        values.put("time",format);
+        return mydb.insert("ammeterhistory2",null,values);
     }
 
 
@@ -336,12 +400,21 @@ public class MyDataBase extends SQLiteOpenHelper {
     }
 
     /**
-     * 删除历史读表数据
+     * 删除历史电表数据
      * @param id 历史读表的id
      * @return
      */
     public int deleteAmHistory(int id){
         return  mydb.delete("ammeterhistory","_id=?",new String[]{id+""});
+    }
+
+    /**
+     * 删除历史水表数据
+     * @param id 历史读表的id
+     * @return
+     */
+    public int deleteAmHistory2(int id){
+        return  mydb.delete("ammeterhistory2","_id=?",new String[]{id+""});
     }
 
 

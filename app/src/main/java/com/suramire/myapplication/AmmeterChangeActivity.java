@@ -14,9 +14,6 @@ import com.suramire.myapplication.util.MyDataBase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Suramire on 2017/10/29.
- */
 
 public class AmmeterChangeActivity extends BaseActivity {
 

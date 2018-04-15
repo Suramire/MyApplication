@@ -12,9 +12,6 @@ import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Room;
 import com.suramire.myapplication.util.MyDataBase;
 
-/**
- * Created by Suramire on 2017/9/21.
- */
 
 public class EditRoomActivity extends BaseActivity {
 

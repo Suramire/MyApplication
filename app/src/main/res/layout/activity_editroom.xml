@@ -11,22 +11,21 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="所属大楼" />
 
         <EditText
             android:id="@+id/house_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
             android:editable="false"
             android:ems="10"
             android:hint="大楼名"
-            android:inputType="textPersonName"
-            android:textAlignment="viewEnd" />
+            android:inputType="textPersonName"/>
 
     </LinearLayout>
 
@@ -37,21 +36,20 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="房名" />
 
         <EditText
             android:id="@+id/room_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
             android:ems="10"
             android:hint="请输入房间名称"
-            android:inputType="textPersonName"
-            android:textAlignment="viewEnd" />
+            android:inputType="textPersonName"/>
 
     </LinearLayout>
 
@@ -62,28 +60,35 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="房型" />
 
-        <TextView
-            android:id="@+id/textView51"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1房" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0厅" />
+            <TextView
+                android:id="@+id/textView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1房" />
 
-        <TextView
-            android:id="@+id/textView49"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0卫" />
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0厅" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0卫" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -94,21 +99,20 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="房间费用" />
 
         <EditText
             android:id="@+id/room_price"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
             android:ems="10"
             android:hint="输入房间费用"
-            android:inputType="number"
-            android:textAlignment="viewEnd" />
+            android:inputType="number"/>
 
     </LinearLayout>
 
@@ -134,47 +138,55 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="水表" />
 
 
-        <EditText
-            android:id="@+id/price_water"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="number"
-            android:text="5"
-            android:textAlignment="viewEnd" />
 
-        <TextView
-            android:id="@+id/textView55"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
             android:layout_weight="1"
-            android:text="元/方" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="0"
-            android:inputType="number"
-            android:textAlignment="viewEnd" />
+            <EditText
+                android:id="@+id/price_water"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="10"
+                android:inputType="number"
+                android:text="5"
+                android:textAlignment="viewEnd" />
 
-        <TextView
-            android:id="@+id/textView56"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="最低值" />
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元/方" />
+        </LinearLayout>
+
+        <!--<EditText-->
+            <!--android:id="@+id/editText4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@null"-->
+            <!--android:ems="10"-->
+            <!--android:hint="0"-->
+            <!--android:inputType="number"-->
+            <!--android:textAlignment="viewEnd" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textView56"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="最低值" />-->
 
     </LinearLayout>
 
@@ -187,46 +199,38 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="电表" />
 
-        <EditText
-            android:id="@+id/price_elec"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
             android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="number"
-            android:text="1.5"
-            android:textAlignment="viewEnd" />
+            android:layout_height="wrap_content">
 
-        <TextView
+            <EditText
+                android:id="@+id/price_elec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="10"
+                android:inputType="number"
+                android:text="1.5"
+                android:textAlignment="viewEnd" />
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="元/度" />
+            <TextView
 
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="0"
-            android:inputType="number"
-            android:textAlignment="viewEnd" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元/度" />
+        </LinearLayout>
 
-        <TextView
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="最低值" />
 
 
 
@@ -239,28 +243,37 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="管理费" />
 
-        <EditText
-            android:id="@+id/price_management"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
             android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="number"
-            android:text="0"
-            android:textAlignment="viewEnd" />
+            android:layout_height="wrap_content">
 
-        <TextView
+            <EditText
+                android:id="@+id/price_management"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="10"
+                android:inputType="number"
+                android:text="0"
+                android:textAlignment="viewEnd" />
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="元/月" />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元/月" />
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -271,28 +284,36 @@
         android:padding="12dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="网费" />
 
-        <EditText
-            android:id="@+id/price_network"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
             android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="number"
-            android:text="0"
-            android:textAlignment="viewEnd" />
+            android:layout_height="wrap_content">
 
-        <TextView
+            <EditText
+                android:id="@+id/price_network"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="10"
+                android:inputType="number"
+                android:text="0"
+                android:textAlignment="viewEnd" />
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="元/月" />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="元/月" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

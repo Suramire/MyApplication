@@ -1,16 +1,27 @@
 package com.suramire.myapplication;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.suramire.myapplication.base.BaseActivity;
+import com.suramire.myapplication.model.Update;
+import com.suramire.myapplication.util.GsonUtil;
+import com.suramire.myapplication.util.HTTPUtil;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,9 +40,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.img_notification).setOnClickListener(this);
         findViewById(R.id.img_help).setOnClickListener(this);
         findViewById(R.id.img_shop).setOnClickListener(this);
+        Log.d("MainActivity", "check version");
+        //先检查版本更新
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HTTPUtil.getPost("http://fd.hhz360.com/static/ra/updateApp/version.js", null, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String string = response.body().string();
+                        try{
+                            final Update updateInfo = (Update) GsonUtil.jsonToObject(string,Update.class);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setTitle("检查更新")
+                                            .setMessage(Html.fromHtml(updateInfo.getUpdateInfo()))
+                                            .setPositiveButton("立即更新", null)
+                                            .setNegativeButton("下次更新", null)
+                                            .setCancelable(false)
+                                            .show();
+                                }
+                            });
+                        }catch (Exception e){
+
+                        }
+
+
+                    }
+                });
+            }
+        }).start();
 
         updateInfo();
-        // TODO: 2017/9/22 关闭cursor
 
     }
 
@@ -63,9 +110,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             cursor1.close();
 
         }
-        if(myDataBase!=null){
-            myDataBase.close();
-        }
+        myDataBase.close();
 
         TextView textView = (TextView) findViewById(R.id.textView24);
         TextView textView1 = (TextView) findViewById(R.id.textView25);
@@ -86,32 +131,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imageView11:
-                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                startActivity( ProfileActivity.class);
                 finish();
                 break;
             case R.id.imageView12:
-                startActivity(new Intent(MainActivity.this,NotificationActivity.class));
+                startActivity( NotificationActivity.class);
                 break;
             case R.id.img_notification:
-                startActivity(new Intent(MainActivity.this,WorkNotificationActivity.class));
+                startActivity( WorkNotificationActivity.class);
                 break;
             case R.id.img_help:
-                startActivity(new Intent(MainActivity.this,HelpActivity.class));
+                startActivity( HelpActivity.class);
                 break;
             case R.id.img_58:
-                startActivity(new Intent(MainActivity.this,FEInfoActivity.class));
+                startActivity( FEInfoActivity.class);
                 break;
             case R.id.img_hardware:
-                startActivity(new Intent(MainActivity.this,HardwareActivity.class));
+                startActivity( HardwareActivity.class);
                 break;
             case R.id.img_shop:
-                startActivity(new Intent(MainActivity.this,ShopActivity.class));
+                startActivity( ShopActivity.class);
                 break;
             case R.id.img_management:
-                startActivity(new Intent(MainActivity.this, ManagementActivity.class));
+                startActivity(  ManagementActivity.class);
                 break;
             case R.id.img_rent:
-                startActivity(new Intent(MainActivity.this, GetRentsActivity.class));
+                startActivity(  GetRentsActivity.class);
                 break;
         }
     }

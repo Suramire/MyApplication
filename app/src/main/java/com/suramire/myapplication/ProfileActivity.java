@@ -1,6 +1,5 @@
 package com.suramire.myapplication;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +13,6 @@ import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
 
-/**
- * Created by Suramire on 2017/9/24.
- */
 
 public class ProfileActivity extends BaseActivity {
     @Override
@@ -29,7 +25,7 @@ public class ProfileActivity extends BaseActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+                startActivity(MainActivity.class);
                 finish();
             }
         });
@@ -37,7 +33,7 @@ public class ProfileActivity extends BaseActivity {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,MoreActivity.class));
+                startActivity(MoreActivity.class);
                 finish();
             }
         });
@@ -52,14 +48,13 @@ public class ProfileActivity extends BaseActivity {
             }
             cursor.close();
         }
-        if(myDataBase !=null)
-            myDataBase.close();
+        myDataBase.close();
     }
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+        startActivity(MainActivity.class);
         finish();
     }
 }

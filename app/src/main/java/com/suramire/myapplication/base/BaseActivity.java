@@ -1,11 +1,14 @@
 package com.suramire.myapplication.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.suramire.myapplication.R;
 
 /**
  * Created by Suramire on 2017/10/29.
@@ -37,5 +40,17 @@ public class BaseActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /*为Activity切换提供动画效果*/
+    public void startActivity(Class<?> cls){
+        startActivity(new Intent(mContext,cls));
+        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+    }
+    /*为Activity退出提供动画效果*/
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
     }
 }

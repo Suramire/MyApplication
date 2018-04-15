@@ -1,6 +1,5 @@
 package com.suramire.myapplication;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,9 +17,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/10/1.
- */
 
 public class HelpActivity extends BaseActivity {
     @Override
@@ -34,7 +30,7 @@ public class HelpActivity extends BaseActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HelpActivity.this,FeedbackActivity.class));
+                startActivity(FeedbackActivity.class);
             }
         });
         SearchView searchView = (SearchView) header.findViewById(R.id.help_search);

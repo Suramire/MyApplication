@@ -11,7 +11,7 @@
         <Key android:codes="1" android:keyLabel="1" />
         <Key android:codes="2" android:keyLabel="2" />
         <Key android:codes="3" android:keyLabel="3" />
-        <Key android:codes="101" android:keyLabel="上一间" android:keyHeight="@dimen/key_height_double" />
+        <Key android:codes="101" android:keyLabel="上一间" />
 
     </Row>
 
@@ -21,6 +21,8 @@
         <Key android:codes="4" android:keyLabel="4" />
         <Key android:codes="5" android:keyLabel="5" />
         <Key android:codes="6" android:keyLabel="6" />
+        <Key android:codes="-1" android:keyLabel="" />
+
     </Row>
 
     <Row>
@@ -29,8 +31,8 @@
         <Key android:codes="7" android:keyLabel="7" />
         <Key android:codes="8" android:keyLabel="8" />
         <Key android:codes="9" android:keyLabel="9" />
+        <Key android:codes="103" android:keyLabel="下一间" />
 
-        <Key android:codes="103" android:keyLabel="下一间" android:keyHeight="@dimen/key_height_double" />
     </Row>
 
     <Row>
@@ -38,6 +40,7 @@
         <Key android:codes="10" android:keyLabel="." />
         <Key android:codes="0" android:keyLabel="0" />
         <Key android:codes="12" android:keyIcon="@drawable/backspace"  />
+        <Key android:codes="-1" android:keyLabel="" />
     </Row>
 </Keyboard>
 

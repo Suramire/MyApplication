@@ -7,9 +7,6 @@ import android.widget.ListView;
 
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/9/28.
- */
 
 public class RentHistoryActivity extends BaseActivity {
     @Override

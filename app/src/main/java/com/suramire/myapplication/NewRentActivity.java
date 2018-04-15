@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,9 +18,6 @@ import com.suramire.myapplication.util.MyDataBase;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Suramire on 2017/9/21.
- */
 
 public class NewRentActivity extends BaseActivity {
     int year_begin,year_end;
@@ -36,57 +32,62 @@ public class NewRentActivity extends BaseActivity {
         setContentView(R.layout.activity_newrent);
         final Calendar calendar = Calendar.getInstance();
         Bundle extras = getIntent().getExtras();
-        final Room room = (Room) extras.getSerializable("room");
-        setTitle(room.getName());
-        calendar.setTime(new Date());
-        year_begin = calendar.get(Calendar.YEAR);
-        month_begin = calendar.get(Calendar.MONTH);
-        day_begin = calendar.get(Calendar.DAY_OF_MONTH);
+        final Room room = (Room) extras.getSerializable("room");//获取目标房间信息
+        setTitle(room.getName());//设置标题栏文本
+        calendar.setTime(new Date());//设置日历对象
+        year_begin = calendar.get(Calendar.YEAR);//获取当前年份
+        month_begin = calendar.get(Calendar.MONTH);//获取当前月份
+        day_begin = calendar.get(Calendar.DAY_OF_MONTH);//获取当前天数
         final EditText rent_name = (EditText) findViewById(R.id.rent_name);
         final EditText rent_phone = (EditText) findViewById(R.id.rent_phone);
         final EditText rent_money = (EditText) findViewById(R.id.rent_money);
-        final EditText rent_money_permonth = (EditText) findViewById(R.id.rent_money_permonth);
+        final EditText rent_money_permonth = (EditText) findViewById(R.id.rent_money_pm);
         final EditText rent_margin = (EditText) findViewById(R.id.rent_margin);
         Button button = (Button) findViewById(R.id.btn_rent);
         final EditText rent_begin = (EditText) findViewById(R.id.rent_begin);
         final EditText rent_end = (EditText) findViewById(R.id.rent_end);
-        rent_begin.setText(year_begin+"年"+(month_begin+1)+"月"+day_begin+"日");
+        rent_begin.setText(year_begin+"年"+(month_begin+1)+"月"+day_begin+"日");//日期框显示日期
         rent_end.setText(year_begin+"年"+(month_begin+1)+"月"+day_begin+"日");
-        rent_money_permonth.setText(room.getPrice()+"");
-        time_begin = calendar.getTimeInMillis();
-        time_end = calendar.getTimeInMillis();
+        rent_money_permonth.setText(room.getPrice()+"");//显示房间价格
+        time_begin = calendar.getTimeInMillis();//得到起租时间的毫秒数
+        time_end = calendar.getTimeInMillis();//得到结束时间的毫秒数
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            //出租时长计算
             if(time_end<=time_begin){
-                Toast.makeText(NewRentActivity.this, "出租时长不能小于1天", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewRentActivity.this, "出租时长不能小于1天",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
+            //获取界面上的数据
             String name = rent_name.getText().toString().trim();
             String phone = rent_phone.getText().toString().trim();
             Float money = Float.valueOf(rent_money.getText().toString().trim());
-            Log.d("NewRentActivity", name);
-            Log.d("NewRentActivity", phone);
-            Log.d("NewRentActivity", "money:" + money);
             Float margin = Float.valueOf(rent_margin.getText().toString().trim());
-            long day = Math.abs((time_end - time_begin) / 1000 / 60 / 60 / 24);
             Date date_begin = new Date(time_begin);
             Date date_end = new Date(time_end);
+            //信息完整性验证
             if(TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || money==0){
-                Toast.makeText(NewRentActivity.this, "请将租客信息补充完整", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewRentActivity.this, "请将租客信息补充完整",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
-            RentInfo rentInfo = new RentInfo(name, phone, room.getId(), money, margin, date_begin.toString(), date_end.toString());
-            MyDataBase myDataBase = new MyDataBase(NewRentActivity.this, "test.db", null, 1);
-            long l = myDataBase.addRentInfo(rentInfo);
+            RentInfo rentInfo = new RentInfo(name, phone, room.getId(), money,
+                    margin, date_begin.toString(), date_end.toString());
+            MyDataBase myDataBase = new MyDataBase(NewRentActivity.this,
+                    "test.db", null, 1);
+            long l = myDataBase.addRentInfo(rentInfo);//将出租信息保存到数据库
             if(l!=0){
-                int i = myDataBase.updateRoomLend(room.getId());
+                int i = myDataBase.updateRoomLend(room.getId());//成功出租时改变房间状态
                 if (i != 0) {
-                    Toast.makeText(NewRentActivity.this, "出租成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewRentActivity.this, "出租成功",
+                            Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }else{
-                Toast.makeText(NewRentActivity.this, "出租失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewRentActivity.this, "出租失败",
+                        Toast.LENGTH_SHORT).show();
             }
 
             }

@@ -1,8 +1,5 @@
 package com.suramire.myapplication.model;
 
-/**
- * Created by Suramire on 2017/9/20.
- */
 
 public class House {
     int id;

@@ -2,7 +2,6 @@ package com.suramire.myapplication;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,9 +31,6 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/9/19.
- */
 
 public class ManagementActivity extends BaseActivity {
 
@@ -50,9 +47,7 @@ public class ManagementActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
         setupActionBar();
-
         initView();
-
         getRoomLend(listView, button);
 
     }
@@ -210,9 +205,11 @@ public class ManagementActivity extends BaseActivity {
         listView.setAdapter(new MyBaseAdapter(ManagementActivity.this,rooms,state));
     }
 
+    //返回该房东拥有的房间数量
     private int selectRoomLend(ListView listView) {
         MyDataBase myDataBase = new MyDataBase(ManagementActivity.this,"test.db",null,1);
         int adminid = (int) SPUtils.get("adminid", 0);
+//        Log.d("ManagementActivity", "adminid:"+adminid);
         Cursor cursorHouse = myDataBase.selectAllHouseByAdminId(adminid);//先查询房东所有的房源
         //再根据房源找出房间
         List<Integer> houseIds = new ArrayList<>();
@@ -279,10 +276,10 @@ public class ManagementActivity extends BaseActivity {
                 switch (i){
                     case 0:
                     case 1:{
-                       startActivity(new Intent(ManagementActivity.this,NewHouseActivity.class));
+                        startActivity(NewHouseActivity.class);
                     }break;
                     case 2:{
-                        startActivity(new Intent(ManagementActivity.this,NewRoomActivity.class));
+                        startActivity(NewRoomActivity.class);
                     }break;
                 }
 

@@ -9,9 +9,6 @@ import android.view.View;
 import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.SPUtils;
 
-/**
- * Created by Suramire on 2017/10/4.
- */
 
 public class MoreActivity extends BaseActivity implements View.OnClickListener {
     @Override
@@ -26,7 +23,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() ==android.R.id.home){
-            startActivity(new Intent(MoreActivity.this,ProfileActivity.class));
+            startActivity(ProfileActivity.class);
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -49,7 +46,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        startActivity(new Intent(MoreActivity.this,ProfileActivity.class));
+        startActivity(ProfileActivity.class);
         finish();
     }
 }

@@ -13,9 +13,6 @@ import com.suramire.myapplication.model.House;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
 
-/**
- * Created by Suramire on 2017/9/19.
- */
 
 public class NewHouseActivity extends BaseActivity {
 

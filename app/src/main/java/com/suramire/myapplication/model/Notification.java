@@ -1,8 +1,5 @@
 package com.suramire.myapplication.model;
 
-/**
- * Created by Suramire on 2017/10/7.
- */
 
 public class Notification {
     int id;

@@ -13,9 +13,6 @@ import android.widget.PopupWindow;
 
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/10/18.
- */
 
 public class SendMessageActivity extends BaseActivity {
 

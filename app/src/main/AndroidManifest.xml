@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.suramire.myapplication">
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -10,39 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoActionBar"/>
-        <activity android:name=".LoginActivity" android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".ManagementActivity" />
-        <activity android:name=".NewHouseActivity"/>
-        <activity android:name=".NewRoomActivity"/>
-        <activity android:name=".RegActivity"/>
-        <activity android:name=".EditRoomActivity"/>
-        <activity android:name=".NewRentActivity"/>
-        <activity android:name=".GetRentsActivity"/>
-        <activity android:name=".GetServiceActivity"/>
-        <activity android:name=".NewPasswordActivity"/>
-        <activity android:name=".ProfileActivity" android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".NotificationActivity"/>
-        <activity android:name=".RentHistoryActivity"/>
-        <activity android:name=".RentDetailActivity"/>
-        <activity android:name=".GetMoneyResultActivity"/>
-        <activity android:name=".HelpActivity"/>
-        <activity android:name=".TestActivity"  >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".FeedbackActivity"/>
-        <activity android:name=".WorkNotificationActivity" />
-        <activity android:name=".FEInfoActivity"  android:process=":picture"/>
-        <activity android:name=".HardwareActivity" />
-        <activity android:name=".ShopActivity" />
-        <activity android:name=".OrderActivity" />
-        <activity android:name=".MoreActivity" />
-        <activity android:name=".AmmeterActivity"/>
-        <activity android:name=".ShopItemDetailActivity" android:process=":picture" />
+        <!--启动页-->
         <activity android:name=".SplashActivity" android:theme="@style/AppThemeFullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,12 +20,78 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--主页-->
+        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoActionBar"/>
+        <!--登录页-->
+        <activity android:name=".LoginActivity" android:theme="@style/AppThemeNoActionBar" />
+        <!--房源管理页-->
+        <activity android:name=".ManagementActivity" />
+        <!--新增房源页-->
+        <activity android:name=".NewHouseActivity"/>
+        <!--新增房间页-->
+        <activity android:name=".NewRoomActivity"/>
+        <!--注册页-->
+        <activity android:name=".RegActivity"/>
+        <!--房间编辑页-->
+        <activity android:name=".EditRoomActivity"/>
+        <!--新增出租页-->
+        <activity android:name=".NewRentActivity"/>
+        <!--收租列表页-->
+        <activity android:name=".GetRentsActivity"/>
+        <!--登录页联系客服页面-->
+        <activity android:name=".GetServiceActivity"/>
+        <!--重置密码页面-->
+        <activity android:name=".NewPasswordActivity"/>
+        <!--个人信息页-->
+        <activity android:name=".ProfileActivity" android:theme="@style/AppThemeNoActionBar" />
+        <!--消息中心 仅显示-->
+        <activity android:name=".NotificationActivity"/>
+        <!--收租记录-->
+        <activity android:name=".RentHistoryActivity"/>
+        <!--收租详情页-->
+        <activity android:name=".RentDetailActivity"/>
+        <!--收租结果页-->
+        <activity android:name=".GetMoneyResultActivity"/>
+        <!--帮助页 仅显示-->
+        <activity android:name=".HelpActivity"/>
+        <!--反馈页 仅显示-->
+        <activity android:name=".FeedbackActivity"/>
+        <!--工作提醒-->
+        <activity android:name=".WorkNotificationActivity" />
+        <!--58品牌馆 仅显示-->
+        <activity android:name=".FEInfoActivity"  android:process=":picture"/>
+        <!--硬件页-->
+        <activity android:name=".HardwareActivity" />
+        <!--商城页-->
+        <activity android:name=".ShopActivity" />
+        <!--我的订单 未实现-->
+        <activity android:name=".OrderActivity" />
+        <!--更多页-->
+        <activity android:name=".MoreActivity" />
+        <!--电表度数页-->
+        <activity android:name=".AmmeterActivity"/>
+        <!--电表度数页-->
+        <activity android:name=".AmmeterActivity2"/>
+        <!--商品详情 仅显示-->
+        <activity android:name=".ShopItemDetailActivity" android:process=":picture" />
+        <!--新增备忘页-->
         <activity android:name=".NewNotificationActivity" />
+        <!--催租 仅显示-->
         <activity android:name=".SendMessageActivity"/>
+        <!--到账记录 仅显示-->
         <activity android:name=".RecordsActivity"/>
+        <!--房间排序-->
         <activity android:name=".SortRoomActivity"/>
+        <activity android:name=".SortRoomActivity2"/>
+        <!--电表历史度数-->
         <activity android:name=".AmmeterHistoryActivity"/>
+        <!--水表历史度数-->
+        <activity android:name=".AmmeterHistoryActivity2"/>
+        <!--更换电表-->
         <activity android:name=".AmmeterChangeActivity"/>
+        <!--更换水表-->
+        <activity android:name=".AmmeterChangeActivity2"/>
+
     </application>
 
 </manifest>

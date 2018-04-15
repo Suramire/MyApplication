@@ -10,9 +10,6 @@ import android.widget.Toast;
 
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/10/1.
- */
 
 public class FeedbackActivity extends BaseActivity {
 

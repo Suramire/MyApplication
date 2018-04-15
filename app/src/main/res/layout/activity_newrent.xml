@@ -147,7 +147,7 @@
                     android:textColor="#f60" />
 
                 <EditText
-                    android:id="@+id/rent_money_permonth"
+                    android:id="@+id/rent_money_pm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

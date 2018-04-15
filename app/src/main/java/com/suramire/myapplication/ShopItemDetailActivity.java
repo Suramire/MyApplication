@@ -10,9 +10,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/10/4.
- */
 
 public class ShopItemDetailActivity extends BaseActivity {
     @Override

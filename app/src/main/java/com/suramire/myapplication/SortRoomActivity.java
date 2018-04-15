@@ -16,10 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by Suramire on 2017/10/23.
- */
-
 public class SortRoomActivity extends BaseActivity {
 
     private ListView mListViewAdd;
@@ -52,7 +48,7 @@ public class SortRoomActivity extends BaseActivity {
             @Override
             public void onUpdate(BaseAdapterHelper helper, final Ammeter item, int position) {
                 helper.setText(R.id.textView42, item.getRoomName())
-                        .setOnClickListener(R.id.imageView51, new View.OnClickListener() {
+                        .setOnClickListener(R.id.rl_add, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 //将当前项从本适配器移除
@@ -70,7 +66,7 @@ public class SortRoomActivity extends BaseActivity {
             @Override
             public void onUpdate(BaseAdapterHelper helper, final Ammeter item, int position) {
                 helper.setText(R.id.textView42, item.getRoomName())
-                        .setOnClickListener(R.id.imageView51, new View.OnClickListener() {
+                        .setOnClickListener(R.id.rl_remove, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 //将当前项从本适配器移除

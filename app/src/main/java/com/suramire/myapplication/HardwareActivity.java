@@ -14,9 +14,6 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/10/4.
- */
 
 public class HardwareActivity extends BaseActivity {
     private ActionBar actionBar;

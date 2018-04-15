@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -21,9 +20,6 @@ import com.suramire.myapplication.util.MyDataBase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Suramire on 2017/9/28.
- */
 
 public class RentDetailActivity extends BaseActivity {
 
@@ -37,14 +33,13 @@ public class RentDetailActivity extends BaseActivity {
         final RentItem rentinfo = (RentItem) getIntent().getSerializableExtra("rentinfo");
 
         TextView tv_total = (TextView) findViewById(R.id.textView59);
-        String margin = rentinfo.getMargin();
+        final String margin = rentinfo.getMargin();
         final String money = rentinfo.getMoney();
         final float total = Float.parseFloat(margin) + Float.parseFloat(money);
         String date_begin = rentinfo.getDate_begin();
         String date_end = rentinfo.getDate_end();
-        String rentRoomName = rentinfo.getRentRoomName();
+        final String rentRoomName = rentinfo.getRentRoomName();
         String renterName = rentinfo.getRenterName();
-        ActionBar supportActionBar = getSupportActionBar();
         setTitle(rentRoomName+"("+renterName+")");
 
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -86,7 +81,8 @@ public class RentDetailActivity extends BaseActivity {
                         if(i1!=0){
                             finish();
                             Intent intent = new Intent(RentDetailActivity.this, GetMoneyResultActivity.class);
-                            intent.putExtra("money", money+"");
+                            intent.putExtra("money", (total)+"");
+                            intent.putExtra("roomname", rentRoomName);
                             startActivity(intent);
                         }else{
                             Toast.makeText(RentDetailActivity.this, "收租失败", Toast.LENGTH_SHORT).show();

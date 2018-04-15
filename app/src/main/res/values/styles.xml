@@ -23,6 +23,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="homeAsUpIndicator">@drawable/ic_chevron_left_black_24dp</item>
         <item name="actionMenuTextColor">#4b9df9</item>
+        <item name="actionBarSize">50dip</item>
 
 
     </style>

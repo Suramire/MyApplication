@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.suramire.myapplication.R;
 
 /**
- * Created by Suramire on 2017/10/10.
+ * 自定义键盘
  */
 
 public class KeyUtils implements  OnKeyboardActionListener{
@@ -136,23 +136,24 @@ public class KeyUtils implements  OnKeyboardActionListener{
     private Keyboard mKeyboard;
     private TextView mEditText;
     private static KeyUtils mKeyUtils;
-    private onTextChangeListener mOnTextChangeListener;
+    private static onTextChangeListener mOnTextChangeListener;
 
     public void setOnTextCompleteListener(onTextChangeListener onTextCompleteListener){
         mOnTextChangeListener = onTextCompleteListener;
     }
 
+    public static onTextChangeListener getmOnTextChangeListener() {
+        return mOnTextChangeListener;
+    }
 
-
-    public static KeyUtils getInstance(Context context,TextView editText){
-//        if(mKeyUtils ==null){
-//            mKeyUtils = new KeyUtils(context,editText);
-//        }
-        Log.d("KeyUtils", editText.getText().toString() + "is selected 2");
+    public static KeyUtils getInstance(Context context, TextView editText){
         mKeyUtils = new KeyUtils(context,editText);
         mKeyUtils.show();
         return mKeyUtils;
     }
+
+
+
 
     private KeyUtils(Context context,TextView editText) {
         mContext = context;

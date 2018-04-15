@@ -12,7 +12,7 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_room"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="#FFF"
         app:tabIndicatorColor="#2fa2f2"
         app:tabSelectedTextColor="#2fa2f2"

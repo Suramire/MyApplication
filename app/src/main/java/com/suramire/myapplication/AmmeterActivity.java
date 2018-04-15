@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/10/12.
- */
 
 public class AmmeterActivity extends BaseActivity {
 
@@ -51,12 +48,10 @@ public class AmmeterActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-
                 if(!isTheSame()){
                     for (int i = 0; i < mAdapter.getData().size(); i++) {
                         //保存本次读表记录
                         Ammeter ammeter = mAdapter.getData().get(i);
-
                         mMyDataBase.updateAmmeter(ammeter);
                         //生成历史读表记录
                         mMyDataBase.addAmHistory(ammeter);
@@ -183,7 +178,7 @@ public class AmmeterActivity extends BaseActivity {
 
             if(mAmmeterList.size()!=0){
                 Collections.sort(mAmmeterList);
-                mAdapter = new MyBaseAdapter2(AmmeterActivity.this, mAmmeterList);
+                mAdapter = new MyBaseAdapter2(AmmeterActivity.this, mAmmeterList,0);
                 listView.setAdapter(mAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -204,7 +199,9 @@ public class AmmeterActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_ammeter,menu);
+        menu.add(0,0x123,0,"电表").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(0,0x124,0,"电表").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(0,0x125,0,"水表").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -232,6 +229,11 @@ public class AmmeterActivity extends BaseActivity {
 
 
         }
+        if(item.getItemId() ==0x125){
+            startActivity(AmmeterActivity2.class);
+            finish();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

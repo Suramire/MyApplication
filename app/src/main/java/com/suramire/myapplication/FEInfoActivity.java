@@ -7,9 +7,6 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/10/3.
- */
 
 public class FEInfoActivity extends BaseActivity {
     @Override

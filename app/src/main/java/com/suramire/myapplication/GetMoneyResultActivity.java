@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 import com.suramire.myapplication.base.BaseActivity;
 
-/**
- * Created by Suramire on 2017/9/28.
- */
 
 public class GetMoneyResultActivity extends BaseActivity {
     @Override
@@ -21,8 +18,11 @@ public class GetMoneyResultActivity extends BaseActivity {
         setTitle("提示");
         setDisplayHomeAsUpEnabled(false);
         String money = getIntent().getStringExtra("money");
+        String roomname = getIntent().getStringExtra("roomname");
         TextView textView = (TextView) findViewById(R.id.textView73);
+        TextView textView2 = (TextView) findViewById(R.id.textView79);
         textView.setText(textView.getText()+money);
+        textView2.setText("缴费房源：" + roomname);
         Button button = (Button) findViewById(R.id.button8);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

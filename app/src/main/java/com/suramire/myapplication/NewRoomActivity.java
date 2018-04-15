@@ -20,9 +20,6 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Suramire on 2017/9/19.
- */
 
 public class NewRoomActivity extends BaseActivity {
     @Override
