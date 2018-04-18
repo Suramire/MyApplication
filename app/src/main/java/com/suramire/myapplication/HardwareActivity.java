@@ -14,9 +14,11 @@ import com.youth.banner.loader.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 智能硬件页 仅界面
+ */
 
 public class HardwareActivity extends BaseActivity {
-    private ActionBar actionBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class HardwareActivity extends BaseActivity {
     }
 
     private void setupBanner() {
+//        第三方框架 轮播图
         Banner banner = (Banner) findViewById(R.id.banner);
         List<Integer> images = new ArrayList<>();
         images.add(R.drawable.smart_0);
@@ -36,20 +39,11 @@ public class HardwareActivity extends BaseActivity {
     }
 
 
-
+//    轮播图的图片加载器
     class GlideImageLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-            /**
-             注意：
-             1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
-             2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
-             传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
-             切记不要胡乱强转！
-             */
-            //Picasso 加载图片简单用法
             Picasso.with(context).load((int)path).into(imageView);
-
         }
     }
 

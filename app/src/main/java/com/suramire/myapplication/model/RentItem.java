@@ -3,16 +3,10 @@ package com.suramire.myapplication.model;
 import java.io.Serializable;
 
 
+//出租记录项 相对于出租信息多了一个房间名字段
+
 public class RentItem  implements Serializable{
     int rentInfoId;
-
-    public int getRentInfoId() {
-        return rentInfoId;
-    }
-
-    public void setRentInfoId(int rentInfoId) {
-        this.rentInfoId = rentInfoId;
-    }
 
     String renterName;
     String rentRoomName;
@@ -44,6 +38,15 @@ public class RentItem  implements Serializable{
     public void setDate_end(String date_end) {
         this.date_end = date_end;
     }
+
+    public int getRentInfoId() {
+        return rentInfoId;
+    }
+
+    public void setRentInfoId(int rentInfoId) {
+        this.rentInfoId = rentInfoId;
+    }
+
 
     public RentItem(int rentInfoId, String renterName, String rentRoomName, String money, String margin, String date_begin, String date_end) {
         this.rentInfoId = rentInfoId;

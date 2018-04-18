@@ -14,6 +14,10 @@ import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
 
 
+/**
+ * 个人中心页
+ */
+
 public class ProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,9 +44,11 @@ public class ProfileActivity extends BaseActivity {
         TextView profile_nickname = (TextView) findViewById(R.id.profile_nickname);
         int adminid = (int) SPUtils.get("adminid", 0);
         MyDataBase myDataBase = new MyDataBase(ProfileActivity.this,"test.db",null,1);
+//        根据房东编号查询房东信息
         Cursor cursor = myDataBase.selectAdminById(adminid);
         if(cursor.getCount()>0){
             if(cursor.moveToNext()){
+//                获取并显示房东名字
                 String nickname = cursor.getString(cursor.getColumnIndex("nickname"));
                 profile_nickname.setText(nickname+"(房东)");
             }
@@ -53,7 +59,6 @@ public class ProfileActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         startActivity(MainActivity.class);
         finish();
     }

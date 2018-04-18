@@ -25,6 +25,9 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 工作提醒列表页
+ */
 
 public class WorkNotificationActivity extends BaseActivity {
     private ListView listView;
@@ -35,8 +38,8 @@ public class WorkNotificationActivity extends BaseActivity {
         setContentView(R.layout.activity_worknotification);
         setupTablayout();
         setTitle("工作提醒");
-        initView();
-        getData();
+        initView();//初始化界面
+        getData();//获取数据
     }
 
     private void initView() {
@@ -61,7 +64,7 @@ public class WorkNotificationActivity extends BaseActivity {
         linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
                 R.drawable.tab_divider));
         linearLayout.setDividerPadding(40);
-
+//        为标签页设置切换事件
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -92,15 +95,16 @@ public class WorkNotificationActivity extends BaseActivity {
         try {
             int adminid = (int) SPUtils.get("adminid", 0);
             MyDataBase myDataBase = new MyDataBase(WorkNotificationActivity.this,"test.db",null,1);
+//            根据房东id查询其创建的工作提醒
             Cursor cursor = myDataBase.selectNotification(adminid);
             List<Notification> notificationList = new ArrayList<>();
+            //有工作提醒(备忘录)情况
             if (cursor.getCount()>0){
                 while (cursor.moveToNext()){
                     String ncontent = cursor.getString(cursor.getColumnIndex("ncontent"));
                     String ndate = cursor.getString(cursor.getColumnIndex("ndate"));
                     notificationList.add(new Notification(ncontent, ndate, adminid));
                 }
-
             }
             listView.setAdapter(new CommonAdapter<Notification>(this, R.layout.item_notification,notificationList) {
                 @Override
@@ -116,9 +120,7 @@ public class WorkNotificationActivity extends BaseActivity {
 
                 }
             });
-            if(myDataBase!=null){
-                myDataBase.close();
-            }
+            myDataBase.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

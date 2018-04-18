@@ -9,6 +9,9 @@ import android.view.View;
 import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.util.SPUtils;
 
+/**
+ * 个人中心页的“更多”菜单
+ */
 
 public class MoreActivity extends BaseActivity implements View.OnClickListener {
     @Override
@@ -32,6 +35,7 @@ public class MoreActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+//            注销登录事件
             case R.id.imageView34:{
                 SPUtils.put("autologin",0);
                 Intent intent = new Intent(MoreActivity.this, LoginActivity.class);

@@ -19,6 +19,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+/**
+ * 新建出租记录页
+ */
+
 public class NewRentActivity extends BaseActivity {
     int year_begin,year_end;
     int month_begin,month_end;
@@ -31,8 +35,9 @@ public class NewRentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newrent);
         final Calendar calendar = Calendar.getInstance();
+        //获取上个页面传过来的房间信息
         Bundle extras = getIntent().getExtras();
-        final Room room = (Room) extras.getSerializable("room");//获取目标房间信息
+        final Room room = (Room) extras.getSerializable("room");
         setTitle(room.getName());//设置标题栏文本
         calendar.setTime(new Date());//设置日历对象
         year_begin = calendar.get(Calendar.YEAR);//获取当前年份
@@ -94,7 +99,7 @@ public class NewRentActivity extends BaseActivity {
         });
 
 
-
+//        点击弹出日期选择对话框
         rent_begin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

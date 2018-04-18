@@ -13,10 +13,8 @@ import java.util.List;
 
 
 /**
- * Created by Suramire on 2017/6/20.
- * JSon 工具类
- * getJSONObject
- * getJSONArray
+ * Json 工具类
+ * 实现实体对象与json字符串的相互转换
  */
 
 

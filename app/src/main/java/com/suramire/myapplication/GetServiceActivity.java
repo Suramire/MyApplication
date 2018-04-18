@@ -11,13 +11,16 @@ import com.suramire.myapplication.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 联系客服页 仅界面
+ */
 
 public class GetServiceActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getservice);
-setTitle("联系客服");
+        setTitle("联系客服");
         ListView listView = (ListView) findViewById(R.id.list_service);
         List<String> strings = new ArrayList<>();
         strings.add("官网：http://fangxun360.com");

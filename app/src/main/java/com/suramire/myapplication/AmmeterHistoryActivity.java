@@ -26,11 +26,13 @@ public class AmmeterHistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actiity_ammeterhistory);
         setTitle("历史读表记录");
+        //        获取上一个页面传过来的值
         int roomid = getIntent().getIntExtra("roomid", 0);
         final MyDataBase myDataBase = new MyDataBase(AmmeterHistoryActivity.this, "test.db", null, 1);
         mListView = (ListView) findViewById(R.id.list_amhistory);
         if(roomid!=0){
             ArrayList<Ammeter> list = new ArrayList<>();
+//            根据房间id查询历史读表记录
             Cursor cursor = myDataBase.selectAmHistory(roomid);
             if(cursor.getCount()!=0){
                 while (cursor.moveToNext()){
@@ -42,12 +44,13 @@ public class AmmeterHistoryActivity extends BaseActivity {
                 cursor.close();
 
             }
-
+//显示列表
             mListView.setAdapter(new CommonAdapter<Ammeter>(this,R.layout.item_amhistory,list) {
                 @Override
                 public void onUpdate(BaseAdapterHelper helper, final Ammeter item, int position) {
                     helper.setText(R.id.textView82, item.getCount() + "")
                             .setText(R.id.textView43,item.getTime());
+//                    设置删除按钮的点击事件
                     helper.setOnClickListener(R.id.imageView53, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

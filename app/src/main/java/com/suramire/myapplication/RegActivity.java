@@ -15,6 +15,9 @@ import com.suramire.myapplication.base.BaseActivity;
 import com.suramire.myapplication.model.Admin;
 import com.suramire.myapplication.util.MyDataBase;
 
+/**
+ * 注册页
+ */
 
 public class RegActivity extends BaseActivity {
     @Override
@@ -34,6 +37,7 @@ public class RegActivity extends BaseActivity {
                 String password = admin_password.getText().toString().trim();
                 String password2 = admin_password2.getText().toString().trim();
                 String nickname = admin_nickname.getText().toString().trim();
+//                信息完整性判断
                 if(name.length()==0||password.length()==0 ||password2.length()==0 || nickname.length()==0){
                     Toast.makeText(RegActivity.this, "请将信息补充完整", Toast.LENGTH_SHORT).show();
                 }else if(!password.equals(password2)){
@@ -42,20 +46,24 @@ public class RegActivity extends BaseActivity {
 
                     Admin admin = new Admin(name, password,nickname);
                     MyDataBase myDataBase = new MyDataBase(RegActivity.this,"test.db",null,1);
+//                    先查询是否有同名用户存在
                     Cursor cursor = myDataBase.selectByName(name);
                     if(cursor.getCount()>0){
                         Toast.makeText(RegActivity.this, "该用户名已被注册，请重新输入", Toast.LENGTH_SHORT).show();
                     }else{
+                        //没有同名用户时进行注册操作
                         long insert = myDataBase.addAdmin(admin);
                         if(insert>0){
                             Toast.makeText(RegActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
-
                 }
             }
         });
+
+
+        //以下是性别选择框代码 点击框的时候改变背景图片
 
         final RadioButton radioButton = (RadioButton) findViewById(R.id.radioButton);
         final RadioButton radioButton2 = (RadioButton) findViewById(R.id.radioButton2);

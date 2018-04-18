@@ -13,6 +13,9 @@ import com.suramire.myapplication.model.House;
 import com.suramire.myapplication.util.MyDataBase;
 import com.suramire.myapplication.util.SPUtils;
 
+/**
+ * 新增房源页
+ */
 
 public class NewHouseActivity extends BaseActivity {
 
@@ -27,6 +30,7 @@ public class NewHouseActivity extends BaseActivity {
         final EditText house_floor = (EditText) findViewById(R.id.house_floor);
 
         Button button = (Button) findViewById(R.id.btn_newhouse);
+//        “添加房源” 按钮点击事件
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +44,7 @@ public class NewHouseActivity extends BaseActivity {
                     MyDataBase myDataBase = new MyDataBase(NewHouseActivity.this,"test.db",null,1);
                     int adminid = (int) SPUtils.get("adminid", 0);
                     House house = new House(address,area,name,Integer.parseInt(floor),adminid);
+//                    将房源保存到数据库
                     long l = myDataBase.addHouse(house);
                     if(l>0){
                         Toast.makeText(NewHouseActivity.this, "添加成功", Toast.LENGTH_SHORT).show();

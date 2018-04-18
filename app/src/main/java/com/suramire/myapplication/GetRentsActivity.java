@@ -29,8 +29,12 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 收租页
+ */
 
 public class GetRentsActivity extends BaseActivity implements View.OnClickListener {
+
 
     private String roomname;
     private View header;
@@ -45,6 +49,7 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getrents);
+//        连接数据库
         mMyDataBase = new MyDataBase(GetRentsActivity.this,"test.db",null,1);
         setupActionBar();
 
@@ -62,7 +67,7 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.imageView54).setOnClickListener(this);
         mLinearLayout = (LinearLayout)findViewById(R.id.linearLayout);
 
-
+//        加载标头的布局文件
         header = LayoutInflater.from(this).inflate(R.layout.header_rents, null);
         tv_state = header.findViewById(R.id.item_roomstate);
         listView = (ListView) findViewById(R.id.rents_list);
@@ -101,9 +106,8 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
 
 
         RelativeLayout tv_empty = (RelativeLayout) findViewById(R.id.empty_layout);
-
         tv_empty.setVisibility(View.VISIBLE);
-//        tv_empty.setText("暂无可收租房间");
+        //为列表设置空白视图
         listView.setEmptyView(tv_empty);
 
         showListNotPayed();
@@ -135,14 +139,18 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
 
     }
 
+    /**
+     * 显示已支付租金的出租记录
+     */
     private void showListNotPayed() {
         listView.setAdapter(null);
+//        当列表没有标头时，添加一个标头
         if(listView.getHeaderViewsCount()==0){
             listView.addHeaderView(header);
         }
         final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
 
-        //未支付
+        //未支付的出租记录
         Cursor cursor = myDataBase.selectAllRoomGotMoney(mAdminid,0);
         final List<RentItem> rentItemList = new ArrayList<>();
 
@@ -201,7 +209,9 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-
+    /**
+     * 显示已支付租金的出租记录
+     */
     private void showListPayed() {
         listView.setAdapter(null);
         if(listView.getHeaderViewsCount()==0){
@@ -209,7 +219,7 @@ public class GetRentsActivity extends BaseActivity implements View.OnClickListen
         }
         final MyDataBase myDataBase = new MyDataBase(GetRentsActivity.this, "test.db", null, 1);
 
-        //已支付
+        //已支付的出租记录
         Cursor cursor = myDataBase.selectAllRoomGotMoney(mAdminid,1);
         List<RentItem> rentItemList = new ArrayList<>();
 

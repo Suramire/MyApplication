@@ -15,6 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+/**
+ * 更换电表
+ */
+
 public class AmmeterChangeActivity extends BaseActivity {
 
     private MyDataBase mMyDataBase;
@@ -29,10 +33,11 @@ public class AmmeterChangeActivity extends BaseActivity {
         EditText editText1 = (EditText) findViewById(R.id.old_time);
         final EditText editText2 = (EditText) findViewById(R.id.new_count);
         EditText editText3 = (EditText) findViewById(R.id.new_time);
-
+//        获取上一个页面传过来的值
         final int roomid = getIntent().getIntExtra("roomid", 0);
         final int ammeterid = getIntent().getIntExtra("ammeterid", 0);
         mMyDataBase = new MyDataBase(AmmeterChangeActivity.this, "test.db", null, 1);
+//        根据房间id获取对应电表度数
         Cursor cursor = mMyDataBase.selectAmmeter(roomid);
         if(cursor.getCount()!=0){
             while (cursor.moveToNext()){
@@ -43,11 +48,11 @@ public class AmmeterChangeActivity extends BaseActivity {
             }
             cursor.close();
         }
-
+//简单日期格式
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String format = simpleDateFormat.format(new Date());
         editText3.setText(format);
-
+//保存新电表度数
         findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

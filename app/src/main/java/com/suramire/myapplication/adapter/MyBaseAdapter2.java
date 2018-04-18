@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Suramire on 2017/9/25.
+ * 水电表读数页的列表适配器
  * 实现选中点击的item修改
  */
 

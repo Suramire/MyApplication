@@ -82,7 +82,6 @@
         <activity android:name=".RecordsActivity"/>
         <!--房间排序-->
         <activity android:name=".SortRoomActivity"/>
-        <activity android:name=".SortRoomActivity2"/>
         <!--电表历史度数-->
         <activity android:name=".AmmeterHistoryActivity"/>
         <!--水表历史度数-->

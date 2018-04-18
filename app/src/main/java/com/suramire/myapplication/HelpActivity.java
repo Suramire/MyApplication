@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+//帮助中心 仅界面
 
 public class HelpActivity extends BaseActivity {
     @Override

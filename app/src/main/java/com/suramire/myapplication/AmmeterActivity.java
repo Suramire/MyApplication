@@ -26,6 +26,10 @@ import java.util.Collections;
 import java.util.List;
 
 
+/**
+ * 电表读数
+ */
+
 public class AmmeterActivity extends BaseActivity {
 
     private List<Ammeter> mAmmeterList;
@@ -43,6 +47,7 @@ public class AmmeterActivity extends BaseActivity {
         mMyDataBase = new MyDataBase(AmmeterActivity.this,"test.db",null,1);
         setupActionBar();
         mListView = (ListView) findViewById(R.id.list_ammeter);
+        //保存按钮
         findViewById(R.id.button21).setOnClickListener(new View.OnClickListener() {
 
 
@@ -72,6 +77,7 @@ public class AmmeterActivity extends BaseActivity {
                         .show();
             }
         });
+//        远程读表 无功能仅界面
         findViewById(R.id.button22).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +100,6 @@ public class AmmeterActivity extends BaseActivity {
                                 Toast.makeText(AmmeterActivity.this, "没有查询到智能设备", Toast.LENGTH_SHORT).show();
                             }
                         })
-//                        .setNeutralButton("全选",null)
                         .setCancelable(false).create();
                         dialog.show();
             }
@@ -129,27 +134,29 @@ public class AmmeterActivity extends BaseActivity {
     }
 
     private void getData(ListView listView) {
-        //        先获取所有房间信息
+        //        先根据房东id获取所有房间信息
 
         int adminid = (int) SPUtils.get("adminid", 0);
         Cursor cursor = mMyDataBase.selectAllRoom(adminid);
         List<Integer> roomIdList = new ArrayList<>();
         mRoomNameList = new ArrayList<>();
+//        有房间的情况
         if (cursor.getCount() != 0) {
             while (cursor.moveToNext()){
                 roomIdList.add(cursor.getInt(0));
                 mRoomNameList.add(cursor.getString(cursor.getColumnIndex("name")));
             }
             cursor.close();
-//        根据roomid获取读表信息
             mAmmeterList = new ArrayList<>();
+
+//        根据房间id获取读表信息
 
             for (int i = 0; i < roomIdList.size(); i++) {
                 Integer roomId = roomIdList.get(i);
                 String roomName = mRoomNameList.get(i);
                 Cursor cursor1 = mMyDataBase.selectAmmeter(roomId);
                 if(cursor1.getCount()!=0){
-                    //该房间存在读表
+                    //该房间之前有读表数据
                     while (cursor1.moveToNext()){
                         //默认带id roomid 当前读数
                         Ammeter ammeter = new Ammeter(cursor1.getInt(cursor1.getColumnIndex("_id")),cursor1.getInt(cursor1.getColumnIndex("roomid")),cursor1.getInt(cursor1.getColumnIndex("count")));
@@ -163,10 +170,11 @@ public class AmmeterActivity extends BaseActivity {
                         ammeter.setSort(cursor1.getInt(cursor1.getColumnIndex("sort")));
                         //当前读数对应的日期
                         ammeter.setTime(cursor1.getString(cursor1.getColumnIndex("time")));
+
                         mAmmeterList.add(ammeter);
                     }
                 }else{
-                    //该房间不存在读表 新建读表
+                    //该房间之前不存在读表 新建读表
                     int id = (int) mMyDataBase.addAmmeter(new Ammeter(roomId, 0));
                     Ammeter ammeter = new Ammeter(id,roomId,0);
                     ammeter.setRoomName(roomName);
@@ -174,8 +182,7 @@ public class AmmeterActivity extends BaseActivity {
                 }
                 cursor1.close();
             }
-
-
+//            显示列表
             if(mAmmeterList.size()!=0){
                 Collections.sort(mAmmeterList);
                 mAdapter = new MyBaseAdapter2(AmmeterActivity.this, mAmmeterList,0);
@@ -193,12 +200,12 @@ public class AmmeterActivity extends BaseActivity {
             }
 
         }
-
         mChecks = new boolean[100];
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+//        添加菜单项
         menu.add(0,0x123,0,"电表").setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         menu.add(0,0x124,0,"电表").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(0,0x125,0,"水表").setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
@@ -207,10 +214,10 @@ public class AmmeterActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+//        点击返回按钮时
         if(item.getItemId() ==android.R.id.home){
 //            判断数据是否修改
-
-            if(!isTheSame()&& !isSaved){
+            if(!isTheSame()&& !isSaved){//数据未修改且未点保存按钮
                 AlertDialog.Builder builder = new AlertDialog.Builder(AmmeterActivity.this);
                 builder.setTitle("抄表提示")
                         .setMessage("您已经抄表，是否不保存？")
@@ -229,6 +236,7 @@ public class AmmeterActivity extends BaseActivity {
 
 
         }
+//        切换到水表读数
         if(item.getItemId() ==0x125){
             startActivity(AmmeterActivity2.class);
             finish();
@@ -260,7 +268,7 @@ public class AmmeterActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mMyDataBase == null) {
+        if (mMyDataBase != null) {
             mMyDataBase.close();
         }
     }

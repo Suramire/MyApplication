@@ -7,6 +7,9 @@ import android.widget.ListView;
 
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 收租记录 仅界面
+ */
 
 public class RentHistoryActivity extends BaseActivity {
     @Override

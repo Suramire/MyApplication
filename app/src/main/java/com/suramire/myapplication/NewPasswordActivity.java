@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 重置密码页 仅页面
+ */
 
 public class NewPasswordActivity extends BaseActivity {
     @Override
@@ -12,7 +15,6 @@ public class NewPasswordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
         setTitle("密码安全");
-        
     }
 
 }

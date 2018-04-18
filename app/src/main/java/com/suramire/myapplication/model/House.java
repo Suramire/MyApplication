@@ -1,12 +1,14 @@
 package com.suramire.myapplication.model;
 
 
+//实体类-房源
+
 public class House {
     int id;
-    String address;
-    String area;
-    String name;
-    int adminid;
+    String address;//详细地址
+    String area;//区域
+    String name;//楼名
+    int adminid;//房东id
 
     public int getAdminid() {
         return adminid;

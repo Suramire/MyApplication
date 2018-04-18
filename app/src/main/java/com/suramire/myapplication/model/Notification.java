@@ -1,24 +1,24 @@
 package com.suramire.myapplication.model;
 
+//实体类-工作提醒(备忘录)
 
 public class Notification {
     int id;
-    int adminid;
+    int adminid;//编写者id
+    String content;//备忘内容
+    String date;//备忘时间
+
+    public Notification(String content, String date, int adminid) {
+        this.content = content;
+        this.date = date;
+        this.adminid = adminid;
+    }
 
     public int getAdminid() {
         return adminid;
     }
 
     public void setAdminid(int adminid) {
-        this.adminid = adminid;
-    }
-
-    String content;
-    String date;
-
-    public Notification(String content, String date, int adminid) {
-        this.content = content;
-        this.date = date;
         this.adminid = adminid;
     }
 

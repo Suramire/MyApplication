@@ -3,25 +3,25 @@ package com.suramire.myapplication.model;
 import java.io.Serializable;
 
 
+//实体类-房间
+
 public class Room implements Serializable {
     int id;
-    int houseid;
-    String name;
+    int houseid;//所属房源id
+    String name;//房间名
+    int isLended;//出租标志位
 
+    public Room(int houseid, String name, float price) {
+        this.houseid = houseid;
+        this.name = name;
+        this.price = price;
+    }
     public int getIsLended() {
         return isLended;
     }
 
     public void setIsLended(int isLended) {
         this.isLended = isLended;
-    }
-
-    int isLended;
-
-    public Room(int houseid, String name, float price) {
-        this.houseid = houseid;
-        this.name = name;
-        this.price = price;
     }
 
     public Room() {

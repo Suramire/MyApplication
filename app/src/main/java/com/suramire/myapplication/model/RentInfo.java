@@ -1,16 +1,16 @@
 package com.suramire.myapplication.model;
 
+//实体类-出租信息
 
 public class RentInfo {
     int id;
-
-    String renterName;
-    String renterPhone;
-    int roomid;
-    float money;
-    float margin;
-    String date_begin;
-    String date_end;
+    String renterName;//租客姓名
+    String renterPhone;//租客电话
+    int roomid;//房间id
+    float money;//应付租金
+    float margin;//押金
+    String date_begin;//起始时间
+    String date_end;//结束时间
 
     public RentInfo(String renterName, String renterPhone, int roomid, float money, float margin, String date_begin, String date_end) {
         this.renterName = renterName;

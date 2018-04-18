@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 反馈页 仅界面
+ */
 
 public class FeedbackActivity extends BaseActivity {
 

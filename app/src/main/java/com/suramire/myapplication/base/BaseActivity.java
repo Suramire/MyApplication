@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.suramire.myapplication.R;
 
 /**
- * Created by Suramire on 2017/10/29.
+ * Activity基本类
  */
 
 public class BaseActivity extends AppCompatActivity {
@@ -23,6 +23,7 @@ public class BaseActivity extends AppCompatActivity {
         mContext = this;
 
     }
+    //设置标题与是否显示返回箭头
     public void setTitle(String title){
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -30,12 +31,14 @@ public class BaseActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(0);
         }
     }
+
     public void setDisplayHomeAsUpEnabled(boolean flag){
         getSupportActionBar().setDisplayHomeAsUpEnabled(flag);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+//        返回箭头点击事件
         if(item.getItemId() ==android.R.id.home){
             finish();
         }

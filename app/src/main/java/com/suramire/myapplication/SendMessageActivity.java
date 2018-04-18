@@ -13,6 +13,9 @@ import android.widget.PopupWindow;
 
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 出租页 仅界面
+ */
 
 public class SendMessageActivity extends BaseActivity {
 
@@ -23,9 +26,11 @@ public class SendMessageActivity extends BaseActivity {
         setContentView(R.layout.activity_sentmessage);
         mContext = this;
         setTitle("催租");
+//        房间费用按钮点击
         findViewById(R.id.textView48).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                弹出底部菜单
                 View inflate = getLayoutInflater().inflate(R.layout.popup_sendmessage, null);
                 final PopupWindow popupWindow = new PopupWindow(inflate, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
                 popupWindow.setTouchable(true);

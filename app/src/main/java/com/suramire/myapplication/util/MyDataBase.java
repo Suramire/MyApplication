@@ -22,20 +22,29 @@ import java.util.Date;
 
 public class MyDataBase extends SQLiteOpenHelper {
     private SQLiteDatabase mydb;
-    private Context context;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public MyDataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-        this.context = context;
+        Context context1 = context;
         mydb = getWritableDatabase();
     }
 
-
+    /**
+     * 根据用户名查询用户信息
+     * @param name 用户名
+     * @return
+     */
     public Cursor selectByName(String name){
         return  mydb.query("admin",null,"name =?",new String[]{name},null,null,null);
     }
 
+
+    /**
+     * 根据用户id查询用户信息
+     * @param adminid
+     * @return
+     */
     public Cursor selectAdminById(int adminid){
         return mydb.query("admin", null,"_id = ?",new String[]{adminid+""},null,null,null);
     }
@@ -74,8 +83,6 @@ public class MyDataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
-
-
 
 
     /**
@@ -416,7 +423,6 @@ public class MyDataBase extends SQLiteOpenHelper {
     public int deleteAmHistory2(int id){
         return  mydb.delete("ammeterhistory2","_id=?",new String[]{id+""});
     }
-
 
     /**
      * 关闭数据库

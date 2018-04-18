@@ -1,8 +1,7 @@
 package com.suramire.myapplication.model;
 
-/**
- * Created by Suramire on 2017/11/21.
- */
+//实体类-首页版本更新内容
+
 
 public class Update {
     /**

@@ -142,10 +142,10 @@ public class KeyUtils implements  OnKeyboardActionListener{
         mOnTextChangeListener = onTextCompleteListener;
     }
 
-    public static onTextChangeListener getmOnTextChangeListener() {
-        return mOnTextChangeListener;
-    }
 
+    /**
+     * 单例模式
+     */
     public static KeyUtils getInstance(Context context, TextView editText){
         mKeyUtils = new KeyUtils(context,editText);
         mKeyUtils.show();
@@ -163,17 +163,21 @@ public class KeyUtils implements  OnKeyboardActionListener{
         mKeyboardView.setKeyboard(mKeyboard);
         mKeyboardView.setPreviewEnabled(false);
         mKeyboardView.setOnKeyboardActionListener(this);
-
     }
 
 
-
+    /**
+     * 显示键盘
+     */
     public void hide(){
         if(mKeyboardView.getVisibility() == View.VISIBLE){
             mKeyboardView.setVisibility(View.GONE);
         }
     }
 
+    /**
+     * 隐藏键盘
+     */
     public void show(){
         if(mKeyboardView.getVisibility() == View.INVISIBLE ||mKeyboardView.getVisibility() ==View.GONE){
             mKeyboardView.setVisibility(View.VISIBLE);

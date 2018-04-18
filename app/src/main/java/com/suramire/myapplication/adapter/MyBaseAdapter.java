@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Suramire on 2017/9/25.
+ * 房源管理页面的房间列表适配器
  * 实现点击item展开其菜单
  */
 

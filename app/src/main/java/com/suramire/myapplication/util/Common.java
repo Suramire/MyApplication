@@ -5,5 +5,6 @@ package com.suramire.myapplication.util;
  */
 
 public class Common {
+//    显示启动页面的间隔时间
     public static final long SPLASHDELAY = 3*60*1000;
 }

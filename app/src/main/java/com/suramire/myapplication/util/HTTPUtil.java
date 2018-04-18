@@ -16,7 +16,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
- * Created by Suramire on 2017/6/26.
+ * OkHttp工具类
+ * 发送网络请求后详情服务器结果
  */
 
 public class HTTPUtil {

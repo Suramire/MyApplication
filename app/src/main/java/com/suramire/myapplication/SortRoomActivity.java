@@ -15,13 +15,14 @@ import com.suramire.myapplication.util.MyDataBase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 房间排序页
+ */
 
 public class SortRoomActivity extends BaseActivity {
 
-    private ListView mListViewAdd;
     private CommonAdapter<Ammeter> mAdapterAdd;
     private CommonAdapter<Ammeter> mAdapterRemove;
-    private ListView mListViewRemove;
     private List<Ammeter> mTempList;
 
     @Override
@@ -29,10 +30,12 @@ public class SortRoomActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sortroom);
         setTitle("房源排序");
-        mListViewAdd = (ListView) findViewById(R.id.list_add);
-        mListViewRemove = (ListView) findViewById(R.id.list_remove);
+//        用于显示排序后的房间列表
+        ListView mListViewAdd = (ListView) findViewById(R.id.list_add);
+        //        用于显示排序前的房间列表
+        ListView mListViewRemove = (ListView) findViewById(R.id.list_remove);
+        //获取上个页面传送过来的电表数据集合
         final List<Ammeter> rooms = (List<Ammeter>) getIntent().getSerializableExtra("rooms");
-
         mTempList = new ArrayList<>();
         for (int i = 0; i < rooms.size(); i++) {
             if(rooms.get(i).getSort()!=0){
@@ -55,6 +58,7 @@ public class SortRoomActivity extends BaseActivity {
                                 remove(item);
                                 //并添加到另外一个适配器中
                                 mAdapterRemove.add(item);
+                                //通知数据更新
                                 mAdapterRemove.notifyDataSetChanged();
                             }
                         });
@@ -73,6 +77,7 @@ public class SortRoomActivity extends BaseActivity {
                                 remove(item);
                                 //并添加到另外一个适配器中
                                 mAdapterAdd.add(item);
+                                //通知数据更新
                                 mAdapterAdd.notifyDataSetChanged();
                             }
                         });
@@ -81,13 +86,13 @@ public class SortRoomActivity extends BaseActivity {
 
         mListViewAdd.setAdapter(mAdapterAdd);
         mListViewRemove.setAdapter(mAdapterRemove);
+
         findViewById(R.id.button30).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyDataBase myDataBase = new MyDataBase(SortRoomActivity.this,"test.db",null,1);
                 //保存排序
                 if(mAdapterRemove.getCount()>0){
-
                     for (int i = 0; i < mAdapterRemove.getCount(); i++) {
                         Ammeter ammeter = mAdapterRemove.getData().get(i);
                         ammeter.setSort(10000-i);
@@ -110,9 +115,7 @@ public class SortRoomActivity extends BaseActivity {
                     }
 
                 }
-                if(myDataBase!=null){
-                    myDataBase.close();
-                }
+                myDataBase.close();
                 Toast.makeText(SortRoomActivity.this, "保存成功!", Toast.LENGTH_SHORT).show();
                 finish();
             }

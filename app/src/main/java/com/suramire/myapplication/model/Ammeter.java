@@ -4,16 +4,17 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
+//实体类-电表
 
 public class Ammeter implements Serializable,Comparable<Ammeter> {
     int id;
-    int mRoomid;
+    int mRoomid;//所属房间编号
 
     String mRoomName;//房间名
     int mLastcount;//上次读数
     int mCount;//本次读数
     String mLastTime;//上次读取时间
-    String mTime;
+    String mTime;//本次记录时间
 
     public String getTime() {
         return mTime;

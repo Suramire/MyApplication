@@ -20,6 +20,9 @@ import com.suramire.myapplication.util.SPUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 新增房间页
+ */
 
 public class NewRoomActivity extends BaseActivity {
     @Override
@@ -27,20 +30,24 @@ public class NewRoomActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newroom);
         setTitle("新增房间");
-        // TODO: 2017/9/20 没有房源时不能添加房间
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final EditText room_name = (EditText) findViewById(R.id.room_name);
         final EditText room_price = (EditText) findViewById(R.id.room_price);
         Button button = (Button) findViewById(R.id.btn_newroom);
+//        连接数据库
         final MyDataBase myDataBase = new MyDataBase(NewRoomActivity.this, "test.db", null, 1);
         int adminid = (int) SPUtils.get("adminid", 0);
+//        查询当前登录的房东拥有的所有房源
         Cursor cursor = myDataBase.selectAllHouseByAdminId(adminid);
         int count = cursor.getCount();
+//        没有房源的情况
         if(count <1){
             Toast.makeText(this, "请先添加房源", Toast.LENGTH_SHORT).show();
             finish();
         }
-        List<String> strings = new ArrayList<>();//存放房源名
+        //存放房源名称
+        List<String> strings = new ArrayList<>();
+        //存放房源编号
         final List<Integer> houseIds = new ArrayList<>();
         while (cursor.moveToNext()){
             strings.add(cursor.getString(cursor.getColumnIndex("name")));
@@ -52,6 +59,7 @@ public class NewRoomActivity extends BaseActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                存放当前选择的房源下标
                 position[0] = i;
             }
 
@@ -60,6 +68,7 @@ public class NewRoomActivity extends BaseActivity {
 
             }
         });
+//        保存房间按钮点击事件
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -8,6 +8,11 @@ import com.squareup.picasso.Picasso;
 import com.suramire.myapplication.base.BaseActivity;
 
 
+/**
+ * 58品牌馆 仅界面
+ */
+
+
 public class FEInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -16,6 +21,7 @@ public class FEInfoActivity extends BaseActivity {
         setTitle("58品牌馆");
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView31);
+//        使用第三方框架加载图片
         Picasso.with(this).load(R.drawable.fe_info).placeholder(R.drawable.loading).into(imageView);
     }
 

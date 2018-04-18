@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 商品详情页 仅界面
+ */
 
 public class ShopItemDetailActivity extends BaseActivity {
     @Override

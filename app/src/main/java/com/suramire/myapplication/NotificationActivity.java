@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 消息中心页 仅界面
+ */
 
 public class NotificationActivity extends BaseActivity {
     @Override

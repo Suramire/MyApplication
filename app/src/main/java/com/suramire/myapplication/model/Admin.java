@@ -1,8 +1,11 @@
 package com.suramire.myapplication.model;
 
 
+//实体类-房东
+
+
 public class Admin {
-    int id;
+    int id;//编号
     String name;//用户名(手机号)
     String password;//密码
     String nickname;//昵称

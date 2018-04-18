@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 
 import com.suramire.myapplication.base.BaseActivity;
 
+/**
+ * 商城里的订单页 仅界面
+ */
 
 public class OrderActivity extends BaseActivity {
     @Override
